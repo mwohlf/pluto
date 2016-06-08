@@ -94,6 +94,25 @@ public final class Utils {
         return q;
     }
 
+    // see: http://nic-gamedev.blogspot.de/2011/11/quaternion-math-getting-local-axis.html
+    public static Vector3 getUpVector(Quaternion q) {
+        return new Vector3(2 * (q.x * q.y - q.w * q.z),
+                1 - 2 * (q.x * q.x + q.z * q.z),
+                2 * (q.y * q.z + q.w * q.x));
+    }
+
+    public static Vector3 getForwardVector(Quaternion q) {
+        return new Vector3(2 * (q.x * q.z + q.w * q.y),
+                2 * (q.y * q.x - q.w * q.x),
+                1 - 2 * (q.x * q.x + q.y * q.y));
+    }
+
+    public static Vector3 getRightVector(Quaternion q) {
+        return new Vector3(1 - 2 * (q.y * q.y + q.z * q.z),
+                2 * (q.x * q.y + q.w * q.z),
+                2 * (q.x * q.z - q.w * q.y));
+    }
+
     public static void dump(Model model) {
         final StringBuilder sb = new StringBuilder();
         Utils.dump(sb, model);

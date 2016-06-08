@@ -9,6 +9,7 @@ import com.badlogic.ashley.core.Family;
 import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
+import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
 
 import net.wohlfart.pluto.controller.ITransformCalculator;
@@ -46,6 +47,7 @@ import net.wohlfart.pluto.scene.properties.HasTransformMethod;
  */
 public class MovementSystem extends EntitySystem {
     public static final Quaternion NULL_ROTATION = new Quaternion();
+    public static final Quaternion ZERO_ROTATION = new Quaternion(Vector3.X, 0);
     public static final Position NULL_POSITION = new Position(0, 0, 0);
 
     private static final ImmutableArray<Entity> EMPTY = new ImmutableArray<>(new Array<>());

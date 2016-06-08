@@ -93,8 +93,8 @@ public class CommandSetup3 extends AbstractCommandFactory {
 
                 parallel.addChild(looping);
                 parallel.addChild(new SeekBehavior()
-                        //.withForward(Vector3.X)
-                        .withRotationSpeed(0.7f)
+                //.withForward(Vector3.X)
+                //.withRotationSpeed(0.7f)
                 //.withMoveSpeed(1f)
                 //.withEntity(graph.findEntity(ship1.getUid()))
                 );

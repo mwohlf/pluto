@@ -31,6 +31,7 @@ public class CameraSetup implements IEntityCommand {
     private CamRobotInput robotInput;
 
     private final Vector3 forward = new Vector3(Vector3.Z).scl(-1);
+    private final Vector3 up = new Vector3(Vector3.Y);
 
     @Override
     public long getUid() {
@@ -56,7 +57,8 @@ public class CameraSetup implements IEntityCommand {
         entity.add(robotInput.getHasRotation());
         entity.add(entityPool.createComponent(HasCamera.class).withCamera(setupCam()));
         entity.add(entityPool.createComponent(IsSteerable.class)
-                .withForward(forward));
+                .withForward(forward)
+                .withUp(up));
 
         if (behavior != null) {
             entity.add(entityPool.createComponent(HasBehavior.class)

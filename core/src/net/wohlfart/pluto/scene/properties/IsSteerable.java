@@ -12,12 +12,9 @@ public class IsSteerable implements Component, Poolable {
     float maxSpeed;
 
     Vector3 forward = new Vector3(0, 0, 1);
-
-    // from HasRotation:
-    //    Quaternion orientation;
-
-    // from HasPosition:
-    //    Position position;
+    Vector3 up = new Vector3(0, 1, 0);
+    float moveSpeed;
+    float rotationSpeed;
 
     @Override
     public void reset() {
@@ -34,6 +31,33 @@ public class IsSteerable implements Component, Poolable {
 
     public Vector3 getForward() {
         return forward;
+    }
+
+    public IsSteerable withUp(Vector3 up) {
+        this.up = up;
+        return this;
+    }
+
+    public Vector3 getUp() {
+        return up;
+    }
+
+    public IsSteerable withMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
+        return this;
+    }
+
+    public float getMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public IsSteerable withRotationSpeed(float rotationSpeed) {
+        this.rotationSpeed = rotationSpeed;
+        return this;
+    }
+
+    public float getRotationSpeed() {
+        return rotationSpeed;
     }
 
 }

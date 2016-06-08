@@ -25,6 +25,14 @@ public class ObjectCommand extends AbstractEntityCommand<ObjectCommand> {
 
     protected String fileName;
 
+    private float moveSpeed;
+
+    private float rotationSpeed;
+
+    private final Vector3 forwardVector = new Vector3();
+
+    private final Vector3 upVector = new Vector3();
+
     /*
 
     TODO: async loading doesn't work
@@ -60,7 +68,10 @@ public class ObjectCommand extends AbstractEntityCommand<ObjectCommand> {
                 .withSetterTransformMethod(element.transform));
 
         entity.add(entityPool.createComponent(IsSteerable.class)
-                .withForward(new Vector3(Vector3.X)));
+                .withForward(new Vector3(Vector3.X))
+                .withUp(new Vector3(Vector3.Y))
+                .withMoveSpeed(moveSpeed)
+                .withRotationSpeed(rotationSpeed));
 
         makePickable(entityPool, element, entity);
 
@@ -71,6 +82,37 @@ public class ObjectCommand extends AbstractEntityCommand<ObjectCommand> {
     @EntityProperty(name = "file", type = "String")
     public ObjectCommand withFile(String fileName) {
         this.fileName = fileName;
+        return this;
+    }
+
+    @EntityProperty(name = "speed", type = "Float")
+    public ObjectCommand withSpeed(float speed) {
+        this.moveSpeed = speed;
+        this.rotationSpeed = speed;
+        return this;
+    }
+
+    @EntityProperty(name = "moveSpeed", type = "Float")
+    public ObjectCommand withMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
+        return this;
+    }
+
+    @EntityProperty(name = "rotationSpeed", type = "Float")
+    public ObjectCommand withRotationSpeed(float rotationSpeed) {
+        this.rotationSpeed = rotationSpeed;
+        return this;
+    }
+
+    @EntityProperty(name = "forward", type = "Vector3")
+    public ObjectCommand withForward(Vector3 forward) {
+        this.forwardVector.set(forward);
+        return this;
+    }
+
+    @EntityProperty(name = "up", type = "Vector3")
+    public ObjectCommand withUp(Vector3 up) {
+        this.upVector.set(up);
         return this;
     }
 

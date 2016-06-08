@@ -1,6 +1,7 @@
 package net.wohlfart.pluto.ai;
 
 import com.badlogic.ashley.core.Entity;
+import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 
@@ -28,9 +29,11 @@ public class FleeBehavior extends AbstractBehaviorLeaf<FleeBehavior> {
 
     protected Entity target;
 
-    protected final Vector3 forwardVector = new Vector3().set(Vector3.Z);
-    protected float moveSpeed = 1; // units per second
-    protected float rotationSpeed = 0.01f; // units per second
+    protected float moveSpeed; // units per second
+    protected float rotationSpeed; // units per second
+
+    protected Vector3 forwardVector;
+    protected Vector3 upVector;
 
     @Override
     public ITask createTask(Entity entity, ITask parent) {
@@ -39,6 +42,11 @@ public class FleeBehavior extends AbstractBehaviorLeaf<FleeBehavior> {
         assert entity.getComponent(HasRotation.class) != null : "entity needs a rotation";
         assert entity.getComponent(IsSteerable.class) != null : "entity needs to be steerable";
         assert !Float.isNaN(moveSpeed) || !Float.isNaN(rotationSpeed) : "need rotation or movement";
+        forwardVector = entity.getComponent(IsSteerable.class).getForward();
+        upVector = entity.getComponent(IsSteerable.class).getUp();
+        moveSpeed = entity.getComponent(IsSteerable.class).getMoveSpeed();
+        rotationSpeed = entity.getComponent(IsSteerable.class).getRotationSpeed();
+        assert MathUtils.isEqual(new Vector3(forwardVector).dot(upVector), 0f, 0.001f);
         return new TaskImpl().initialize(entity, parent);
     }
 
@@ -46,31 +54,6 @@ public class FleeBehavior extends AbstractBehaviorLeaf<FleeBehavior> {
     public FleeBehavior withEntity(Entity target) {
         assert target.getComponent(HasPosition.class) != null : "waypoint needs a position";
         this.target = target;
-        return this;
-    }
-
-    @EntityProperty(name = "speed", type = "Float")
-    public FleeBehavior withSpeed(float speed) {
-        this.moveSpeed = speed;
-        this.rotationSpeed = speed;
-        return this;
-    }
-
-    @EntityProperty(name = "moveSpeed", type = "Float")
-    public FleeBehavior withMoveSpeed(float moveSpeed) {
-        this.moveSpeed = moveSpeed;
-        return this;
-    }
-
-    @EntityProperty(name = "rotationSpeed", type = "Float")
-    public FleeBehavior withRotationSpeed(float rotationSpeed) {
-        this.rotationSpeed = rotationSpeed;
-        return this;
-    }
-
-    @EntityProperty(name = "forward", type = "Vector3")
-    public FleeBehavior withForward(Vector3 forward) {
-        this.forwardVector.set(forward);
         return this;
     }
 

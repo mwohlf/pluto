@@ -30,10 +30,10 @@ public class CommandSetup1 extends AbstractCommandFactory {
 
         final long shipId = uid[0]++;
 
-        final SeekBehavior behavior = new SeekBehavior()
-                //.withForward(Vector3.Z.scl(-1))
-                .withMoveSpeed(3f)
-                .withRotationSpeed(0.4f);
+        final SeekBehavior behavior = new SeekBehavior();
+        //.withForward(Vector3.Z.scl(-1))
+        //.withMoveSpeed(3f)
+        //.withRotationSpeed(0.4f);
 
         add(new CommandSupplier() {
             @Override

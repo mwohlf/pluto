@@ -32,7 +32,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
 
     public final Position position = new Position();
 
-    public final Quaternion rotation = new Quaternion();
+    public final Quaternion rotation = new Quaternion(Vector3.X, 0);
 
     public final ScaleValue scale = new ScaleValue();
 
@@ -40,11 +40,13 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
 
     private long uid = NULL_UID;
 
+    /*
     protected F reset() {
         reset(position);
         reset(rotation);
         return (F) this;
     }
+    */
 
     @Override
     public long getUid() {
@@ -171,6 +173,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
 
     @EntityProperty(name = "rotation", type = "Quaternion")
     public F withRotation(Quaternion rotation) {
+        System.err.println(" setting rotation: " + rotation);
         this.rotation.set(rotation);
         return (F) this;
     }

@@ -45,9 +45,9 @@ public class CommandSetup2 extends AbstractCommandFactory {
                         new CameraSetup()
                                 .withUid(uid[0]++)
                                 .withBehavior(new SeekBehavior()
-                                        //.withForward(Vector3.Z.scl(-1))
-                                        .withMoveSpeed(3f)
-                                        .withRotationSpeed(0.4f)
+                //.withForward(Vector3.Z.scl(-1))
+                //.withMoveSpeed(3f)
+                //.withRotationSpeed(0.4f)
                 //.withEntity(graph.findEntity(waypoint1Id))
                 ))
 

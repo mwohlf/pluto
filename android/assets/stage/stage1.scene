@@ -189,17 +189,19 @@ ship1 = Object {
     uid:uid++,
     position: Position{x:0.0,y:0.0,z:-170.0},
     file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 1,
     behavior: sequence2,  
 };
 
+/*
 ship2 = Object {
     uid:uid++,
     position: Position{x:0.0,y:0.0,z:-70.0},
     file: "obj/manta1/manta1.obj",
-    // TODO: moveSpeed: 9,
+    moveSpeed: 9,
+    rotationSpeed: 1,
     behavior: Seek{
-        moveSpeed: 9,
-        rotationSpeed: 0.2,
         waypoint: ship1,
     },
 };
@@ -208,11 +210,11 @@ ship3 = Object {
     uid:uid++,
     position: Position{x:0.0,y:0.0,z:-10.0},
     file: "obj/manta1/manta1.obj",
-    // TODO: moveSpeed: 9,
+    moveSpeed: 8,
+    rotationSpeed: 1,
     behavior: Seek{
-        moveSpeed: 3,
-        rotationSpeed: 0.1,
         waypoint: ship2,
     },
 };
+*/
 
