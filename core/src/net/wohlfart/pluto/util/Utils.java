@@ -95,19 +95,19 @@ public final class Utils {
     }
 
     // see: http://nic-gamedev.blogspot.de/2011/11/quaternion-math-getting-local-axis.html
-    public static Vector3 getUpVector(Quaternion q) {
+    public static Vector3 getYVector(Quaternion q) {
         return new Vector3(2 * (q.x * q.y - q.w * q.z),
                 1 - 2 * (q.x * q.x + q.z * q.z),
                 2 * (q.y * q.z + q.w * q.x));
     }
 
-    public static Vector3 getForwardVector(Quaternion q) {
+    public static Vector3 getZVector(Quaternion q) {
         return new Vector3(2 * (q.x * q.z + q.w * q.y),
                 2 * (q.y * q.x - q.w * q.x),
                 1 - 2 * (q.x * q.x + q.y * q.y));
     }
 
-    public static Vector3 getRightVector(Quaternion q) {
+    public static Vector3 getXVector(Quaternion q) {
         return new Vector3(1 - 2 * (q.y * q.y + q.z * q.z),
                 2 * (q.x * q.y + q.w * q.z),
                 2 * (q.x * q.z - q.w * q.y));

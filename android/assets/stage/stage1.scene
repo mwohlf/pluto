@@ -194,7 +194,6 @@ ship1 = Object {
     behavior: sequence2,  
 };
 
-/*
 ship2 = Object {
     uid:uid++,
     position: Position{x:0.0,y:0.0,z:-70.0},
@@ -216,5 +215,5 @@ ship3 = Object {
         waypoint: ship2,
     },
 };
-*/
+
 

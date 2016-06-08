@@ -114,25 +114,34 @@ public class SeekBehavior extends AbstractBehaviorLeaf<SeekBehavior> {
             if (!SeekBehavior.tmpVector1.isCollinear(behavior.forwardVector, 0.00001f)) {
                 SeekBehavior.tmpQuaternion1.setFromCross(SeekBehavior.tmpVector1, behavior.forwardVector);
                 Utils.scale(SeekBehavior.tmpQuaternion1, delta * behavior.rotationSpeed);
-                entity.getComponent(HasRotation.class).getRotation().mul(SeekBehavior.tmpQuaternion1.conjugate());
+                entity.getComponent(HasRotation.class).getRotation().mul(SeekBehavior.tmpQuaternion1.conjugate()).nor();
             }
 
             // calculate the rotation to match the up vector from the targte
             tmpQuaternion1.set(entity.getComponent(HasRotation.class).getRotation()); // entity orientation
             tmpQuaternion2.set(behavior.target.getComponent(HasRotation.class).getRotation()); // target orientation
-            tmpVector1.set(Utils.getForwardVector(tmpQuaternion1)).nor(); // flight direction
-            tmpVector2.set(Utils.getUpVector(tmpQuaternion2)).nor(); // target up vector
-            if (!SeekBehavior.tmpVector2.isCollinear(tmpVector1, 0.001f)) {
+            tmpQuaternion1.transform(tmpVector1.set(behavior.forwardVector)); // flight direction
+            tmpVector2.set(Utils.getYVector(tmpQuaternion2)); // target up vector
+            if (!tmpVector2.isCollinear(tmpVector1, 0.1f)) {
                 //System.out.println("target: " + tmpQuaternion2);
                 //System.out.println("entityForward: " + tmpVector1);
                 //tmpVector1.set(Utils.getUpVector(tmpQuaternion1)); // entity up vector
-                final float angle1 = tmpQuaternion2.getAngleAround(tmpVector1);
-                //System.out.println("angle1: " + angle1);
-
-                final float angle2 = tmpQuaternion1.getAngleAround(tmpVector1);
-                final float angle = 0.7f; //(angle2 - angle1) * 0.5f;
-                tmpQuaternion2.set(Vector3.X, angle);
-                entity.getComponent(HasRotation.class).getRotation().mul(SeekBehavior.tmpQuaternion2);
+                tmpVector1.nor();
+                final float angle1 = tmpQuaternion1.getAngleAround(tmpVector1);
+                final float angle2 = tmpQuaternion2.getAngleAround(tmpVector1);
+                float angle = (angle1 - angle2) * 0.5f;
+                /*
+                System.err.println("-- "
+                        + "behavior.forwardVector: " + behavior.forwardVector
+                        + "tmpQuaternion1: " + tmpQuaternion1
+                        + "tmpVector1:" + tmpVector1
+                        + " 1: " + angle1 + " 2: " + angle2 + " angle: " + angle);
+                */
+                if (angle > 0) {
+                    angle = Math.min(angle, 1f);
+                    tmpQuaternion2.set(Vector3.X, angle).nor();
+                    entity.getComponent(HasRotation.class).getRotation().mul(tmpQuaternion2);
+                }
             }
 
             SeekBehavior.tmpVector1.set(behavior.forwardVector);
