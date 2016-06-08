@@ -1,0 +1,163 @@
+
+buildscript {
+    // see: https://discuss.gradle.org/t/gradle-thinks-2-10-is-less-than-2-2-when-resolving-plugins/13434
+    System.properties['com.android.build.gradle.overrideVersionCheck'] = 'true'
+    
+    repositories {
+        mavenCentral()
+        maven { url "https://plugins.gradle.org/m2/" }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        jcenter()
+    }
+
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.30' 
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'me.champeau.gradle:antlr4-gradle-plugin:0.1'
+    }
+}
+
+allprojects {
+    apply plugin: "eclipse"
+    apply plugin: "idea"    
+    apply plugin: "me.tatarka.retrolambda"
+    
+    repositories {
+        mavenLocal() // needed for the tween engine in local
+        mavenCentral()
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url "https://oss.sonatype.org/content/repositories/releases/" }
+        jcenter()
+    }
+
+    version = '0.1'
+    ext {
+        appName = 'pluto'
+        gdxVersion = '1.9.3'
+        gwtVersion = '2.8.0-beta1'
+        roboVMVersion = '1.9'
+        box2DLightsVersion = '1.3'
+        ashleyVersion = '1.7.2'
+        appengineVersion = '1.9.30'
+        nettyVersion = '4.1.0.Beta6'
+        guavaVersion = '19.0'
+        kiwiVersion = '1.6'
+        // wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/java-universal-tween-engine/tween-engine-api-6.3.3.zip
+        // mvn install:install-file -Dfile=tween-engine-api.jar -DgroupId=aurelienribon -DartifactId=tweenengine -Dversion=6.3.3 -Dpackaging=jar
+        tweenEngineVersion = '6.3.3'
+        antlrVersion = '4.5.3'
+    }
+
+}
+
+project(":core") {
+    apply plugin: "java"
+    apply plugin: "me.champeau.gradle.antlr4"
+
+    dependencies {
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        compile "com.github.czyzby:gdx-kiwi:$kiwiVersion.$gdxVersion"
+        compile 'com.google.android:support-v4:r7'
+        compile "com.google.guava:guava:$guavaVersion"
+        compile "aurelienribon:tweenengine:$tweenEngineVersion"
+        compile "org.antlr:antlr4-runtime:$antlrVersion"
+        compile fileTree(dir: "../libs", include: "*.jar") // annotations
+        
+        testCompile "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+        testCompile "com.badlogicgames.gdx:gdx-backend-headless:$gdxVersion"
+        testCompile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        testCompile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+        testCompile 'org.mockito:mockito-core:1.10.19'
+        testCompile 'junit:junit:4.12'
+
+        antlr4 "org.antlr:antlr4:$antlrVersion"
+
+    }
+
+    // see: https://github.com/melix/antlr4-gradle-plugin
+    //antlr4.source = new File("core/antlr")
+    //antlr4.output = new File("build")
+    antlr4 {
+        source = file('antlr')
+        output = file('build/antlr-src/net/wohlfart/pluto/stage')
+        extraArgs = [
+            '-package', 'net.wohlfart.pluto.stage',
+            '-no-listener', '-visitor'
+        ]
+    }
+
+    compileJava.dependsOn antlr4
+    
+    //sourceSets.test.java.srcDirs += file('build/antlr-src/')
+    sourceSets.test.java.srcDir "build/antlr-src/"
+    sourceSets.main.java.srcDirs += antlr4.output
+    sourceSets.test.resources.srcDirs += "../android/assets/"
+}
+
+project(":desktop") {
+    apply plugin: "java"
+    
+    dependencies {
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-lwjgl3:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-controllers-lwjgl3:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-desktop"
+        compile "com.badlogicgames.gdx:gdx-box2d-platform:$gdxVersion:natives-desktop"
+        compile "com.badlogicgames.gdx:gdx-bullet-platform:$gdxVersion:natives-desktop"
+        compile "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-desktop"
+    }
+}
+
+project(":android") {
+    apply plugin: "com.android.application"
+    apply plugin: "me.tatarka.retrolambda"
+       
+    configurations { natives }
+
+    dependencies {
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"  
+        
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
+        
+        compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
+        natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi-v7a"
+    }
+}
+
+project(":html") {
+    apply plugin: "java"
+    apply plugin: "war"
+    apply plugin: "jetty"
+    
+    dependencies {
+        providedCompile "com.google.gwt:gwt-user:$gwtVersion"
+        providedCompile "com.google.gwt:gwt-dev:$gwtVersion"
+    
+        compile project(":core")
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
+        compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
+        compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion:sources"
+    }    
+}
+
+project(":server") {
+    apply plugin: "java"
+    apply plugin: "war"
+    apply plugin: "appengine"    
+    
+    dependencies {
+        compile "io.netty:netty-all:$nettyVersion"
+        compile "javax.servlet:servlet-api:2.5"
+        appengineSdk "com.google.appengine:appengine-java-sdk:$appengineVersion"
+        compile "com.google.appengine:appengine-api-1.0-sdk:$appengineVersion" 
+    }
+}

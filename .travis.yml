@@ -1,0 +1,94 @@
+env:
+  global:
+    secure: G7OMB/n3geQdy0ZXn6bxkdSRQ1ri6Km65RspNw2myRcpHV17WSeNyz7+wn/wUOj5/jJfRIx3r6+qp51RzPT4gc8SBCam3nU34vu8vah3M9V+jzvI3karFAe8MgBswBbKDaHnUCzoC+rjMaHfhknn9CG1cP9ZlSeSHmx/hkD85FAhkWslu17SM6KnlH/26Pd3mvKDAX0H5lVp6sFtYGnacFVSJfMXybHQHrUEbogctR1s222NCKdJxfV3Z+ZNkrAiQgV08iUgiBCXN2eecqWNU8wLgZ4Ku8SdHQ4/ezq45lJ86nuzP5PgVP1QXbCJJD04234bmxB4X/v07ilUcHqa6x/3pKkg5MMz6OXLBxtYq9o5RRsiiltRdOf0NXfCgEZfKNpBuiUxEzPLu4Xo90nlv5AWf3Gwv7wRJHA7RMzMOjaWkxse8YxulQpcVhA6xWAru3DWJCdXJJBKA8fyPNveh7eu6KCDK+JRubDrWVA5T4j+T+EX/zIJw5lnl/b6CIknLE4YqnykExOskv30gYBtHvIzusFSW2NYBt/lqbOgplQ98teeK2VK/osmFUFh1vojXLIjrPNcAnKhmxuWaHiHE9ab4WfCYGeh9JXX2HCYLX+xS6Hg2C/ZR4jkfqleCOEluGT6/Pba+4hTLIf/QI3ReT5xEWWiyaDNzw9A2/8X1S4=
+ 
+language: java
+
+jdk:
+- oraclejdk8
+# Switching to Oracle JDK8 (java-8-oracle), JAVA_HOME will be set to /usr/lib/jvm/java-8-oracle
+
+branches:
+  only:
+  - master
+  - "/v\\d+\\.\\d+[a-z]/"
+
+# see: https://github.com/paulmthompson/GLFW.jl/blob/master/.travis.yml
+
+before_install:
+- chmod +x gradlew
+- export DISPLAY=:99
+- export LIBGL_ALWAYS_SOFTWARE=1
+# cloud-init breaks updates sometimes and we don't need it anyways
+- sudo apt-get remove cloud-init -qq --force-yes
+- sudo apt-get update -qq --force-yes
+# testing setup
+- sudo apt-get install -qq --force-yes libgd2-xpm ia32-libs ia32-libs-multiarch gawk maven
+# prepare software rendering
+- sudo apt-get install -qq --force-yes mesa-utils libgl1-mesa-swx11 libgl1-mesa-swx11-dev xvfb  
+- /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
+## java, android, etc.
+- sudo apt-get install -qq openjdk-7-jdk
+- wget http://dl.google.com/android/android-sdk_r24.3.3-linux.tgz
+- tar -zxf android-sdk_r24.3.3-linux.tgz
+- wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/java-universal-tween-engine/tween-engine-api-6.3.3.zip
+- unzip tween-engine-api-6.3.3.zip
+- mvn install:install-file -Dfile=tween-engine-api.jar -DgroupId=aurelienribon -DartifactId=tweenengine -Dversion=6.3.3 -Dpackaging=jar 
+- export JAVA7_HOME=/usr/lib/jvm/java-7-oracle
+- export _JAVA_OPTIONS="-Xms128m -Xmx512m"
+- export ANDROID_HOME=`pwd`/android-sdk-linux
+- export PATH=${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
+- echo "sdk.dir=${ANDROID_HOME}" > local.properties
+- echo "retrolambda.jdk=${JAVA_HOME}" >> local.properties
+- echo "retrolambda.oldJdk=${JAVA7_HOME}" >> local.properties
+- echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
+- echo yes | android update sdk --all --filter build-tools-23.0.2 --no-ui --force > /dev/null
+# TODO: remove unneeded stuff
+- echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null
+- echo yes | android update sdk --filter android-20 --no-ui --force > /dev/null
+- echo yes | android update sdk --filter android-18 --no-ui --force > /dev/null
+- echo yes | android update sdk --filter extra-android-support --no-ui --force > /dev/null
+- echo yes | android update sdk --filter extra-android-m2repository --no-ui --force > /dev/null
+- glxinfo
+- dmesg
+
+script:
+- gradle clean
+- gradle build
+- gradle dist
+#- echo no | android create avd -n emu -t android-18 --force
+#- emulator -avd emu -gpu on &
+#- sleep 3
+#- adb install -r android/build/outputs/apk/android-release-unsigned.apk
+#- adb shell am start -n net.wohlfart.pluto.android/.AndroidLauncher
+# for debugging: show test status
+# test overview:
+#- cat /home/travis/build/mwohlf/pluto/core/build/reports/tests/index.html
+#- cat /home/travis/build/mwohlf/pluto/core/build/reports/tests/classes/net.wohlfart.pluto.stage.SceneLanguageTest.html
+
+before_deploy:
+- echo 'about to deploy..'
+# delete tags:
+- git tag -d `git tag | grep -E '.'`
+- git ls-remote --tags | gawk '/^(.*)(\s+)(.*[a-zA-Z0-9])$/ {print ":" $2}' | xargs git push https://${GITHUB_TOKEN}@github.com/mwohlf/pluto
+- git config --global user.email "builds@travis-ci.com"
+- git config --global user.name "Travis CI"
+- export GIT_TAG=$TRAVIS_BRANCH-v0.1.$TRAVIS_BUILD_NUMBER
+- git tag $GIT_TAG -a -m "Generated tag from TravisCI for build $TRAVIS_BUILD_NUMBER"
+- git push -q https://${GITHUB_TOKEN}@github.com/mwohlf/pluto --tags
+
+deploy:
+  provider: releases
+  api_key: ${GITHUB_TOKEN}
+  file:
+  - desktop/build/libs/desktop-0.1.jar
+  - android/build/outputs/apk/android-release-unsigned.apk
+  - /tmp/output1.png
+  skip_cleanup: true
+  on:
+    tags: false
+    repo: mwohlf/pluto
+    all_branches: true
+    
+after_deploy:
+- echo '...finished deploy'

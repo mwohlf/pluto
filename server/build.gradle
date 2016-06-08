@@ -1,0 +1,25 @@
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.output.classesDir = 'webapp/WEB-INF/classes'
+
+[compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
+
+// see: http://stackoverflow.com/questions/20117678/how-to-create-google-app-engine-project-with-gradle
+appengine {
+    httpPort = 8888
+    // jvmFlags = ['-Xdebug', '-Xrunjdwp:transport=dt_socket,server=y,suspend=n,address=8889', '-Xmx1024m', '-XX:MaxPermSize=512m']
+    downloadSdk = true
+    warDir = file('webapp')
+
+    appcfg {
+        email = "mwhlfrt@gmail.com"
+        noCookies = true
+        oauth2 = true
+    }
+}
+
+eclipse.project {
+    name = appName + "-server"
+}

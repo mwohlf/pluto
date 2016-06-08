@@ -1,0 +1,62 @@
+
+sourceSets.main.java.srcDirs = [ "src/" ]
+sourceSets.main.compileClasspath += files(project(':core').sourceSets.main.allJava.srcDirs)
+
+webAppDirName = 'webapp'
+
+/*
+gwt {
+    gwtVersion=project.gwtVersion // Should match the gwt version used for building the gwt backend
+    maxHeapSize="1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
+    minHeapSize="1G"
+
+    src = files(file("src/")) // Needs to be in front of "modules" below.
+    modules 'net.wohlfart.pluto.GdxDefinition'
+    devModules 'net.wohlfart.pluto.GdxDefinitionSuperdev'
+
+    compiler {
+       strict = true;
+       enableClosureCompiler = true;
+       //disableCastChecking = true;
+    }
+}
+*/
+
+task compileGwt(dependsOn: test, type: JavaExec) {
+    inputs.source sourceSets.main.java.srcDirs
+    inputs.dir sourceSets.main.output.resourcesDir
+
+    main = 'com.google.gwt.dev.Compiler'
+    classpath {
+        [
+                sourceSets.main.java.srcDirs, // Java source
+                sourceSets.main.output.resourcesDir, // Generated resources
+                sourceSets.main.output.classesDir, // Generated classes
+                sourceSets.main.compileClasspath, // dependencies
+        ]
+    }
+
+    ext.buildDir = "${project.buildDir}/gwt"
+    ext.extraDir = "${project.buildDir}/extra"
+
+    args =
+    [  
+        'net.wohlfart.pluto.GdxDefinition', // Your GWT module
+        '-war', buildDir,
+        '-extra', extraDir,
+        '-logLevel', 'DEBUG',
+        '-sourceLevel', '1.8',
+        '-style', project.ext.has('gwtStyle') ? project.gwtStyle : 'OBF',
+    ]
+    maxHeapSize = '3g'
+}
+
+
+// war.dependsOn compileGwt
+//war {
+//    from compileGwt.buildDir
+//}
+
+eclipse.project {
+    name = appName + "-gwt"
+}

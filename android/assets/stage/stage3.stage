@@ -1,0 +1,140 @@
+
+{
+	stageKey: stage3,
+	graph: {
+
+		001: {
+			type: cam,
+			nearFrustum: 10,
+			farFrustum: 1000,
+			fieldOfView: 67,
+		},
+		002: {
+			// blue, test, sky, violent
+			type: skybox,
+			style: "sky",
+		},
+		003: {
+			type: light,
+			color: "0.5,0.5,0.5,1"
+		},
+		004: {
+			type: box,
+			length: 0.5,
+			rotation: {axis: "0,0,1", degree: 45},
+			texture: "texture/ash_uvgrid01.png",
+			position: "0,0,-15",
+			behavior: [
+			           {moveTo: {
+			        	   speed: 5,
+			        	   waypoint: {
+			        		   uid: 2001,
+			        		   position: "+5,+5,-15"
+			        	   }
+			           }},
+			           {moveTo: {
+			        	   speed: 5,
+			        	   waypoint: {
+			        		   uid: 2002,
+			        		   position: "-5,+5,-15"
+			        	   }
+			           }},
+			           {moveTo: {
+			        	   speed: 5,
+			        	   waypoint: {
+			        		   uid: 2003,
+			        		   position: "-5,-5,-15"
+			        	   }
+			           }},
+			           {moveTo: {
+			        	   speed: 5,
+			        	   waypoint: {
+			        		   uid: 2004,
+			        		   position: "+5,-5,-15"
+			        	   }
+			           }}
+			           ]
+		},
+		005: {
+			type: triangle,
+			position: "-20,0,-70",
+			length: 5
+			behavior: { 
+				spin: {axis: "1,0,0", angle: 30},
+				spin: {axis: "0,1,0", angle: 10},
+				// spinRel : {axis: "1,0,0", degree: 20},
+			}
+		},
+		006: {
+			type: quad,
+			position: "0,0,-70",
+			length: 5,
+			texture: "texture/badlogic.jpg",
+			behavior: { 
+				spin: {axis: "1,0,0", angle: 30},
+				spin: {axis: "0,1,0", angle: 10},
+				// spinRel : {axis: "1,0,0", degree: 20},
+			}
+		},
+		007: {
+			type: box,
+			length: 0.5,
+			rotation: {
+				axis: "0,0,1", 
+				degree: 45
+			},
+			texture: "texture/ash_uvgrid01.png",
+			position: "0,6,-15",
+			behavior: {
+				moveTo: {
+					speed: 5,
+					waypoint: {
+						uid: 2001,
+						position: "+5,6,-15"
+					}
+				},
+				spin: {axis: "0,1,0", angle: 60}
+				// spin : {axis: "1,0,0", angle: 20},
+			}
+		}
+		008: {
+			type: icosphere
+			position: "0,0,-70",
+			radius: 5,
+			primitive: GL_LINES,  // GL_TRIANGLES, GL_LINES
+			attribute: Normal,
+			color: "0.9,0.5,0.5,1",
+			behavior: { 
+				spin : {axis: "0,1,0", angle: 30},
+				// spin : {axis: "1,0,0", degree: 20},
+				move : {direction: Y, speed: 1},            
+				// moveRel : {axis: X, speed: -2},
+			}
+		},
+		009: {
+			type: planet,
+			radius: 50,
+			position: "10,-10,-150",  // relative to cam at 0,0,0
+			rotation: {axis: "1,0,0", degree: -10},
+			// color: "0.5,0.5,0.5,1",
+			// cubemap: "earth", // earth
+			details: 1,
+			heightFunction: ROCK1,
+			colorFunction: ROCK1,
+			behavior: { 
+				spin : {axis: "0,0,1", angle: -10},
+				// spin : {axis: "1,-0.5,-1", degree: 30}
+			}
+		},
+		010: {
+			type: object,
+			position: "0,-0,-100",  // relative to cam at 0,0,0
+			file : "obj/manta1/manta1.obj",
+			behavior: {
+				move: {direction: X, speed: 10},                 
+				spin: {axis: "0,1,0", angle: 2}
+			}      
+		}  
+	}
+
+}

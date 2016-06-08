@@ -1,0 +1,117 @@
+
+a = 2;
+
+uid = 1;
+
+path = Parallel{
+   Seek{
+        speed: 12,
+        forward: Vector {x:0.0, y:0.0, z:-1.0},
+        waypoint: Waypoint {
+            uid:uid++,
+            position: Position{x:0.0, y:30.0, z:-200.0}
+        }
+   },
+   Seek{
+        speed: 12,
+        forward: Vector {x:0.0, y:0.0, z:-1.0},
+        waypoint: Waypoint {
+            uid:uid++,
+            position: Position{x:0.0, y:130.0, z:-400.0}
+        }
+   }        
+};
+
+
+Cam {  
+    uid:uid++,
+    nearFrustum: 10.0,
+    farFrustum: 1000.0,
+    fieldOfView: 67.0,
+    behavior: Seek{
+        speed: 12,
+        forward: Vector {x:0.0, y:0.0, z:-1.0},
+        waypoint: Waypoint {
+            uid:uid++,
+            position: Position{x:0.0, y:30.0, z:-500.0}
+        }
+    }    
+};
+
+Skybox {  
+    uid:uid++,
+    //  test, blue, sky, violent
+    style: 'sky' 
+};
+
+Light {  
+    uid:uid++,
+    color: Color{r:0.5,g:0.5,b:0.5,a:1.0}
+};
+
+Planet {
+    uid:uid++,
+    radius: 50,
+    details: 4,
+    position: Position{x:10.0,y:-10.0,z:-150.0},
+    rotation: Rotation{axis:Vector{x:0.0,y:0.0,z:1.0}, angle: -40},
+    cubemap: "test",
+    behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
+};
+
+
+
+b = 1 + a;
+
+println(">>>>>" + b);
+
+target = Waypoint {
+   uid:uid++,
+   position: Position{x:a,y:b,z:-15.0}
+};
+
+
+target = Waypoint {
+    uid:uid++,
+    position: Position{x:0.0,y:10.0,z:-15.0}
+};
+
+goto = MoveTo {
+    waypoint: target
+};
+
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:0.0,y:-2.0,z:-15.0},
+    texture: 'texture/ash_uvgrid01.png'
+};
+
+Smoke {
+    uid:uid++,
+    position: Position{x:5.0,y:2.0,z:-15.0}
+};
+
+Triangle {
+    uid:uid++,
+    position: Position{x:10.0,y:2.0,z:-17.0},
+    length: 5.5
+};
+
+Quad {
+    uid:uid++,
+    position: Position{x:-10.0,y:2.0,z:-18.0},
+    length: 5.5,
+    texture: 'texture/badlogic.jpg'
+};
+
+Icosphere {
+    uid:uid++,
+    position: Position{x:-10.0,y:2.0,z:-70.0},
+    radius: 5,
+    primitive: 'GL_LINES',  // GL_TRIANGLES, GL_LINES
+    attribute: 'Normal',
+    color: Color{r:0.5,g:0.5,b:0.5,a:1.0}
+};
+
