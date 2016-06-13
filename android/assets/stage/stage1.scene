@@ -157,11 +157,12 @@ Box {
     texture: 'texture/ash_uvgrid01.png'
 };
 
-
+/*
 Smoke {
     uid:uid++,
     position: Position{x:5.0,y:2.0,z:-15.0}
 };
+*/
 
 Triangle {
     uid:uid++,
@@ -187,7 +188,7 @@ Icosphere {
 
 ship1 = Object {
     uid:uid++,
-    position: Position{x:0.0,y:0.0,z:-170.0},
+    position: Position{x:0.0,y:0.0,z:-90.0},
     file: "obj/manta1/manta1.obj",
     moveSpeed: 10,
     rotationSpeed: 1,
@@ -204,16 +205,16 @@ ship2 = Object {
         waypoint: ship1,
     },
 };
-
+/*
 ship3 = Object {
     uid:uid++,
     position: Position{x:0.0,y:0.0,z:-10.0},
     file: "obj/manta1/manta1.obj",
-    moveSpeed: 8,
-    rotationSpeed: 1,
+    moveSpeed: 5,
+    rotationSpeed: 0.1,
     behavior: Seek{
         waypoint: ship2,
     },
 };
-
+*/
 

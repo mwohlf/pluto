@@ -173,7 +173,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
 
     @EntityProperty(name = "rotation", type = "Quaternion")
     public F withRotation(Quaternion rotation) {
-        System.err.println(" setting rotation: " + rotation);
+        //System.err.println(" setting rotation: " + rotation);
         this.rotation.set(rotation);
         return (F) this;
     }
