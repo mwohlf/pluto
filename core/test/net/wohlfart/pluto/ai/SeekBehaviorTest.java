@@ -19,10 +19,10 @@ public class SeekBehaviorTest {
         final PooledEngine entityPool = new PooledEngine();
         final Entity entity = new Entity();
 
-        entityPool.createComponent(HasPosition.class)
-                .withPosition(100, 100, 100);
-        entityPool.createComponent(HasRotation.class)
-                .withRotation(new Quaternion());
+        entity.add(entityPool.createComponent(HasPosition.class)
+                .withPosition(100, 100, 100));
+        entity.add(entityPool.createComponent(HasRotation.class)
+                .withRotation(new Quaternion()));
 
         seekBehavior.withEntity(entity);
 
