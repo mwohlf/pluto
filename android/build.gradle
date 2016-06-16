@@ -2,8 +2,8 @@
 import com.android.build.gradle.tasks.PackageApplication
 
 android {
-    buildToolsVersion "23.0.2"
-    compileSdkVersion 23
+    compileSdkVersion 24
+    buildToolsVersion '24'
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8

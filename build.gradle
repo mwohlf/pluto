@@ -113,7 +113,6 @@ project(":desktop") {
 
 project(":android") {
     apply plugin: "com.android.application"
-    apply plugin: "me.tatarka.retrolambda"
        
     configurations { natives }
 
