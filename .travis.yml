@@ -29,8 +29,8 @@ before_install:
 - /sbin/start-stop-daemon --start --quiet --pidfile /tmp/custom_xvfb_99.pid --make-pidfile --background --exec /usr/bin/Xvfb -- :99 -screen 0 1400x900x24 -ac +extension GLX +render
 ## java, android, etc.
 - sudo apt-get install -qq openjdk-7-jdk
-- wget http://dl.google.com/android/android-sdk_r24.3.3-linux.tgz
-- tar -zxf android-sdk_r24.3.3-linux.tgz
+- wget http://dl.google.com/android/android-sdk_r24.4.1-linux.tgz
+- tar -zxf android-sdk_r24.4.1-linux.tgz
 - wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/java-universal-tween-engine/tween-engine-api-6.3.3.zip
 - unzip tween-engine-api-6.3.3.zip
 - mvn install:install-file -Dfile=tween-engine-api.jar -DgroupId=aurelienribon -DartifactId=tweenengine -Dversion=6.3.3 -Dpackaging=jar 
@@ -42,7 +42,7 @@ before_install:
 - echo "retrolambda.jdk=${JAVA_HOME}" >> local.properties
 - echo "retrolambda.oldJdk=${JAVA7_HOME}" >> local.properties
 - echo yes | android update sdk --filter platform-tools --no-ui --force > /dev/null
-- echo yes | android update sdk --all --filter build-tools-24 --no-ui --force > /dev/null
+- echo yes | android update sdk --all --filter build-tools-24.0.0 --no-ui --force > /dev/null
 # TODO: remove unneeded stuff
 - echo yes | android update sdk --filter android-24 --no-ui --force > /dev/null
 #- echo yes | android update sdk --filter android-23 --no-ui --force > /dev/null
