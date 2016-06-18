@@ -5,8 +5,11 @@ package net.wohlfart.pluto.scene;
  */
 public interface UpdateMethod {
 
-    UpdateMethod NULL = delta -> {
-        // do nothing
+    UpdateMethod NULL = new UpdateMethod() {
+        @Override
+        public void update(float delta) {
+            // do nothing
+        }
     };
 
     void update(float delta);

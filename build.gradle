@@ -11,9 +11,9 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.android.tools.build:gradle:2.1.2'
         classpath 'com.google.appengine:gradle-appengine-plugin:1.9.30' 
-        //classpath 'me.tatarka:gradle-retrolambda:3.2.5'
+        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'me.champeau.gradle:antlr4-gradle-plugin:0.1'
     }
 }
@@ -21,7 +21,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"    
-    //apply plugin: "me.tatarka.retrolambda"
+    apply plugin: "me.tatarka.retrolambda"
     
     repositories {
         mavenLocal() // needed for the tween engine in local

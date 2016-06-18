@@ -8,11 +8,11 @@ def localProperties = project.file("../local.properties")
 if (localProperties.exists()) {
   Properties properties = new Properties()
   localProperties.withInputStream { instr -> properties.load(instr)}
- // retrolambda.jdk = properties.getProperty('retrolambda.jdk')
- // retrolambda.oldJdk = properties.getProperty('retrolambda.oldJdk')
+  retrolambda.jdk = properties.getProperty('retrolambda.jdk')
+  retrolambda.oldJdk = properties.getProperty('retrolambda.oldJdk')
 } else {
- // retrolambda.jdk = "$System.env.JAVA_HOME"
- // retrolambda.oldJdk = "$System.env.JAVA7_HOME"
+  retrolambda.jdk = "$System.env.JAVA_HOME"
+  retrolambda.oldJdk = "$System.env.JAVA7_HOME"
 }
 
 eclipse.project {

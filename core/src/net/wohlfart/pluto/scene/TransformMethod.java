@@ -14,8 +14,11 @@ import com.badlogic.gdx.math.Vector3;
  */
 public interface TransformMethod {
 
-    TransformMethod NULL = (tmpTranslation, tmpRotation) -> {
-        // do nothing
+    TransformMethod NULL = new TransformMethod() {
+        @Override
+        public void apply(Position tmpTranslation, Quaternion tmpRotation) {
+            // do nothing
+        }
     };
 
     void apply(Position tmpTranslation, Quaternion tmpRotation);
