@@ -14,7 +14,7 @@ import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.IConsumer;
 
-public class FireLaser extends AbstractBehaviorLeaf<FireLaser> {
+public class FireLaser extends AbstractBehaviorLeaf {
 
     protected Entity target;
 

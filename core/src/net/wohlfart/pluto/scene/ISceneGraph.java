@@ -18,7 +18,7 @@ public interface ISceneGraph extends Disposable, Executor {
 
     FutureEntity findEntity(long uid);
 
-    long getProcessingCount();
+    long getTaskCount();
 
     void destroy(long uid, Entity entity);
 

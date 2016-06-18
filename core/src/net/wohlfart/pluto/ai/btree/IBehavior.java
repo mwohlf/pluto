@@ -7,7 +7,7 @@ import com.badlogic.ashley.core.Entity;
  * implementations contain definition data
  * that do not change at runtime
  */
-public interface IBehavior<T extends IBehavior<T>> {
+public interface IBehavior {
 
     enum State {
         INVALID,
@@ -21,10 +21,10 @@ public interface IBehavior<T extends IBehavior<T>> {
     ITask createTask(Entity entity, ITask parent);
 
     // executor for running tasks
-    T withContext(BehaviorContext behaviorExecutor);
+    IBehavior withContext(BehaviorContext behaviorExecutor);
 
-    <S extends IBehavior<S>> void addChild(IBehavior<S> behavior);
+    void addChild(IBehavior behavior);
 
-    <U extends IBehavior<U>> void removeChild(IBehavior<U> behavior);
+    void removeChild(IBehavior behavior);
 
 }

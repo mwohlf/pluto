@@ -33,7 +33,7 @@ public final class FactoryContainer {
 
     private static final Map<String, IFactoryDecorator<IEntityCommand>> ENTITY_BY_NAME = new HashMap<>();
 
-    private static final Map<String, IFactoryDecorator<IBehavior<?>>> BEHAVIOR_BY_NAME = new HashMap<>();
+    private static final Map<String, IFactoryDecorator<IBehavior>> BEHAVIOR_BY_NAME = new HashMap<>();
 
     static {
         // this should run off the render thread
@@ -147,7 +147,7 @@ public final class FactoryContainer {
         return FactoryContainer.ENTITY_BY_NAME.get(key);
     }
 
-    public static IFactoryDecorator<IBehavior<?>> getBehavior(String key) {
+    public static IFactoryDecorator<IBehavior> getBehavior(String key) {
         return FactoryContainer.BEHAVIOR_BY_NAME.get(key);
     }
 
@@ -173,7 +173,7 @@ public final class FactoryContainer {
             if (FactoryContainer.BEHAVIOR_BY_NAME.containsKey(jsonType)) {
                 FactoryContainer.LOGGER.error("<registerCommand> behavior type already used: " + jsonType);
             } else {
-                FactoryContainer.BEHAVIOR_BY_NAME.put(jsonType, (IFactoryDecorator<IBehavior<?>>) decorator);
+                FactoryContainer.BEHAVIOR_BY_NAME.put(jsonType, (IFactoryDecorator<IBehavior>) decorator);
             }
         } else if (IEntityCommand.class.isAssignableFrom(clazz)) {
             if (FactoryContainer.ENTITY_BY_NAME.containsKey(jsonType)) {

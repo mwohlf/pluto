@@ -78,9 +78,7 @@ public class WaypointCommand extends AbstractEntityCommand<WaypointCommand> {
     private short[] createIndices(final short vertCount) {
         final short[] result = new short[WaypointCommand.ARROW_INDICES.length * 3];
         for (int i = 0; i < WaypointCommand.ARROW_INDICES.length; i += 1) {
-            //noinspection PointlessArithmeticExpression
             result[i + WaypointCommand.ARROW_INDICES.length * 0] = (short) (WaypointCommand.ARROW_INDICES[i] + vertCount * 0);
-            //noinspection PointlessArithmeticExpression
             result[i + WaypointCommand.ARROW_INDICES.length * 1] = (short) (WaypointCommand.ARROW_INDICES[i] + vertCount * 1);
             result[i + WaypointCommand.ARROW_INDICES.length * 2] = (short) (WaypointCommand.ARROW_INDICES[i] + vertCount * 2);
         }

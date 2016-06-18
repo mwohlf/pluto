@@ -23,7 +23,7 @@ import net.wohlfart.pluto.util.ISupplier;
 public class BehaviorFactoryDecorators {
     private static final Logger LOGGER = LoggerService.forClass(BehaviorFactoryDecorators.class);
 
-    private final Map<String, IFactoryDecorator<IBehavior<?>>> FACTORY_DECORATORS = new HashMap<>();
+    private final Map<String, IFactoryDecorator<IBehavior>> FACTORY_DECORATORS = new HashMap<>();
 
     {
         newFactoryDecorator(new ISupplier<SpinBehavior>() {
@@ -73,7 +73,7 @@ public class BehaviorFactoryDecorators {
 
     // pre-read the setter methods of the IEntityCommand
     @SuppressWarnings("unchecked")
-    private <D extends IBehavior<?>> void newFactoryDecorator(ISupplier<D> supplier) {
+    private <D extends IBehavior> void newFactoryDecorator(ISupplier<D> supplier) {
         final FactoryDecoratorImpl<D> factoryDecorator = new FactoryDecoratorImpl<>(supplier);
         final Class<?> clazz = supplier.get().getClass();
         // setup the factory decorator
@@ -94,11 +94,11 @@ public class BehaviorFactoryDecorators {
         if (FACTORY_DECORATORS.containsKey(type)) {
             LOGGER.error("<newFactoryDecorator> entity type already used: " + type);
         } else {
-            FACTORY_DECORATORS.put(type, (IFactoryDecorator<IBehavior<?>>) factoryDecorator);
+            FACTORY_DECORATORS.put(type, (IFactoryDecorator<IBehavior>) factoryDecorator);
         }
     }
 
-    public IFactoryDecorator<IBehavior<?>> get(String type) {
+    public IFactoryDecorator<IBehavior> get(String type) {
         return FACTORY_DECORATORS.get(type);
     }
 

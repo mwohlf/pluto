@@ -11,7 +11,7 @@ import net.wohlfart.pluto.scene.SceneGraph;
  *https://plus.google.com/u/0/
  * this behavior returns when a sub behavior returns fail
  */
-public class Looping extends AbstractBehaviorNode<Looping> {
+public class Looping extends AbstractBehaviorNode {
 
     @Override
     public ITask createTask(Entity entity, ITask parent) {

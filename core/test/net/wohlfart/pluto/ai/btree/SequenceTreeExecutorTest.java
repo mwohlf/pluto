@@ -13,7 +13,7 @@ public class SequenceTreeExecutorTest {
     private BehaviorExecutor executor;
     private StateSensor stateHolder1;
     private StateSensor stateHolder2;
-    private AbstractBehaviorNode<?> sequence;
+    private AbstractBehaviorNode sequence;
 
     @Before
     public void before() {

@@ -1,23 +1,23 @@
 package net.wohlfart.pluto.ai.btree;
 
-public abstract class AbstractBehaviorLeaf<T extends AbstractBehaviorLeaf<T>> implements IBehavior<T> {
+public abstract class AbstractBehaviorLeaf implements IBehavior {
 
     protected BehaviorContext context;
 
     @SuppressWarnings("unchecked")
     @Override
-    public T withContext(BehaviorContext context) {
+    public AbstractBehaviorLeaf withContext(BehaviorContext context) {
         this.context = context;
-        return (T) this;
+        return this;
     }
 
     @Override
-    public <S extends IBehavior<S>> void addChild(IBehavior<S> behavior) {
+    public void addChild(IBehavior behavior) {
         throw new IllegalArgumentException("can't add child");
     }
 
     @Override
-    public <U extends IBehavior<U>> void removeChild(IBehavior<U> behavior) {
+    public void removeChild(IBehavior behavior) {
         throw new IllegalArgumentException("can't remove child");
     }
 

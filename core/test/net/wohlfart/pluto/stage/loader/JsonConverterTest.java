@@ -100,7 +100,7 @@ public class JsonConverterTest {
         });
         latch.await(1, TimeUnit.SECONDS);
         CustomAssert.assertEquals(new Position(0, 0, -70), entity.getComponent(HasPosition.class).getPosition());
-        final IBehavior<?> behavior = entity.getComponent(HasBehavior.class).getBehavior();
+        final IBehavior behavior = entity.getComponent(HasBehavior.class).getBehavior();
         Assert.assertNotNull(behavior);
     }
 
@@ -138,7 +138,7 @@ public class JsonConverterTest {
         });
         latch.await(1, TimeUnit.SECONDS);
         CustomAssert.assertEquals(new Position(0, 0, -70), entity.getComponent(HasPosition.class).getPosition());
-        final IBehavior<?> behavior = entity.getComponent(HasBehavior.class).getBehavior();
+        final IBehavior behavior = entity.getComponent(HasBehavior.class).getBehavior();
         Assert.assertNotNull(behavior);
         Assert.assertTrue(behavior instanceof MoveToBehavior);
         final Entity waypoint = graph.findEntity(2001).get();

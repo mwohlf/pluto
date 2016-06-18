@@ -15,7 +15,7 @@ import net.wohlfart.pluto.util.IConsumer;
 public final class FlightpathBuilder {
 
     private final SceneGraph graph;
-    private final IBehavior<?> flightPath;
+    private final IBehavior flightPath;
     private float moveSpeed;
     private float rotationSpeed;
     private Vector3 forward;
@@ -28,7 +28,7 @@ public final class FlightpathBuilder {
         return new FlightpathBuilder(graph, new Sequential());
     }
 
-    private FlightpathBuilder(SceneGraph graph, IBehavior<?> flightPath) {
+    private FlightpathBuilder(SceneGraph graph, IBehavior flightPath) {
         this.graph = graph;
         this.flightPath = flightPath;
     }

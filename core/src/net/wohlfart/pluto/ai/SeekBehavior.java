@@ -25,7 +25,7 @@ import net.wohlfart.pluto.util.Utils;
  */
 // see: http://www.red3d.com/cwr/steer/gdc99/
 @EntityElement(type = "Seek")
-public class SeekBehavior extends AbstractBehaviorLeaf<SeekBehavior> {
+public class SeekBehavior extends AbstractBehaviorLeaf {
 
     static final float TARGET_EPSILON = 1.0f;
 

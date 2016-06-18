@@ -15,7 +15,7 @@ public class SimpleTreeExecutorTest {
 
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
-        final IBehavior<?> behavior = new SuccessBehavior();
+        final IBehavior behavior = new SuccessBehavior();
         executor.attachBehavior(IEntityCommand.NULL_ENTITY, behavior);
         Assert.assertTrue(executor.getLastState() == State.RUNNING);
         Assert.assertEquals(1, executor.getSize());
@@ -32,7 +32,7 @@ public class SimpleTreeExecutorTest {
 
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
-        final AbstractBehaviorNode<?> sequentialBehavior = new Sequential();
+        final AbstractBehaviorNode sequentialBehavior = new Sequential();
         executor.attachBehavior(IEntityCommand.NULL_ENTITY, sequentialBehavior);
         Assert.assertTrue(executor.getLastState() == State.RUNNING);
         Assert.assertEquals(1, executor.getSize());
@@ -49,7 +49,7 @@ public class SimpleTreeExecutorTest {
 
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
-        final IBehavior<?> behavior = new FailBehavior();
+        final IBehavior behavior = new FailBehavior();
         executor.attachBehavior(IEntityCommand.NULL_ENTITY, behavior);
         Assert.assertTrue(executor.getLastState() == State.RUNNING);
         Assert.assertEquals(1, executor.getSize());
@@ -66,7 +66,7 @@ public class SimpleTreeExecutorTest {
 
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
-        final AbstractBehaviorNode<?> sequentialBehavior = new Sequential();
+        final AbstractBehaviorNode sequentialBehavior = new Sequential();
         sequentialBehavior.addChild(new FailBehavior());
 
         executor.attachBehavior(IEntityCommand.NULL_ENTITY, sequentialBehavior);
@@ -95,7 +95,7 @@ public class SimpleTreeExecutorTest {
 
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
-        final AbstractBehaviorNode<?> sequentialBehavior = new Sequential();
+        final AbstractBehaviorNode sequentialBehavior = new Sequential();
         sequentialBehavior.addChild(new SuccessBehavior());
 
         executor.attachBehavior(IEntityCommand.NULL_ENTITY, sequentialBehavior);
@@ -124,7 +124,7 @@ public class SimpleTreeExecutorTest {
 
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
-        final AbstractBehaviorNode<?> sequentialBehavior = new Sequential();
+        final AbstractBehaviorNode sequentialBehavior = new Sequential();
         sequentialBehavior.addChild(new SuccessBehavior());
         sequentialBehavior.addChild(new SuccessBehavior());
         sequentialBehavior.addChild(new FailBehavior());

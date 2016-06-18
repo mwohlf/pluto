@@ -3,10 +3,7 @@ package net.wohlfart.pluto.scene;
 import javax.annotation.Nonnull;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.ashley.core.Family;
-import com.badlogic.ashley.utils.ImmutableArray;
 import com.badlogic.gdx.graphics.g3d.Environment;
-import com.badlogic.gdx.graphics.g3d.ModelBatch;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.collision.Ray;
 
@@ -20,8 +17,6 @@ import net.wohlfart.pluto.entity.PickSystem;
 import net.wohlfart.pluto.entity.ScaleSystem;
 import net.wohlfart.pluto.resource.Executor.BackgroundWorker;
 import net.wohlfart.pluto.resource.ResourceManager;
-import net.wohlfart.pluto.scene.properties.HasRenderables;
-import net.wohlfart.pluto.shader.SceneShaderProvider;
 import net.wohlfart.pluto.util.Utils;
 
 /**
@@ -32,11 +27,6 @@ import net.wohlfart.pluto.util.Utils;
  *
  */
 public class SceneGraph implements ISceneGraph {
-
-    @SuppressWarnings("unchecked")
-    private final Family renderableEntities = Family.all(HasRenderables.class).get();
-
-    private final ModelBatch modelBatch;
 
     protected final PickSystem pickSystem = new PickSystem();
 
@@ -62,12 +52,14 @@ public class SceneGraph implements ISceneGraph {
 
     protected final ResourceManager resourceManager;
 
+    protected ModelRenderLayer modelRenderLayer;
+
     public SceneGraph(ResourceManager resourceManager) {
         this.resourceManager = resourceManager;
         behaviorExecutor = new BehaviorExecutor();
-        modelBatch = new ModelBatch(null, new SceneShaderProvider(), new SceneRenderableSorter());
         environment = new Environment();
         entityPool = new SceneGraphElementPool(environment, behaviorExecutor);
+        modelRenderLayer = new ModelRenderLayer(environment, entityPool);
         pickFacade = createPickFacade();
 
         entityPool.addSystem(movementSystem);
@@ -107,7 +99,7 @@ public class SceneGraph implements ISceneGraph {
     }
 
     @Override
-    public long getProcessingCount() {
+    public long getTaskCount() {
         return processingCount;
     }
 
@@ -132,19 +124,12 @@ public class SceneGraph implements ISceneGraph {
 
     @Override
     public void render() {
-        modelBatch.begin(entityPool.getCamera());
-        // pick the renderables from the pool
-        final ImmutableArray<Entity> renderables = entityPool.getEntitiesFor(renderableEntities);
-        for (final Entity elem : renderables) {
-            final HasRenderables renderable = elem.getComponent(HasRenderables.class);
-            modelBatch.render(renderable, environment);
-        }
-        modelBatch.end();
+        modelRenderLayer.render();
     }
 
     @Override
     public void dispose() {
-        modelBatch.dispose();
+        modelRenderLayer.dispose();
         entityPool.clearPools();
     }
 

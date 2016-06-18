@@ -19,7 +19,7 @@ public class TriggerTreeExecutorTest {
         Assert.assertTrue(executor.getLastState() == State.SUCCESS);
 
         stateHolder = new StateSensor();
-        final IBehavior<?> behavior = new TriggerBehavior(stateHolder);
+        final IBehavior behavior = new TriggerBehavior(stateHolder);
 
         executor.attachBehavior(IEntityCommand.NULL_ENTITY, behavior);
         Assert.assertTrue(executor.getLastState() == State.RUNNING);

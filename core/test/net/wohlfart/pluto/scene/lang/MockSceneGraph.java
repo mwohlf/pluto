@@ -31,7 +31,7 @@ public class MockSceneGraph implements ISceneGraph {
     }
 
     @Override
-    public long getProcessingCount() {
+    public long getTaskCount() {
         return 0;
     }
 

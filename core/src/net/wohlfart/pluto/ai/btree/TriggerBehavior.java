@@ -6,7 +6,7 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.scene.SceneGraph;
 
-public class TriggerBehavior extends AbstractBehaviorLeaf<TriggerBehavior> {
+public class TriggerBehavior extends AbstractBehaviorLeaf {
 
     private final StateHolder stateHolder;
 

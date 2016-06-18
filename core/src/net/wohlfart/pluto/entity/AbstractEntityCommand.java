@@ -36,7 +36,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
 
     public final ScaleValue scale = new ScaleValue();
 
-    public IBehavior<?> behavior;
+    public IBehavior behavior;
 
     private long uid = NULL_UID;
 
@@ -179,7 +179,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
     }
 
     @EntityProperty(name = "behavior", type = "Behavior")
-    public F withBehavior(IBehavior<?> behavior) {
+    public F withBehavior(IBehavior behavior) {
         this.behavior = behavior;
         return (F) this;
     }

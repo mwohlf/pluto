@@ -7,7 +7,7 @@ import net.wohlfart.pluto.scene.SceneGraph;
 import net.wohlfart.pluto.stage.loader.EntityElement;
 
 @EntityElement(type = "Parallel")
-public class Parallel extends AbstractBehaviorNode<Parallel> {
+public class Parallel extends AbstractBehaviorNode {
 
     @Override
     public ITask createTask(Entity entity, ITask parent) {
@@ -61,7 +61,7 @@ public class Parallel extends AbstractBehaviorNode<Parallel> {
         }
 
         private void runAllChildren(float delta) {
-            for (final IBehavior<?> behavior : children) {
+            for (final IBehavior behavior : children) {
                 context.add(behavior.createTask(entity, this));
             }
         }

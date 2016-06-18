@@ -18,7 +18,7 @@ import net.wohlfart.pluto.util.Utils;
  * adds spin behavior to a entity
  */
 @EntityElement(type = "Spin")
-public class SpinBehavior extends AbstractBehaviorLeaf<SpinBehavior> {
+public class SpinBehavior extends AbstractBehaviorLeaf {
 
     static final Quaternion TMP_QUATERNION = new Quaternion();
 

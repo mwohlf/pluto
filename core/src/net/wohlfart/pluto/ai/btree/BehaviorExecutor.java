@@ -20,7 +20,7 @@ public class BehaviorExecutor implements BehaviorContext { // TODO: use the inte
 
     private final NullTask NULL_TASK = new NullTask();
 
-    public BehaviorExecutor attachBehavior(Entity entity, IBehavior<?> behavior) {
+    public BehaviorExecutor attachBehavior(Entity entity, IBehavior behavior) {
         return new BehaviorBuilder(behavior).build(entity);
     }
 
@@ -73,9 +73,9 @@ public class BehaviorExecutor implements BehaviorContext { // TODO: use the inte
 
     private final class BehaviorBuilder {
 
-        private final IBehavior<?> rootBehavior;
+        private final IBehavior rootBehavior;
 
-        private BehaviorBuilder(IBehavior<?> behavior) {
+        private BehaviorBuilder(IBehavior behavior) {
             this.rootBehavior = behavior;
         }
 

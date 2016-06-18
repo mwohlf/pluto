@@ -38,7 +38,7 @@ public class ParseableStage extends AbstractGraphStage {
 
     @Override
     public float getTasksLeft() {
-        final long tasksLeft = graph.getProcessingCount();
+        final long tasksLeft = graph.getTaskCount();
         if (tasksLeft == 0) {
             futureGraph.set(graph);
         }

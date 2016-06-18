@@ -171,7 +171,7 @@ public class JsonConverter {
                 }
             });
         } else { // size > 1
-            final IBehavior<?> behavior;
+            final IBehavior behavior;
             final Deque<JsonValue> elements;
             if (jsonValue.isArray()) {
                 JsonConverter.LOGGER.debug("<setBehaviorProperty> sequential behavior");
@@ -205,7 +205,7 @@ public class JsonConverter {
         }
     }
 
-    private void collectBehaviors(ISceneGraph graph, IBehavior<?> parent, Deque<JsonValue> elements, Runnable runnable) throws Exception {
+    private void collectBehaviors(ISceneGraph graph, IBehavior parent, Deque<JsonValue> elements, Runnable runnable) throws Exception {
         if (elements.isEmpty()) {
             runnable.run();
         } else {
@@ -221,15 +221,15 @@ public class JsonConverter {
         }
     }
 
-    private void convertBehavior(ISceneGraph graph, JsonValue jsonValue, Callback<IBehavior<?>> callback) throws Exception {
+    private void convertBehavior(ISceneGraph graph, JsonValue jsonValue, Callback<IBehavior> callback) throws Exception {
         assert !JsonConverter.BEHAVIOR_TAG.equals(jsonValue.name); // not a meta behavior
         JsonConverter.LOGGER.debug("<convertBehavior> called with size: " + jsonValue.size + " name: " + jsonValue.name);
-        final IFactoryDecorator<IBehavior<?>> behaviorDecorator = FactoryContainer.getBehavior(jsonValue.name);
+        final IFactoryDecorator<IBehavior> behaviorDecorator = FactoryContainer.getBehavior(jsonValue.name);
         if (behaviorDecorator == null) {
             JsonConverter.LOGGER.error("<convertBehavior> no behavior for json name '" + jsonValue.name + "', ignoring");
             return;
         }
-        final IBehavior<?> delegate = behaviorDecorator.create();
+        final IBehavior delegate = behaviorDecorator.create();
         assert delegate != null;
         final AtomicInteger openCalls = new AtomicInteger(jsonValue.size);
         for (JsonValue childJson = jsonValue.child; childJson != null; childJson = childJson.next) {

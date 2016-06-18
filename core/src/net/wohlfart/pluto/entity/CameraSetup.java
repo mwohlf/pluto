@@ -26,7 +26,7 @@ public class CameraSetup implements IEntityCommand {
 
     private long uid = IEntityCommand.NULL_UID;
 
-    private IBehavior<?> behavior;
+    private IBehavior behavior;
 
     private CamRobotInput robotInput;
 
@@ -108,7 +108,7 @@ public class CameraSetup implements IEntityCommand {
     }
 
     @EntityProperty(name = "behavior", type = "Behavior")
-    public CameraSetup withBehavior(IBehavior<?> behavior) {
+    public CameraSetup withBehavior(IBehavior behavior) {
         this.behavior = behavior;
         return this;
     }

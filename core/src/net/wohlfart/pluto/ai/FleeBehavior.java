@@ -18,7 +18,7 @@ import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
 
 @EntityElement(type = "Flee")
-public class FleeBehavior extends AbstractBehaviorLeaf<FleeBehavior> {
+public class FleeBehavior extends AbstractBehaviorLeaf {
 
     private static final float TARGET_EPSILON = 0.1f;
 

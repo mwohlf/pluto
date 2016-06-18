@@ -26,8 +26,8 @@ import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.scene.properties.HasRenderables;
 import net.wohlfart.pluto.scene.properties.HasRotation;
 import net.wohlfart.pluto.scene.properties.HasTransformMethod;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.stage.loader.EntityElement;
+import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
 
 /*
@@ -49,7 +49,7 @@ public class LightCommand implements IEntityCommand {
 
     protected long uid;
 
-    public IBehavior<?> behavior;
+    public IBehavior behavior;
 
     @Override
     public long getUid() {
@@ -183,7 +183,7 @@ public class LightCommand implements IEntityCommand {
     }
 
     @EntityProperty(name = "behavior", type = "Behavior")
-    public LightCommand withBehavior(IBehavior<?> behavior) {
+    public LightCommand withBehavior(IBehavior behavior) {
         this.behavior = behavior;
         return this;
     }

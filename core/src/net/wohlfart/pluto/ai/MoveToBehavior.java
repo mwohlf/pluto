@@ -15,7 +15,7 @@ import net.wohlfart.pluto.stage.loader.EntityProperty;
  *
  */
 @EntityElement(type = "MoveTo")
-public class MoveToBehavior extends AbstractBehaviorLeaf<MoveToBehavior> {
+public class MoveToBehavior extends AbstractBehaviorLeaf {
 
     private static final float TARGET_EPSILON = 0.1f;
 

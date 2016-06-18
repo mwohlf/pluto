@@ -10,7 +10,7 @@ import net.wohlfart.pluto.scene.ISceneGraph;
 import net.wohlfart.pluto.stage.SceneLanguageParser;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ParameterContext;
 
-public class BehaviorVisitor extends ElementVisitor<IBehavior<?>> {
+public class BehaviorVisitor extends ElementVisitor<IBehavior> {
 
     private static final Logger LOGGER = LoggerService.forClass(BehaviorVisitor.class);
 
@@ -21,7 +21,7 @@ public class BehaviorVisitor extends ElementVisitor<IBehavior<?>> {
     }
 
     @Override
-    public IBehavior<?> visitBehavior(SceneLanguageParser.BehaviorContext ctx) {
+    public IBehavior visitBehavior(SceneLanguageParser.BehaviorContext ctx) {
         final String type = ctx.behaviorType().getText();
         LOGGER.info("<visitBehavior> type: " + type);
         this.factory = DECORATORS.get(type);

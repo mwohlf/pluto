@@ -3,30 +3,30 @@ package net.wohlfart.pluto.ai.btree;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class AbstractBehaviorNode<T extends AbstractBehaviorNode<T>> implements IBehavior<T> {
+public abstract class AbstractBehaviorNode implements IBehavior {
 
-    protected final List<IBehavior<?>> children = new ArrayList<>();
+    protected final List<IBehavior> children = new ArrayList<>();
 
     protected BehaviorContext context;
 
     @SuppressWarnings("unchecked")
     @Override
-    public T withContext(BehaviorContext context) {
+    public AbstractBehaviorNode withContext(BehaviorContext context) {
         this.context = context;
-        for (final IBehavior<?> behavior : children) {
+        for (final IBehavior behavior : children) {
             behavior.withContext(context);
         }
-        return (T) this;
+        return this;
     }
 
     @Override
-    public <S extends IBehavior<S>> void addChild(IBehavior<S> behavior) {
+    public void addChild(IBehavior behavior) {
         behavior.withContext(context);
         children.add(behavior);
     }
 
     @Override
-    public <U extends IBehavior<U>> void removeChild(IBehavior<U> behavior) {
+    public void removeChild(IBehavior behavior) {
         children.remove(behavior);
     }
 

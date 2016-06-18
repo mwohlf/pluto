@@ -12,7 +12,7 @@ import net.wohlfart.pluto.stage.loader.EntityElement;
  * this behavior returns when a sub behavior returns fail
  */
 @EntityElement(type = "Sequential")
-public class Sequential extends AbstractBehaviorNode<Sequential> {
+public class Sequential extends AbstractBehaviorNode {
 
     @Override
     public ITask createTask(Entity entity, ITask parent) {

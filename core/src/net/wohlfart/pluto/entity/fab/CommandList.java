@@ -32,7 +32,7 @@ public class CommandList implements IEntityCommand {
 
     private Entity entity;
 
-    private IBehavior<?> behavior;
+    private IBehavior behavior;
 
     private long uid = IEntityCommand.NULL_UID;
 
@@ -99,7 +99,7 @@ public class CommandList implements IEntityCommand {
         return add(new WaypointCommand().withPosition(position));
     }
 
-    public IBehavior<?> asLoopBehavior() {
+    public IBehavior asLoopBehavior() {
         behavior = new Looping();
         for (final Entry<IEntityCommand, FutureEntity> entry : list.entrySet()) {
             entry.getValue().then(new IConsumer<Entity>() {

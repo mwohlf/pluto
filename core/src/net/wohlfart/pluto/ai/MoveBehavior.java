@@ -17,7 +17,7 @@ import net.wohlfart.pluto.stage.loader.EntityProperty;
  * move an entity for a fixed distance
  */
 @EntityElement(type = "Move")
-public class MoveBehavior extends AbstractBehaviorLeaf<MoveBehavior> {
+public class MoveBehavior extends AbstractBehaviorLeaf {
 
     public final Vector3 tmpVector = new Vector3();
 
@@ -58,7 +58,7 @@ public class MoveBehavior extends AbstractBehaviorLeaf<MoveBehavior> {
     }
 
     @Override
-    public <S extends IBehavior<S>> void addChild(IBehavior<S> behavior) {
+    public void addChild(IBehavior behavior) {
         throw new IllegalArgumentException("can't add child");
     }
 

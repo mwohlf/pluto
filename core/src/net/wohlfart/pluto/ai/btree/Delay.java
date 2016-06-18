@@ -5,7 +5,7 @@ import com.badlogic.ashley.core.Entity;
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.scene.SceneGraph;
 
-public class Delay extends AbstractBehaviorLeaf<Delay> {
+public class Delay extends AbstractBehaviorLeaf {
 
     float waitTime;
 

@@ -205,8 +205,8 @@ public class Value<T> implements Comparable<Value<T>> {
         return (Color) value;
     }
 
-    public IBehavior<?> asBehavior() {
-        return (IBehavior<?>) value;
+    public IBehavior asBehavior() {
+        return (IBehavior) value;
     }
 
     public FutureEntity asEntity() {
