@@ -231,11 +231,13 @@ ship4 = Object {
 
 behavior5 = 
     ( FireLaser {
-        timeout: 5,
+        timeout: 1,
         target: ship4}
     & Delay {
-        timeout: 5}
-    );  
+        timeout: 1}
+    );
+    
+behavior6 = ( behavior5 | Seek{ target: ship4 } );
 
 ship5 = Object {
     uid:uid++,
@@ -243,6 +245,6 @@ ship5 = Object {
     file: "obj/manta1/manta1.obj",
     moveSpeed: 10,
     rotationSpeed: 0.5,
-    behavior: behavior5,  
+    behavior: behavior6,  
 };
 
