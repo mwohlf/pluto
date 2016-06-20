@@ -4,19 +4,23 @@ import com.badlogic.ashley.core.Entity;
 
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.scene.SceneGraph;
+import net.wohlfart.pluto.stage.loader.EntityElement;
+import net.wohlfart.pluto.stage.loader.EntityProperty;
 
+@EntityElement(type = "Delay")
 public class Delay extends AbstractBehaviorLeaf {
 
     float waitTime;
 
-    public Delay withTimeout(float waitTime) {
-        this.waitTime = waitTime;
-        return this;
-    }
-
     @Override
     public ITask createTask(Entity entity, ITask parent) {
         return new TaskImpl().initialize(entity, parent);
+    }
+
+    @EntityProperty(name = "timeout", type = "Float")
+    public Delay withTimeout(float waitTime) {
+        this.waitTime = waitTime;
+        return this;
     }
 
     class TaskImpl extends AbstractLeafTask {

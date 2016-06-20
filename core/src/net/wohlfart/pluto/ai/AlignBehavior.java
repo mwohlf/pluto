@@ -17,14 +17,8 @@ import net.wohlfart.pluto.stage.loader.EntityElement;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
 
-/**
- * seek a target entity and follow
- * TODO: checkout
- * BSpline derivativeAt()
- */
-// see: http://www.red3d.com/cwr/steer/gdc99/
-@EntityElement(type = "Seek")
-public class SeekBehavior extends AbstractBehaviorLeaf {
+@EntityElement(type = "Align")
+public class AlignBehavior extends AbstractBehaviorLeaf {
 
     static final float TARGET_EPSILON = 1.0f;
 
@@ -61,7 +55,7 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
     }
 
     @EntityProperty(name = "target", type = "Entity")
-    public SeekBehavior withTarget(Entity target) {
+    public AlignBehavior withTarget(Entity target) {
         assert target != null : "target cant be null";
         assert target.getComponent(HasPosition.class) != null : "target needs a position, target was: " + target;
         assert target.getComponent(HasRotation.class) != null : "target needs a rotation, target was: " + target;
@@ -71,9 +65,9 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
 
     static class TaskImpl extends AbstractLeafTask {
 
-        private SeekBehavior behavior;
+        private AlignBehavior behavior;
 
-        public ITask initialize(SeekBehavior behavior, Entity entity, ITask parent) {
+        public ITask initialize(AlignBehavior behavior, Entity entity, ITask parent) {
             assert parent != null : "parent must not be null";
             this.behavior = behavior;
             return super.initialize(entity, parent);
@@ -81,9 +75,9 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
 
         @Override
         public void tick(float delta, SceneGraph graph) {
-            behavior.target.getComponent(HasPosition.class).getPosition().get(SeekBehavior.tmpVector1);
+            behavior.target.getComponent(HasPosition.class).getPosition().get(behavior.tmpVector1);
             entity.getComponent(HasPosition.class).getPosition().get(SeekBehavior.tmpVector2);
-            if (SeekBehavior.tmpVector1.epsilonEquals(SeekBehavior.tmpVector2, SeekBehavior.TARGET_EPSILON)) {
+            if (behavior.tmpVector1.epsilonEquals(behavior.tmpVector2, behavior.TARGET_EPSILON)) {
                 behavior.context.remove(this);
                 parent.reportState(State.SUCCESS);
             } else {
@@ -119,10 +113,60 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
             tmpQuaternion2.set(behavior.target.getComponent(HasRotation.class).getRotation()); // target orientation
             //System.err.println("  tmpQuaternion2: " + tmpQuaternion2);
             tmpVector2.set(Utils.getYVector(tmpQuaternion2)).nor(); // target up vector
+            // target
+            //System.err.println("  tmpQuaternion2 (target x): " + Utils.getXVector(tmpQuaternion2));
+            //System.err.println("  tmpQuaternion2 (target y): " + Utils.getYVector(tmpQuaternion2));
+            //System.err.println("  tmpQuaternion2 (target z): " + Utils.getZVector(tmpQuaternion2));
+            // entity
+            //System.err.println("  tmpQuaternion1 (target x): " + Utils.getXVector(tmpQuaternion1));
+            //System.err.println("  tmpQuaternion1 (target y): " + Utils.getYVector(tmpQuaternion1));
+            //System.err.println("  tmpQuaternion1 (target z): " + Utils.getZVector(tmpQuaternion1));
+            //System.err.println("    orthogonal check: " + Utils.getZVector(tmpQuaternion1).dot(vector));
 
             tmpVector1.set(behavior.forwardVector);
             tmpVector1.mul(tmpQuaternion1);
             //System.err.println("  tmpVector1 (forward): " + tmpVector1);
+
+            if (!tmpVector2.isOnLine(tmpVector1, 0.001f)) {
+
+                tmpVector1.set(behavior.upVector);
+                tmpVector1.mul(tmpQuaternion1);
+                //System.err.println("  tmpVector1 (up): " + tmpVector1);
+
+                //System.err.println("  isOnLine: " + tmpVector2.isOnLine(tmpVector1, 0.001f));
+
+                tmpVector1.nor();
+
+                // do we need to rotate
+                if (!tmpVector2.isCollinear(tmpVector1, 0.001f)) {
+
+                    final float angle1 = tmpQuaternion1.getAngleAround(tmpVector1);
+                    //System.err.println("     tmpQuaternion1: " + tmpQuaternion1 + " angle1: " + angle1 + " tmpVector1: " + tmpVector1);
+
+                    final float angle2 = tmpQuaternion2.getAngleAround(tmpVector1);
+                    //System.err.println("     tmpQuaternion2: " + tmpQuaternion2 + " angle2: " + angle2 + " tmpVector1: " + tmpVector1);
+
+                    final float angle = (angle1 - angle2) * delta;
+
+                    /*
+                    System.err.println(""
+                            + " angle1: " + angle1
+                            + " angle2: " + angle2
+                            + " angle: " + angle
+                            + " tmpVector1: " + tmpVector1
+                            + " tmpVector2: " + tmpVector2
+                            + " tmpQuaternion1: " + tmpQuaternion1
+                            + " tmpQuaternion2: " + tmpQuaternion2);
+                    */
+                    if (angle > 0.001) {
+                        tmpQuaternion2.setFromAxis(1, 0, 0, angle);
+                        entity.getComponent(HasRotation.class).getRotation().mul(tmpQuaternion2);
+                    } else if (angle < -0.001) {
+                        tmpQuaternion2.setFromAxis(-1, 0, 0, -angle);
+                        entity.getComponent(HasRotation.class).getRotation().mul(tmpQuaternion2);
+                    }
+                }
+            }
 
             SeekBehavior.tmpVector1.set(behavior.forwardVector);
             SeekBehavior.tmpQuaternion1.set(entity.getComponent(HasRotation.class).getRotation());

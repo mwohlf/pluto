@@ -7,11 +7,14 @@ import java.util.Map;
 import com.github.czyzby.kiwi.log.Logger;
 import com.github.czyzby.kiwi.log.LoggerService;
 
+import net.wohlfart.pluto.ai.AlignBehavior;
+import net.wohlfart.pluto.ai.FireLaser;
 import net.wohlfart.pluto.ai.FleeBehavior;
 import net.wohlfart.pluto.ai.MoveBehavior;
 import net.wohlfart.pluto.ai.MoveToBehavior;
 import net.wohlfart.pluto.ai.SeekBehavior;
 import net.wohlfart.pluto.ai.SpinBehavior;
+import net.wohlfart.pluto.ai.btree.Delay;
 import net.wohlfart.pluto.ai.btree.IBehavior;
 import net.wohlfart.pluto.ai.btree.Parallel;
 import net.wohlfart.pluto.ai.btree.Sequential;
@@ -68,7 +71,24 @@ public class BehaviorFactoryDecorators {
                 return new Sequential();
             }
         });
-
+        newFactoryDecorator(new ISupplier<FireLaser>() {
+            @Override
+            public FireLaser get() {
+                return new FireLaser();
+            }
+        });
+        newFactoryDecorator(new ISupplier<AlignBehavior>() {
+            @Override
+            public AlignBehavior get() {
+                return new AlignBehavior();
+            }
+        });
+        newFactoryDecorator(new ISupplier<Delay>() {
+            @Override
+            public Delay get() {
+                return new Delay();
+            }
+        });
     }
 
     // pre-read the setter methods of the IEntityCommand

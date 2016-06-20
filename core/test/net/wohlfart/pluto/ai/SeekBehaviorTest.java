@@ -24,7 +24,7 @@ public class SeekBehaviorTest {
         entity.add(entityPool.createComponent(HasRotation.class)
                 .withRotation(new Quaternion()));
 
-        seekBehavior.withEntity(entity);
+        seekBehavior.withTarget(entity);
 
         // TODO
     }

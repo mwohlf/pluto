@@ -3,7 +3,6 @@ package net.wohlfart.pluto.ai;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.utils.Pool;
 
 import net.wohlfart.pluto.ai.btree.AbstractBehaviorLeaf;
 import net.wohlfart.pluto.ai.btree.ITask;
@@ -22,13 +21,6 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
 
     static final Quaternion TMP_QUATERNION = new Quaternion();
 
-    private static final Pool<TaskImpl> POOL = new Pool<TaskImpl>(16, 1000) {
-        @Override
-        protected TaskImpl newObject() {
-            return new TaskImpl();
-        }
-    };
-
     private Vector3 axis;
 
     private float angle = Float.NaN;
@@ -39,7 +31,7 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
     public ITask createTask(Entity entity, ITask parent) {
         assert !Float.isNaN(angle) : "angle is null";
         assert axis != null : "axis is null";
-        return SpinBehavior.POOL.obtain().initialize(this, entity, parent);
+        return new TaskImpl().initialize(this, entity, parent);
     }
 
     public SpinBehavior withRotation(Quaternion spinPerSec) {

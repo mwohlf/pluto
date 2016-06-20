@@ -33,7 +33,7 @@ public class MoveToBehavior extends AbstractBehaviorLeaf {
         return new TaskImpl().initialize(entity, parent);
     }
 
-    @EntityProperty(name = "waypoint", type = "Entity")
+    @EntityProperty(name = "target", type = "Entity")
     public MoveToBehavior withTarget(Entity target) {
         this.target = target;
         return this;

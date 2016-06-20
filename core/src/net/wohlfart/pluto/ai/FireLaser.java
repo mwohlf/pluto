@@ -11,29 +11,32 @@ import net.wohlfart.pluto.entity.effects.LaserBeamCommand;
 import net.wohlfart.pluto.scene.FutureEntity;
 import net.wohlfart.pluto.scene.SceneGraph;
 import net.wohlfart.pluto.scene.properties.HasPosition;
+import net.wohlfart.pluto.stage.loader.EntityElement;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.IConsumer;
 
+@EntityElement(type = "FireLaser")
 public class FireLaser extends AbstractBehaviorLeaf {
 
     protected Entity target;
 
-    float waitTime;
-
-    public FireLaser withTimeout(float waitTime) {
-        this.waitTime = waitTime;
-        return this;
-    }
+    float waitTime = 5;
 
     @Override
     public ITask createTask(Entity entity, ITask parent) {
-        assert this.target != null : "no target at: " + System.identityHashCode(this);
+        //assert this.target != null : "no target at: " + System.identityHashCode(this);
         return new TaskImpl().initialize(entity, parent);
     }
 
     @EntityProperty(name = "target", type = "Entity")
     public FireLaser withTarget(Entity target) {
         this.target = target;
+        return this;
+    }
+
+    @EntityProperty(name = "timeout", type = "Float")
+    public FireLaser withTimeout(float waitTime) {
+        this.waitTime = waitTime;
         return this;
     }
 

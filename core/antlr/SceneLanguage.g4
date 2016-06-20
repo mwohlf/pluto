@@ -140,6 +140,9 @@ behaviorType
       | 'Flee'
       | 'Parallel'
       | 'Sequential'     
+      | 'FireLaser'
+      | 'Delay'  
+      | 'Align'     
       ;  
         
 entityType

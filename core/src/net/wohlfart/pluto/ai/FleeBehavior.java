@@ -50,8 +50,8 @@ public class FleeBehavior extends AbstractBehaviorLeaf {
         return new TaskImpl().initialize(entity, parent);
     }
 
-    @EntityProperty(name = "waypoint", type = "Entity")
-    public FleeBehavior withEntity(Entity target) {
+    @EntityProperty(name = "target", type = "Entity")
+    public FleeBehavior withTarget(Entity target) {
         assert target.getComponent(HasPosition.class) != null : "waypoint needs a position";
         this.target = target;
         return this;

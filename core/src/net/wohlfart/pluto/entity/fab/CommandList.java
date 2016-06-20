@@ -107,7 +107,7 @@ public class CommandList implements IEntityCommand {
                 public void apply(Entity target) {
                     behavior.addChild(new SeekBehavior()
                             //.withForward(Vector3.X)
-                            .withEntity(target));
+                            .withTarget(target));
                 }
             });
         }

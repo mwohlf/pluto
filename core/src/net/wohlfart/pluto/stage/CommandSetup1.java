@@ -63,7 +63,7 @@ public class CommandSetup1 extends AbstractCommandFactory {
         graph.findEntity(command.getUid()).then(new IConsumer<Entity>() {
             @Override
             public void apply(Entity target) {
-                behavior.withEntity(target);
+                behavior.withTarget(target);
             }
         });
         return command;

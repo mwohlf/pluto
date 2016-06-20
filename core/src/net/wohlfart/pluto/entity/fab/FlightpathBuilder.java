@@ -60,7 +60,7 @@ public final class FlightpathBuilder {
 
     public FlightpathBuilder addTarget(Entity entity) {
         flightPath.addChild(new SeekBehavior()
-                .withEntity(entity)
+                .withTarget(entity)
         //.withMoveSpeed(moveSpeed)
         //.withRotationSpeed(rotationSpeed)
         )

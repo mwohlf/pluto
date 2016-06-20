@@ -3,47 +3,49 @@ a = 2;
 
 uid = 1;
 
-sequence1 = Seek{
-        waypoint: Waypoint {
+sequence1 = 
+        (  Seek {
+          target: Waypoint {
             uid:uid++,
             position: Position{x:-20.0, y:20.0, z:-50.0}}}
-        &  Seek{
-        waypoint: Waypoint {
+        &  Seek {
+          target: Waypoint {
             uid:uid++,
             position: Position{x:0.0, y:-20.0, z:-100.0}}}
         &  Seek{
-        waypoint: Waypoint {
+          target: Waypoint {
             uid:uid++,
             position: Position{x:-10.0, y:20.0, z:-150.0}}}
         &  Seek{
-        waypoint: Waypoint {
+          target: Waypoint {
             uid:uid++,
             position: Position{x:0.0, y:-20.0, z:-200.0}}}
         &  Seek{
-        waypoint: Waypoint {
+          target: Waypoint {
             uid:uid++,
             position: Position{x:30.0, y:20.0, z:-250.0}}}
+        )    
 ;
 
 sequence2 = 
         (  Seek{
-        waypoint: Waypoint {
+        target: Waypoint {
             uid:uid++,
             position: Position{x:20.0, y:20.0, z:-50.0}}}
         &  Seek{
-        waypoint: Waypoint {
+        target: Waypoint {
             uid:uid++,
             position: Position{x:20.0, y:-20.0, z:-50.0}}}
         &  Seek{
-        waypoint: Waypoint {
+        target: Waypoint {
             uid:uid++,
             position: Position{x:-20.0, y:-20.0, z:-50.0}}}
         &  Seek{
-        waypoint: Waypoint {
+        target: Waypoint {
             uid:uid++,
             position: Position{x:-20.0, y:20.0, z:-50.0}}}
         &  Seek{
-        waypoint: Waypoint {
+        target: Waypoint {
             uid:uid++,
             position: Position{x:-20.0, y:20.0, z:-150.0}}}
         )    
@@ -104,7 +106,7 @@ target = Waypoint {
 };
 
 goto = MoveTo {
-    waypoint: target
+    target: target
 };
 
 
@@ -202,19 +204,45 @@ ship2 = Object {
     moveSpeed: 9,
     rotationSpeed: 1,
     behavior: Seek{
-        waypoint: ship1,
+        target: ship1,
     },
 };
-/*
+
 ship3 = Object {
     uid:uid++,
     position: Position{x:0.0,y:0.0,z:-10.0},
     file: "obj/manta1/manta1.obj",
     moveSpeed: 5,
-    rotationSpeed: 0.1,
+    rotationSpeed: 1,
     behavior: Seek{
-        waypoint: ship2,
+        target: ship2,
     },
 };
-*/
+
+
+ship4 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-190.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 1,
+    behavior: sequence1,  
+};
+
+behavior5 = 
+    ( FireLaser {
+        timeout: 5,
+        target: ship4}
+    & Delay {
+        timeout: 5}
+    );  
+
+ship5 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-90.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 0.5,
+    behavior: behavior5,  
+};
 

@@ -28,6 +28,7 @@ import net.wohlfart.pluto.scene.lang.IFactoryDecorator;
 import net.wohlfart.pluto.shader.SkyboxCommand;
 import net.wohlfart.pluto.util.ISupplier;
 
+@Deprecated
 public final class FactoryContainer {
     private static final Logger LOGGER = LoggerService.forClass(FactoryContainer.class);
 
@@ -138,6 +139,7 @@ public final class FactoryContainer {
                 return new FleeBehavior();
             }
         });
+
     }
 
     private FactoryContainer() {
