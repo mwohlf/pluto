@@ -38,7 +38,7 @@ public class Scope {
     public void assignExisting(String identifier, Value<?> value) {
         if (variables.containsKey(identifier)) {
             variables.put(identifier, value);
-        } else if (!HasParentScope()) {
+        } else if (!hasParentScope()) {
             parent.assignExisting(identifier, value);
         } else {
             throw new IllegalStateException("variable not found for reassigning, name war " + identifier + " value: " + value);
