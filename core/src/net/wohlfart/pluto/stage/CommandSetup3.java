@@ -89,7 +89,22 @@ public class CommandSetup3 extends AbstractCommandFactory {
 
                 final Looping looping = new Looping();
                 looping.addChild(new Delay().withTimeout(2f));
-                looping.addChild(new FireLaser().withTimeout(2f).withTarget(graph.findEntity(ship1.getUid())));
+                looping.addChild(new FireLaser().withTimeout(2f)); //.withTarget(graph.findEntity(ship1.getUid())));
+
+                /*
+
+                      @Deprecated
+                public FireLaser withTarget(FutureEntity futureEntity) {
+                futureEntity.then(new IConsumer<Entity>() {
+                @Override
+                public void apply(Entity target) {
+                FireLaser.this.withTarget(target);
+                }
+                });
+                return this;
+                }
+
+                 */
 
                 parallel.addChild(looping);
                 parallel.addChild(new SeekBehavior()

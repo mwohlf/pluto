@@ -29,7 +29,6 @@ android {
         instrumentTest.setRoot('tests')
     }
     lintOptions {
-        // TODO: check the lint errors
         abortOnError false
     }
 }

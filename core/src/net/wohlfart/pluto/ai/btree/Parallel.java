@@ -53,16 +53,16 @@ public class Parallel extends AbstractBehaviorNode {
                     runAllChildren(delta);
                     break;
                 case FAILURE:
-                    parent.reportState(State.FAILURE);
+                    getParent().reportState(State.FAILURE);
                     break;
                 default:
-                    parent.reportState(State.INVALID);
+                    getParent().reportState(State.INVALID);
             }
         }
 
         private void runAllChildren(float delta) {
             for (final IBehavior behavior : children) {
-                context.add(behavior.createTask(entity, this));
+                context.add(behavior.createTask(getEntity(), this));
             }
         }
 

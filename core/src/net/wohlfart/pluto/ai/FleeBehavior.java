@@ -62,23 +62,23 @@ public class FleeBehavior extends AbstractBehaviorLeaf {
         @Override
         public void tick(float delta, SceneGraph graph) {
             target.getComponent(HasPosition.class).getPosition().get(tmpVector1);
-            entity.getComponent(HasPosition.class).getPosition().get(tmpVector2);
+            getEntity().getComponent(HasPosition.class).getPosition().get(tmpVector2);
             if (tmpVector1.epsilonEquals(tmpVector2, FleeBehavior.TARGET_EPSILON)) {
-                context.remove(this);
-                parent.reportState(State.SUCCESS);
+                getContext().remove(this);
+                getParent().reportState(State.SUCCESS);
             } else {
                 calculate(delta);
-                parent.reportState(State.RUNNING);
+                getParent().reportState(State.RUNNING);
             }
         }
 
         private boolean calculate(float delta) {
             // tmpVector1 is a vector from current entity's position to the target's position in target space
             tmpPosition.set(0.0, 0.0, 0.0)
-                    .sub(entity.getComponent(HasPosition.class).getPosition())
+                    .sub(getEntity().getComponent(HasPosition.class).getPosition())
                     .add(target.getComponent(HasPosition.class).getPosition());
             tmpPosition.get(tmpVector1);
-            tmpQuaternion.set(entity.getComponent(HasRotation.class).getRotation());
+            tmpQuaternion.set(getEntity().getComponent(HasRotation.class).getRotation());
             tmpVector1.mul(tmpQuaternion.conjugate());
             tmpVector1.nor();
 
@@ -87,14 +87,14 @@ public class FleeBehavior extends AbstractBehaviorLeaf {
                 tmpQuaternion.setFromCross(tmpVector1, forwardVector);
                 //tmpQuaternion.nor();
                 Utils.scale(tmpQuaternion, delta * rotationSpeed);
-                entity.getComponent(HasRotation.class).getRotation().mul(tmpQuaternion.conjugate());
+                getEntity().getComponent(HasRotation.class).getRotation().mul(tmpQuaternion.conjugate());
             }
 
             // we should use the forward direction here
             tmpPosition.get(tmpVector1); // reset
             tmpVector1.nor();
             tmpVector1.scl(delta * moveSpeed);
-            entity.getComponent(HasPosition.class).getPosition().move(tmpVector1);
+            getEntity().getComponent(HasPosition.class).getPosition().move(tmpVector1);
 
             return true;
         }

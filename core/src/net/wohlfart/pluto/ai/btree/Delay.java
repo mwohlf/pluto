@@ -28,13 +28,13 @@ public class Delay extends AbstractBehaviorLeaf {
 
         @Override
         public void tick(float delta, SceneGraph graph) {
-            assert context != null;
+            assert getContext() != null;
             time += delta;
             if (time <= waitTime) {
-                parent.reportState(State.RUNNING); // signal the parent task
+                getParent().reportState(State.RUNNING); // signal the parent task
             } else {
-                context.remove(this); // remove this task from the queue
-                parent.reportState(State.SUCCESS); // signal the parent task
+                getContext().remove(this); // remove this task from the queue
+                getParent().reportState(State.SUCCESS); // signal the parent task
             }
         }
 

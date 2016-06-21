@@ -59,23 +59,23 @@ public class MoveToBehavior extends AbstractBehaviorLeaf {
         @Override
         public void tick(float delta, SceneGraph graph) {
             target.getComponent(HasPosition.class).getPosition().get(tmpVector1);
-            entity.getComponent(HasPosition.class).getPosition().get(tmpVector2);
+            getEntity().getComponent(HasPosition.class).getPosition().get(tmpVector2);
             if (tmpVector1.epsilonEquals(tmpVector2, MoveToBehavior.TARGET_EPSILON)) {
-                context.remove(this);
-                parent.reportState(State.SUCCESS);
+                getContext().remove(this);
+                getParent().reportState(State.SUCCESS);
             } else {
                 calculate(delta);
-                parent.reportState(State.RUNNING);
+                getParent().reportState(State.RUNNING);
             }
         }
 
         private void calculate(float delta) {
             target.getComponent(HasPosition.class).getPosition().get(tmpVector1);
-            entity.getComponent(HasPosition.class).getPosition().get(tmpVector2);
+            getEntity().getComponent(HasPosition.class).getPosition().get(tmpVector2);
             // calculate delta
             tmpVector1.sub(tmpVector2).nor().scl(delta * speed);
             // add to current position
-            entity.getComponent(HasPosition.class).getPosition().move(tmpVector1);
+            getEntity().getComponent(HasPosition.class).getPosition().move(tmpVector1);
         }
 
     }

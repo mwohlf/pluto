@@ -7,16 +7,21 @@ public abstract class AbstractBehaviorNode implements IBehavior {
 
     protected final List<IBehavior> children = new ArrayList<>();
 
-    protected BehaviorContext context;
+    protected BehaviorTaskContext context;
 
     @SuppressWarnings("unchecked")
     @Override
-    public AbstractBehaviorNode withContext(BehaviorContext context) {
+    public AbstractBehaviorNode withContext(BehaviorTaskContext context) {
         this.context = context;
         for (final IBehavior behavior : children) {
             behavior.withContext(context);
         }
         return this;
+    }
+
+    @Override
+    public BehaviorTaskContext getContext() {
+        return context;
     }
 
     @Override

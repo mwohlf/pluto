@@ -63,22 +63,22 @@ public class Looping extends AbstractBehaviorNode {
                     createNext(delta);
                     break;
                 case FAILURE:
-                    parent.reportState(State.FAILURE);
+                    getParent().reportState(State.FAILURE);
                     break;
                 default:
-                    parent.reportState(State.INVALID);
+                    getParent().reportState(State.INVALID);
             }
         }
 
         protected void createNext(float delta) {
             if (children.isEmpty()) {
                 // no tasks to loop
-                parent.reportState(this.state = State.SUCCESS);
+                getParent().reportState(this.state = State.SUCCESS);
             } else if (nextPos >= children.size()) {
                 nextPos = 0;
             } else {
-                context.add(children.get(nextPos).createTask(entity, this));
-                parent.reportState(state = State.RUNNING);
+                context.add(children.get(nextPos).createTask(getEntity(), this));
+                getParent().reportState(state = State.RUNNING);
                 nextPos = ++nextPos % children.size();
             }
         }

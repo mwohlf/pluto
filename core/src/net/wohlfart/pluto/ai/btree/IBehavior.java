@@ -21,7 +21,9 @@ public interface IBehavior {
     ITask createTask(Entity entity, ITask parent);
 
     // executor for running tasks
-    IBehavior withContext(BehaviorContext behaviorExecutor);
+    IBehavior withContext(BehaviorTaskContext behaviorExecutor);
+
+    BehaviorTaskContext getContext();
 
     void addChild(IBehavior behavior);
 

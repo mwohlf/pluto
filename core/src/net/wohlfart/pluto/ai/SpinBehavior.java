@@ -67,7 +67,7 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
         @Override
         public void tick(float delta, SceneGraph graph) {
             calculate(delta);
-            parent.reportState(State.RUNNING);
+            getParent().reportState(State.RUNNING);
         }
 
         public ITask initialize(SpinBehavior behavior, Entity entity, ITask parent) {
@@ -84,11 +84,11 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
             behavior.angle = SpinBehavior.TMP_QUATERNION.getAxisAngle(behavior.axis);
 
             // transform the axis into object space
-            entity.getComponent(HasRotation.class).getRotation().transform(behavior.axis);
+            getEntity().getComponent(HasRotation.class).getRotation().transform(behavior.axis);
             SpinBehavior.TMP_QUATERNION.set(behavior.axis, behavior.angle);
 
             // add to the current rotation of the object
-            entity.getComponent(HasRotation.class).getRotation().mulLeft(SpinBehavior.TMP_QUATERNION);
+            getEntity().getComponent(HasRotation.class).getRotation().mulLeft(SpinBehavior.TMP_QUATERNION);
         }
 
     }

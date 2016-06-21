@@ -16,9 +16,9 @@ public class FailBehavior extends AbstractBehaviorLeaf {
 
         @Override
         public void tick(float delta, SceneGraph graph) {
-            assert context != null;
-            context.remove(this); // remove this task from the queue
-            parent.reportState(State.FAILURE); // signal the parent task
+            assert getContext() != null;
+            getContext().remove(this); // remove this task from the queue
+            getParent().reportState(State.FAILURE); // signal the parent task
         }
 
     }

@@ -8,19 +8,17 @@ import net.wohlfart.pluto.ai.btree.ITask;
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.entity.IEntityCommand;
 import net.wohlfart.pluto.entity.effects.LaserBeamCommand;
-import net.wohlfart.pluto.scene.FutureEntity;
 import net.wohlfart.pluto.scene.SceneGraph;
 import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.stage.loader.EntityElement;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
-import net.wohlfart.pluto.util.IConsumer;
 
 @EntityElement(type = "FireLaser")
 public class FireLaser extends AbstractBehaviorLeaf {
 
     protected Entity target;
 
-    float waitTime = 5;
+    protected float timeout = 5; // in seconds
 
     @Override
     public ITask createTask(Entity entity, ITask parent) {
@@ -35,19 +33,8 @@ public class FireLaser extends AbstractBehaviorLeaf {
     }
 
     @EntityProperty(name = "timeout", type = "Float")
-    public FireLaser withTimeout(float waitTime) {
-        this.waitTime = waitTime;
-        return this;
-    }
-
-    @Deprecated
-    public FireLaser withTarget(FutureEntity futureEntity) {
-        futureEntity.then(new IConsumer<Entity>() {
-            @Override
-            public void apply(Entity target) {
-                FireLaser.this.withTarget(target);
-            }
-        });
+    public FireLaser withTimeout(float timeout) {
+        this.timeout = timeout;
         return this;
     }
 
@@ -59,18 +46,17 @@ public class FireLaser extends AbstractBehaviorLeaf {
 
         @Override
         public void tick(float delta, SceneGraph graph) {
-            assert context != null;
+            assert getContext() != null;
             if (time == 0) {
                 graph.create(createBeam());
-            } else if (time <= waitTime) {
-                // TODO: we need to move start and end of the laser here
-                getEntity().getComponent(HasPosition.class).getPosition().get(begin);
+            } else if (time <= timeout) {
+                this.getEntity().getComponent(HasPosition.class).getPosition().get(begin);
                 target.getComponent(HasPosition.class).getPosition().get(end);
-                parent.reportState(State.RUNNING); // signal the parent task
+                getParent().reportState(State.RUNNING); // signal the parent task
             } else {
                 graph.destroy(uid, graph.findEntity(uid).get());
-                context.remove(this); // remove this task from the queue
-                parent.reportState(State.SUCCESS); // signal the parent task
+                getContext().remove(this); // remove this task from the queue
+                getParent().reportState(State.SUCCESS); // signal the parent task
             }
             time += delta;
         }

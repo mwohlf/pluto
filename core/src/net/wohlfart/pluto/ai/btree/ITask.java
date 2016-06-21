@@ -13,6 +13,8 @@ public interface ITask extends Poolable {
 
     Entity getEntity();
 
+    ITask getParent();
+
     // runtime parent relationship, also initialized the task
     ITask initialize(Entity entity, ITask parent);
 
@@ -26,14 +28,19 @@ public interface ITask extends Poolable {
     abstract class AbstractNodeTask implements ITask {
 
         // the entity to which the behavior is applied to
-        protected Entity entity;
+        private Entity entity;
 
         // parent task that gets reported this tasks events
-        protected ITask parent;
+        private ITask parent;
 
         @Override
         public Entity getEntity() {
             return entity;
+        }
+
+        @Override
+        public ITask getParent() {
+            return parent;
         }
 
         @Override
@@ -60,14 +67,19 @@ public interface ITask extends Poolable {
     abstract class AbstractLeafTask implements ITask {
 
         // the entity to which the behavior is applied to
-        protected Entity entity;
+        private Entity entity;
 
         // parent task that gets reported this tasks events
-        protected ITask parent;
+        private ITask parent;
 
         @Override
         public Entity getEntity() {
             return entity;
+        }
+
+        @Override
+        public ITask getParent() {
+            return parent;
         }
 
         @Override
@@ -88,6 +100,7 @@ public interface ITask extends Poolable {
             throw new IllegalArgumentException("this is a leaf task, no child state expected");
         }
 
+        // implement task behavior in child classes
         @Override
         public abstract void tick(float delta, SceneGraph graph);
 

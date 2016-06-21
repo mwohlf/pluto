@@ -34,13 +34,13 @@ public class TriggerBehavior extends AbstractBehaviorLeaf {
         @SuppressFBWarnings(value = "SF_SWITCH_FALLTHROUGH", justification = "I know what I am doing")
         @Override
         public void tick(float delta, SceneGraph graph) {
-            assert context != null;
+            assert getContext() != null;
             final State state = stateHolder.getState();
             switch (state) {
                 default:
-                    context.remove(this);
+                    getContext().remove(this);
                 case RUNNING:
-                    parent.reportState(state);
+                    getParent().reportState(state);
             }
         }
 

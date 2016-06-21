@@ -16,9 +16,9 @@ public class SuccessBehavior extends AbstractBehaviorLeaf {
 
         @Override
         public void tick(float delta, SceneGraph graph) {
-            assert context != null;
-            context.remove(this);
-            parent.reportState(State.SUCCESS);
+            assert getContext() != null;
+            getContext().remove(this);
+            getParent().reportState(State.SUCCESS);
         }
 
     }

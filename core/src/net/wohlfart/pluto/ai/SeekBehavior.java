@@ -82,23 +82,23 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
         @Override
         public void tick(float delta, SceneGraph graph) {
             behavior.target.getComponent(HasPosition.class).getPosition().get(SeekBehavior.tmpVector1);
-            entity.getComponent(HasPosition.class).getPosition().get(SeekBehavior.tmpVector2);
+            getEntity().getComponent(HasPosition.class).getPosition().get(SeekBehavior.tmpVector2);
             if (SeekBehavior.tmpVector1.epsilonEquals(SeekBehavior.tmpVector2, SeekBehavior.TARGET_EPSILON)) {
-                behavior.context.remove(this);
-                parent.reportState(State.SUCCESS);
+                behavior.getContext().remove(this);
+                getParent().reportState(State.SUCCESS);
             } else {
                 calculate(delta);
-                parent.reportState(State.RUNNING);
+                getParent().reportState(State.RUNNING);
             }
         }
 
         private boolean calculate(float delta) {
             // tmpVector1 is a vector from current entity's position to the target's position in target space
             SeekBehavior.tmpPosition.set(0.0, 0.0, 0.0)
-                    .sub(entity.getComponent(HasPosition.class).getPosition())
+                    .sub(getEntity().getComponent(HasPosition.class).getPosition())
                     .add(behavior.target.getComponent(HasPosition.class).getPosition());
             SeekBehavior.tmpPosition.get(SeekBehavior.tmpVector1);
-            SeekBehavior.tmpQuaternion1.set(entity.getComponent(HasRotation.class).getRotation());
+            SeekBehavior.tmpQuaternion1.set(getEntity().getComponent(HasRotation.class).getRotation());
             SeekBehavior.tmpVector1.mul(SeekBehavior.tmpQuaternion1.conjugate());
             SeekBehavior.tmpVector1.nor();
 
@@ -106,11 +106,11 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
             if (!SeekBehavior.tmpVector1.isOnLine(behavior.forwardVector, 0.00001f)) {
                 SeekBehavior.tmpQuaternion1.setFromCross(SeekBehavior.tmpVector1, behavior.forwardVector);
                 Utils.scale(SeekBehavior.tmpQuaternion1, delta * behavior.rotationSpeed);
-                entity.getComponent(HasRotation.class).getRotation().mul(SeekBehavior.tmpQuaternion1.conjugate());//.nor();
+                getEntity().getComponent(HasRotation.class).getRotation().mul(SeekBehavior.tmpQuaternion1.conjugate());//.nor();
             }
 
             // calculate the rotation to match the up vector from the target
-            tmpQuaternion1.set(entity.getComponent(HasRotation.class).getRotation()); // entity orientation
+            tmpQuaternion1.set(getEntity().getComponent(HasRotation.class).getRotation()); // entity orientation
             //System.err.println("  behavior.forwardVector: " + behavior.forwardVector);
             //tmpQuaternion1.conjugate();
             //tmpQuaternion1.transform(tmpVector1.set(behavior.forwardVector)); // flight direction
@@ -125,10 +125,10 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
             //System.err.println("  tmpVector1 (forward): " + tmpVector1);
 
             SeekBehavior.tmpVector1.set(behavior.forwardVector);
-            SeekBehavior.tmpQuaternion1.set(entity.getComponent(HasRotation.class).getRotation());
+            SeekBehavior.tmpQuaternion1.set(getEntity().getComponent(HasRotation.class).getRotation());
             SeekBehavior.tmpVector1.mul(SeekBehavior.tmpQuaternion1 /*.conjugate()*/);
             SeekBehavior.tmpVector1.scl(delta * behavior.moveSpeed);
-            entity.getComponent(HasPosition.class).getPosition().move(SeekBehavior.tmpVector1);
+            getEntity().getComponent(HasPosition.class).getPosition().move(SeekBehavior.tmpVector1);
 
             return true;
         }

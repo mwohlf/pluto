@@ -63,20 +63,20 @@ public class Sequential extends AbstractBehaviorNode {
                     createNext(delta);
                     break;
                 case FAILURE:
-                    parent.reportState(State.FAILURE);
+                    getParent().reportState(State.FAILURE);
                     break;
                 default:
-                    parent.reportState(this.state = State.INVALID);
+                    getParent().reportState(this.state = State.INVALID);
             }
         }
 
         protected void createNext(float delta) {
             if (nextPos >= children.size()) {
                 // we are done
-                parent.reportState(this.state = State.SUCCESS);
+                getParent().reportState(this.state = State.SUCCESS);
             } else {
-                context.add(children.get(nextPos).createTask(entity, this));
-                parent.reportState(state = State.RUNNING);
+                context.add(children.get(nextPos).createTask(getEntity(), this));
+                getParent().reportState(state = State.RUNNING);
                 nextPos++;
             }
         }

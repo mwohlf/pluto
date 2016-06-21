@@ -2,13 +2,18 @@ package net.wohlfart.pluto.ai.btree;
 
 public abstract class AbstractBehaviorLeaf implements IBehavior {
 
-    protected BehaviorContext context;
+    private BehaviorTaskContext context;
 
     @SuppressWarnings("unchecked")
     @Override
-    public AbstractBehaviorLeaf withContext(BehaviorContext context) {
+    public AbstractBehaviorLeaf withContext(BehaviorTaskContext context) {
         this.context = context;
         return this;
+    }
+
+    @Override
+    public BehaviorTaskContext getContext() {
+        return context;
     }
 
     @Override

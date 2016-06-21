@@ -3,7 +3,7 @@ package net.wohlfart.pluto.ai.btree;
 /**
  *
  */
-public interface BehaviorContext {
+public interface BehaviorTaskContext {
 
     void remove(ITask task);
 

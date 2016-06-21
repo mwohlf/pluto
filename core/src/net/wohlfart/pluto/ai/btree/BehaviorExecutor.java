@@ -12,7 +12,7 @@ import net.wohlfart.pluto.scene.SceneGraph;
 /**
  * contains all running tasks and shared state information of the tasks
  */
-public class BehaviorExecutor implements BehaviorContext { // TODO: use the interface
+public class BehaviorExecutor implements BehaviorTaskContext { // TODO: use the interface
 
     private final List<ITask> runningTasks = new CopyOnWriteArrayList<>();
 
@@ -116,6 +116,11 @@ public class BehaviorExecutor implements BehaviorContext { // TODO: use the inte
 
         @Override
         public void reset() {
+            throw new IllegalArgumentException("executor task should not be reset");
+        }
+
+        @Override
+        public ITask getParent() {
             throw new IllegalArgumentException("executor task should not be reset");
         }
     }

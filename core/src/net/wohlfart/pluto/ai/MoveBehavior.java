@@ -67,15 +67,15 @@ public class MoveBehavior extends AbstractBehaviorLeaf {
         @Override
         public void tick(float delta, SceneGraph graph) {
             calculate(delta);
-            parent.reportState(State.RUNNING);
+            getParent().reportState(State.RUNNING);
         }
 
         private void calculate(float deltaTime) {
             tmpVector.set(movePerSec).scl(deltaTime);
             // transform the velocity from object space
-            entity.getComponent(HasRotation.class).getRotation().transform(tmpVector);
+            getEntity().getComponent(HasRotation.class).getRotation().transform(tmpVector);
             // add the transformed velocity to the position
-            entity.getComponent(HasPosition.class).getPosition().move(tmpVector);
+            getEntity().getComponent(HasPosition.class).getPosition().move(tmpVector);
         }
 
     }
