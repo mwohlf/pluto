@@ -55,7 +55,7 @@ public class Scope {
     }
 
     public boolean hasParentScope() {
-        return parent == null;
+        return parent != null;
     }
 
     public Scope parent() {

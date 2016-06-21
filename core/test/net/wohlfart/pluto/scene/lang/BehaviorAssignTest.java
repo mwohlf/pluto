@@ -13,7 +13,6 @@ public class BehaviorAssignTest {
                 + "      uid: 1,"
                 + "      position: Position{x:0.0, y:30.0, z:-200.0}"
                 + "};";
-
         final Scope scope = new MockEvalScope().invoke(script);
         final Value<?> path = scope.resolve("waypoint");
         assertNotNull(path);
