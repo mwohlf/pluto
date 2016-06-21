@@ -58,7 +58,7 @@ public class ParseableStage extends AbstractGraphStage {
             final ParseTree tree = parser.parse();
 
             final Scope scope = new Scope();
-            final Map<String, Function> functions = new HashMap<String, Function>();
+            final Map<String, Function> functions = new HashMap<>();
 
             // TODO: do we need the return value from the visit call?
             new EvalVisitor(graph, scope, functions).visit(tree);

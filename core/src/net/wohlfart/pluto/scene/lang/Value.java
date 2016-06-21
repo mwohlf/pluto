@@ -39,7 +39,7 @@ public class Value<T> implements Comparable<Value<T>> {
     private final Class<T> clazz;
 
     public static <T> Value<T> of(Value<T> val) {
-        return new Value<T>(val.clazz, val.value);
+        return new Value<>(val.clazz, val.value);
     }
 
     public Value<?> or(Value value) {
@@ -50,39 +50,39 @@ public class Value<T> implements Comparable<Value<T>> {
     }
 
     public static Value<Double> of(Double v) {
-        return new Value<Double>(Double.class, v);
+        return new Value<>(Double.class, v);
     }
 
     public static Value<Double> of(Float v) {
-        return new Value<Double>(Double.class, v.doubleValue());
+        return new Value<>(Double.class, v.doubleValue());
     }
 
     public static Value<Long> of(Long v) {
-        return new Value<Long>(Long.class, v);
+        return new Value<>(Long.class, v);
     }
 
     public static Value<String> of(String v) {
-        return new Value<String>(String.class, v);
+        return new Value<>(String.class, v);
     }
 
     public static Value<Position> of(Position v) {
-        return new Value<Position>(Position.class, v);
+        return new Value<>(Position.class, v);
     }
 
     public static Value<Color> of(Color v) {
-        return new Value<Color>(Color.class, v);
+        return new Value<>(Color.class, v);
     }
 
     public static Value<IBehavior> of(IBehavior v) {
-        return new Value<IBehavior>(IBehavior.class, v);
+        return new Value<>(IBehavior.class, v);
     }
 
     public static Value<FutureEntity> of(FutureEntity v) {
-        return new Value<FutureEntity>(FutureEntity.class, v);
+        return new Value<>(FutureEntity.class, v);
     }
 
     public static Value<List> of(List<Value<?>> v) {
-        return new Value<List>(List.class, v);
+        return new Value<>(List.class, v);
     }
 
     public static Value<Vector3> of(Vector3 v) {
@@ -90,7 +90,7 @@ public class Value<T> implements Comparable<Value<T>> {
     }
 
     public static Value<Boolean> of(Boolean v) {
-        return new Value<Boolean>(Boolean.class, v);
+        return new Value<>(Boolean.class, v);
     }
 
     public static Value<Long> of(int v) {
@@ -98,7 +98,7 @@ public class Value<T> implements Comparable<Value<T>> {
     }
 
     public static Value<Quaternion> of(Quaternion v) {
-        return new Value<Quaternion>(Quaternion.class, v);
+        return new Value<>(Quaternion.class, v);
     }
 
     private Value(Class<T> clazz, T value) {

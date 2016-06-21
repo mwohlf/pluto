@@ -1,14 +1,12 @@
 package net.wohlfart.pluto.scene.lang;
 
-import static org.junit.Assert.assertEquals;
-
-import org.junit.Test;
-
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
-
 import net.wohlfart.pluto.scene.Position;
+import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
 
 public class ValueAssignTest {
 
@@ -26,10 +24,10 @@ public class ValueAssignTest {
         assertEquals(Long.valueOf(2L), scope.resolve("a").asLong());
         assertEquals(Boolean.FALSE, scope.resolve("b").asBoolean());
         assertEquals(Boolean.TRUE, scope.resolve("c").asBoolean());
-        assertEquals(new Double(10), scope.resolve("d").asDouble());
-        assertEquals(new Long(10), scope.resolve("d").asLong());
-        assertEquals(new Float(10), scope.resolve("d").asFloat());
-        assertEquals(new Integer(10), scope.resolve("d").asInteger());
+        assertEquals(Double.valueOf(10), scope.resolve("d").asDouble());
+        assertEquals(Long.valueOf(10), scope.resolve("d").asLong());
+        assertEquals(Float.valueOf(10), scope.resolve("d").asFloat());
+        assertEquals(Integer.valueOf(10), scope.resolve("d").asInteger());
         assertEquals(Boolean.TRUE, scope.resolve("e").asBoolean());
         assertEquals(Boolean.FALSE, scope.resolve("f").asBoolean());
         assertEquals(Boolean.FALSE, scope.resolve("g").asBoolean());
@@ -109,9 +107,9 @@ public class ValueAssignTest {
                 + "d = 0.2;"
                 + "d =- 0.1;";
         final Scope scope = new MockEvalScope().invoke(script);
-        assertEquals(new Long(2), scope.resolve("a").asLong());
-        assertEquals(new Double(0.2), scope.resolve("b").asDouble());
-        assertEquals(new Long(1), scope.resolve("c").asLong());
-        assertEquals(new Double(0.1), scope.resolve("d").asDouble());
+        assertEquals(Long.valueOf(2), scope.resolve("a").asLong());
+        assertEquals(Double.valueOf(0.2), scope.resolve("b").asDouble());
+        assertEquals(Long.valueOf(1), scope.resolve("c").asLong());
+        assertEquals(Double.valueOf(0.1), scope.resolve("d").asDouble());
     }
 }

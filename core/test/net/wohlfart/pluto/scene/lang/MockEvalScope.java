@@ -34,7 +34,7 @@ public class MockEvalScope {
             //parser.setErrorHandler(new BailErrorStrategy());
             final ParseTree tree = parser.parse();
 
-            final Map<String, Function> functions = new HashMap<String, Function>();
+            final Map<String, Function> functions = new HashMap<>();
 
             // TODO: do we need the return value from the visit call?
             new EvalVisitor(new MockSceneGraph(), scope, functions).visit(tree);

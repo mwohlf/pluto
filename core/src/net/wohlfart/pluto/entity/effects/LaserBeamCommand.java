@@ -71,7 +71,7 @@ public class LaserBeamCommand implements IEntityCommand {
     @Override
     public void runNow(ResourceManager resourceManager, EntityPool entityPool, FutureEntity futureEntity) {
         // do nothing
-    };
+    }
 
     @Override
     public void runAsync(ResourceManager resourceManager, EntityPool entityPool, FutureEntity futureEntity) {

@@ -38,7 +38,7 @@ public class Scope {
     public void assignExisting(String identifier, Value<?> value) {
         if (variables.containsKey(identifier)) {
             variables.put(identifier, value);
-        } else if (!isGlobalScope()) {
+        } else if (!HasParentScope()) {
             parent.assignExisting(identifier, value);
         } else {
             throw new IllegalStateException("variable not found for reassigning, name war " + identifier + " value: " + value);
@@ -54,7 +54,7 @@ public class Scope {
         return scope;
     }
 
-    public boolean isGlobalScope() {
+    public boolean hasParentScope() {
         return parent == null;
     }
 
@@ -67,7 +67,7 @@ public class Scope {
         final Value<?> value = variables.get(identifier);
         if (value != null) {
             return value;
-        } else if (!isGlobalScope()) {
+        } else if (hasParentScope()) {
             return parent.resolve(identifier);
         } else {
             return null;

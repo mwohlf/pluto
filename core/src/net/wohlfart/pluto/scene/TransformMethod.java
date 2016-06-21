@@ -90,7 +90,7 @@ public interface TransformMethod {
     }
 
     // for decals
-    public class TranslatePosition implements TransformMethod {
+    class TranslatePosition implements TransformMethod {
         private final Matrix4 matrix;
 
         public TranslatePosition(Matrix4 targetMatrix) {

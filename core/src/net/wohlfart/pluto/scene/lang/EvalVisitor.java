@@ -718,12 +718,12 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value<?>> {
     public Value<?> visitEntity(SceneLanguageParser.EntityContext ctx) {
         final IEntityCommand entity = new EntityVisitor(graph, this.scope, this.functions).visitEntity(ctx);
         return Value.of(graph.create(entity));
-    };
+    }
 
     @Override
     public Value<?> visitBehavior(SceneLanguageParser.BehaviorContext ctx) {
         return Value.of(new BehaviorVisitor(graph, this.scope, this.functions).visitBehavior(ctx));
-    };
+    }
 
     @Override
     public Value<?> visitAttribute(AttributeContext ctx) {
