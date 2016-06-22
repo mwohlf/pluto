@@ -257,8 +257,18 @@ public class Value<T> implements Comparable<Value<T>> {
 
     @Override
     public int compareTo(Value<T> that) {
-        // TODO
-        return 0;
+        if (this.isDouble() && that.isDouble()) {
+            return ((Double) this.value).compareTo((Double) that.value);
+        } else if (this.isDouble() && that.isLong()) {
+            return ((Double) this.value).compareTo(((Long) that.value).doubleValue());
+        } else if (this.isLong() && that.isDouble()) {
+            return ((Long) this.value).compareTo(((Double) that.value).longValue());
+        } else if (this.isLong() && that.isLong()) {
+            return ((Long) this.value).compareTo((Long) that.value);
+        } else if (this.isString() && that.isString()) {
+            return this.asString().compareTo(that.asString());
+        }
+        throw new EvalException("unable to compare values " + this + " : " + that);
     }
 
     public Value<?> minus(Value<?> that) {

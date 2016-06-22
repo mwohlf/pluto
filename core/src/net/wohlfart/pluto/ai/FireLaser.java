@@ -10,6 +10,7 @@ import net.wohlfart.pluto.entity.IEntityCommand;
 import net.wohlfart.pluto.entity.effects.LaserBeamCommand;
 import net.wohlfart.pluto.scene.SceneGraph;
 import net.wohlfart.pluto.scene.properties.HasPosition;
+import net.wohlfart.pluto.scene.properties.HasUid;
 import net.wohlfart.pluto.stage.loader.EntityElement;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
 
@@ -40,7 +41,7 @@ public class FireLaser extends AbstractBehaviorLeaf {
 
     class TaskImpl extends AbstractLeafTask {
         private float time = 0;
-        private final int uid = 10_000;
+        private final long uid = HasUid.next();
         private final Vector3 begin = new Vector3();
         private final Vector3 end = new Vector3();
 

@@ -63,7 +63,7 @@ forStatement
  ;
 
 whileStatement
- : While expression Do block End
+ : While expression OBrace block CBrace
  ;
 
 idList

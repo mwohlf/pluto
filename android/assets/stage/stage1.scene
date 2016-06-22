@@ -1,5 +1,4 @@
 
-a = 2;
 
 uid = 1;
 
@@ -24,8 +23,7 @@ sequence1 =
           target: Waypoint {
             uid:uid++,
             position: Position{x:30.0, y:20.0, z:-250.0}}}
-        )    
-;
+        );
 
 sequence2 = 
         (  Seek{
@@ -48,8 +46,7 @@ sequence2 =
         target: Waypoint {
             uid:uid++,
             position: Position{x:-20.0, y:20.0, z:-150.0}}}
-        )    
-;
+        );
 
 Cam {  
     uid:uid++,
@@ -88,7 +85,7 @@ Planet {
     behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
 };
 
-
+a = 100;
 
 b = 1 + a;
 
@@ -247,4 +244,27 @@ ship5 = Object {
     rotationSpeed: 0.5,
     behavior: behavior6,  
 };
+
+c = 2;
+a = -52;
+while (c < 400) {
+  a = a + 20;
+  c = c + 20;
+  println(">>>>>" + c);
+  ship = Object {
+    uid:uid++,
+    position: Position{x:a,y:0.0,z:c},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 0.5,
+    behavior: behavior6,  
+};
+};
+
+
+c= 30;
+
+
+
+
 

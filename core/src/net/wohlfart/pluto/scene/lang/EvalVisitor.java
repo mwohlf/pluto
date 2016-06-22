@@ -228,57 +228,33 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value<?>> {
     // expression '>=' expression               #gtEqExpression
     @Override
     public Value<?> visitGtEqExpression(GtEqExpressionContext ctx) {
-        final Value<?> left = this.visit(ctx.expression(0));
-        final Value<?> right = this.visit(ctx.expression(1));
-        if (left.isDouble() && right.isDouble()) {
-            return Value.of(left.asDouble() >= right.asDouble());
-        }
-        if (left.isString() && right.isString()) {
-            return Value.of(left.asString().compareTo(right.asString()) >= 0);
-        }
-        throw new EvalException(ctx);
+        final Value left = this.visit(ctx.expression(0));
+        final Value right = this.visit(ctx.expression(1));
+        return Value.of(left.compareTo(right) >= 0);
     }
 
     // expression '<=' expression               #ltEqExpression
     @Override
     public Value<?> visitLtEqExpression(LtEqExpressionContext ctx) {
-        final Value<?> left = this.visit(ctx.expression(0));
-        final Value<?> right = this.visit(ctx.expression(1));
-        if (left.isDouble() && right.isDouble()) {
-            return Value.of(left.asDouble() <= right.asDouble());
-        }
-        if (left.isString() && right.isString()) {
-            return Value.of(left.asString().compareTo(right.asString()) <= 0);
-        }
-        throw new EvalException(ctx);
+        final Value left = this.visit(ctx.expression(0));
+        final Value right = this.visit(ctx.expression(1));
+        return Value.of(left.compareTo(right) <= 0);
     }
 
     // expression '>' expression                #gtExpression
     @Override
     public Value<?> visitGtExpression(GtExpressionContext ctx) {
-        final Value<?> left = this.visit(ctx.expression(0));
-        final Value<?> right = this.visit(ctx.expression(1));
-        if (left.isDouble() && right.isDouble()) {
-            return Value.of(left.asDouble() > right.asDouble());
-        }
-        if (left.isString() && right.isString()) {
-            return Value.of(left.asString().compareTo(right.asString()) > 0);
-        }
-        throw new EvalException(ctx);
+        final Value left = this.visit(ctx.expression(0));
+        final Value right = this.visit(ctx.expression(1));
+        return Value.of(left.compareTo(right) > 0);
     }
 
     // expression '<' expression                #ltExpression
     @Override
     public Value<?> visitLtExpression(LtExpressionContext ctx) {
-        final Value<?> left = this.visit(ctx.expression(0));
-        final Value<?> right = this.visit(ctx.expression(1));
-        if (left.isDouble() && right.isDouble()) {
-            return Value.of(left.asDouble() < right.asDouble());
-        }
-        if (left.isString() && right.isString()) {
-            return Value.of(left.asString().compareTo(right.asString()) < 0);
-        }
-        throw new EvalException(ctx);
+        final Value left = this.visit(ctx.expression(0));
+        final Value right = this.visit(ctx.expression(1));
+        return Value.of(left.compareTo(right) < 0);
     }
 
     // expression '==' expression               #eqExpression
