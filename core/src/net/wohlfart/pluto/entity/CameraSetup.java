@@ -11,6 +11,7 @@ import net.wohlfart.pluto.resource.ResourceManager;
 import net.wohlfart.pluto.scene.FutureEntity;
 import net.wohlfart.pluto.scene.properties.HasBehavior;
 import net.wohlfart.pluto.scene.properties.HasCamera;
+import net.wohlfart.pluto.scene.properties.HasUid;
 import net.wohlfart.pluto.scene.properties.IsSteerable;
 import net.wohlfart.pluto.stage.loader.EntityElement;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
@@ -24,7 +25,7 @@ public class CameraSetup implements IEntityCommand {
 
     protected float fieldOfView = 67f;
 
-    private long uid = IEntityCommand.NULL_UID;
+    private long uid = HasUid.NULL_UID;
 
     private IBehavior behavior;
 
@@ -35,14 +36,14 @@ public class CameraSetup implements IEntityCommand {
 
     @Override
     public long getUid() {
-        assert this.uid != IEntityCommand.NULL_UID : "uid is invalid for CameraSetup";
+        assert this.uid != HasUid.NULL_UID : "uid is invalid for CameraSetup";
         return uid;
     }
 
     @EntityProperty(name = "uid", type = "Long")
     public CameraSetup withUid(long uid) {
-        assert this.uid == IEntityCommand.NULL_UID : "uid reset for CameraSetup was " + this.uid;
-        assert uid != IEntityCommand.NULL_UID : "uid setting invalid value for CameraSetup " + uid;
+        assert this.uid == HasUid.NULL_UID : "uid reset for CameraSetup was " + this.uid;
+        assert uid != HasUid.NULL_UID : "uid setting invalid value for CameraSetup " + uid;
         this.uid = uid;
         return this;
     }

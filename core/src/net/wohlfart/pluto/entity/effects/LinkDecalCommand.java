@@ -35,13 +35,14 @@ import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.scene.properties.HasRenderables;
 import net.wohlfart.pluto.scene.properties.HasRotation;
 import net.wohlfart.pluto.scene.properties.HasTransformMethod;
+import net.wohlfart.pluto.scene.properties.HasUid;
 
 public class LinkDecalCommand implements IEntityCommand {
 
     protected static final String TEXTURE_PATH = "texture/flame.png";
     protected static final String TEXTURE_BEAM_PATH = "texture/laser.jpg";
 
-    private long uid = IEntityCommand.NULL_UID;
+    private long uid = HasUid.NULL_UID;
 
     private Entity main;
 
@@ -51,12 +52,12 @@ public class LinkDecalCommand implements IEntityCommand {
 
     @Override
     public long getUid() {
-        assert this.uid != IEntityCommand.NULL_UID : "uid is invalid";
+        assert this.uid != HasUid.NULL_UID : "uid is invalid";
         return uid;
     }
 
     public LinkDecalCommand withUid(long uid) {
-        assert this.uid == IEntityCommand.NULL_UID : "uid can't be changed";
+        assert this.uid == HasUid.NULL_UID : "uid can't be changed";
         this.uid = uid;
         return this;
     }

@@ -16,6 +16,7 @@ import net.wohlfart.pluto.resource.ResourceManager;
 import net.wohlfart.pluto.scene.FutureEntity;
 import net.wohlfart.pluto.scene.ISceneGraph;
 import net.wohlfart.pluto.scene.Position;
+import net.wohlfart.pluto.scene.properties.HasUid;
 import net.wohlfart.pluto.util.IConsumer;
 import net.wohlfart.pluto.util.Utils;
 
@@ -34,7 +35,7 @@ public class CommandList implements IEntityCommand {
 
     private IBehavior behavior;
 
-    private long uid = IEntityCommand.NULL_UID;
+    private long uid = HasUid.NULL_UID;
 
     public CommandList(ISceneGraph graph) {
         this.graph = graph;
@@ -42,12 +43,12 @@ public class CommandList implements IEntityCommand {
 
     @Override
     public long getUid() {
-        assert this.uid != IEntityCommand.NULL_UID : "uid is invalid";
+        assert this.uid != HasUid.NULL_UID : "uid is invalid";
         return uid;
     }
 
     public CommandList withUid(long uid) {
-        assert this.uid == IEntityCommand.NULL_UID : "uid can't be changed";
+        assert this.uid == HasUid.NULL_UID : "uid can't be changed";
         this.uid = uid;
         return this;
     }

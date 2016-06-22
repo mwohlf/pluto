@@ -38,15 +38,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
 
     public IBehavior behavior;
 
-    private long uid = NULL_UID;
-
-    /*
-    protected F reset() {
-        reset(position);
-        reset(rotation);
-        return (F) this;
-    }
-    */
+    private long uid = HasUid.NULL_UID;
 
     @Override
     public long getUid() {
@@ -121,7 +113,7 @@ public abstract class AbstractEntityCommand<F extends AbstractEntityCommand<F>> 
                     .withBehavior(behavior));
         }
 
-        if (uid != NULL_UID) { // TODO
+        if (uid != HasUid.NULL_UID) { // TODO
             entity.add(entityPool.createComponent(HasUid.class)
                     .withUid(uid));
         }

@@ -26,6 +26,7 @@ import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.scene.properties.HasRenderables;
 import net.wohlfart.pluto.scene.properties.HasRotation;
 import net.wohlfart.pluto.scene.properties.HasTransformMethod;
+import net.wohlfart.pluto.scene.properties.HasUid;
 import net.wohlfart.pluto.stage.loader.EntityElement;
 import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
@@ -53,7 +54,7 @@ public class LightCommand implements IEntityCommand {
 
     @Override
     public long getUid() {
-        assert this.uid != IEntityCommand.NULL_UID : "uid is invalid";
+        assert this.uid != HasUid.NULL_UID : "uid is invalid";
         return uid;
     }
 

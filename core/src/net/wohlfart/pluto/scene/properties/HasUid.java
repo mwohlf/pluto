@@ -5,6 +5,8 @@ import com.badlogic.gdx.utils.Pool.Poolable;
 
 public class HasUid implements Component, Poolable {
 
+    public static long NULL_UID = 0;
+
     private long uid;
 
     @Override

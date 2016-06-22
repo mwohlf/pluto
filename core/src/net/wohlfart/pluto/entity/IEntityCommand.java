@@ -10,8 +10,6 @@ import net.wohlfart.pluto.scene.FutureEntity;
  */
 public interface IEntityCommand {
 
-    long NULL_UID = 0;
-
     long getUid();
 
     /**
