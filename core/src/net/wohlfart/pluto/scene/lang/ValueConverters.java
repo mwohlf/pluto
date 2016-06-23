@@ -9,6 +9,8 @@ import com.badlogic.ashley.core.Entity;
 import com.github.czyzby.kiwi.log.Logger;
 import com.github.czyzby.kiwi.log.LoggerService;
 
+import net.wohlfart.pluto.entity.fab.roam.ColorFunctionEnum;
+import net.wohlfart.pluto.entity.fab.roam.HeightFunctionEnum;
 import net.wohlfart.pluto.util.IConsumer;
 
 public class ValueConverters {
@@ -143,26 +145,25 @@ public class ValueConverters {
             }
         });
 
-        // -- TODO
         CONVERTERS.put("HeightFunction", new ISetterDecorator() {
             @Override
             public void setValue(Object entity, Method method, Value<?> value) {
-                String key = value.asString();
-                switch (key) {
-
-                    default:
-                        LOGGER.error("implement me for HeightFunction value is " + key); 
+                final String enumName = value.asString();
+                try {
+                    method.invoke(entity, HeightFunctionEnum.valueOf(enumName).get());
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
         CONVERTERS.put("ColorFunction", new ISetterDecorator() {
             @Override
             public void setValue(Object entity, Method method, Value<?> value) {
-                String key = value.asString();
-                switch (key) {
-
-                    default:
-                        LOGGER.error("implement me for HeightFunction value is " + key); 
+                final String enumName = value.asString();
+                try {
+                    method.invoke(entity, ColorFunctionEnum.valueOf(enumName).get());
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                    ex.printStackTrace();
                 }
             }
         });
