@@ -2,7 +2,7 @@ package net.wohlfart.pluto.entity.fab.roam;
 
 import com.badlogic.gdx.math.Vector3;
 
-public class SimplexIteration implements HeightFunction {
+public class SimplexIteration implements IHeightFunction {
     private final int iterations;
     private final float persistence;
     private final Vector3 frequency = new Vector3();

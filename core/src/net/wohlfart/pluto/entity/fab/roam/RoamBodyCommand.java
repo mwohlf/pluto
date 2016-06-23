@@ -62,7 +62,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
     private FloatArray verticesBuffer = new FloatArray();
     private ShortArray indicesBuffer = new ShortArray();
     private float radius = Float.NaN;
-    private HeightFunction heightFunction = new HeightFunction.Const(1);
+    private IHeightFunction heightFunction = new IHeightFunction.Const(1);
     private int details = 2;
 
     // exactly one allowed (xor):
@@ -253,7 +253,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
     }
 
     @EntityProperty(name = "heightFunction", type = "HeightFunction")
-    public RoamBodyCommand withHeightFunction(HeightFunction heightFunction) {
+    public RoamBodyCommand withHeightFunction(IHeightFunction heightFunction) {
         this.heightFunction = heightFunction;
         return this;
     }

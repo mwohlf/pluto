@@ -147,13 +147,23 @@ public class ValueConverters {
         CONVERTERS.put("HeightFunction", new ISetterDecorator() {
             @Override
             public void setValue(Object entity, Method method, Value<?> value) {
-                LOGGER.error("implement me for HeightFunction");
+                String key = value.asString();
+                switch (key) {
+
+                    default:
+                        LOGGER.error("implement me for HeightFunction value is " + key); 
+                }
             }
         });
         CONVERTERS.put("ColorFunction", new ISetterDecorator() {
             @Override
             public void setValue(Object entity, Method method, Value<?> value) {
-                LOGGER.error("implement me for ColorFunction");
+                String key = value.asString();
+                switch (key) {
+
+                    default:
+                        LOGGER.error("implement me for HeightFunction value is " + key); 
+                }
             }
         });
 

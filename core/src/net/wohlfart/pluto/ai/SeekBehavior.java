@@ -56,6 +56,8 @@ public class SeekBehavior extends AbstractBehaviorLeaf {
         upVector = entity.getComponent(IsSteerable.class).getUp();
         moveSpeed = entity.getComponent(IsSteerable.class).getMoveSpeed();
         rotationSpeed = entity.getComponent(IsSteerable.class).getRotationSpeed();
+        assert rotationSpeed != 0 : "rotationSpeed is zero";
+        assert moveSpeed != 0 : "moveSpeed is zero";
         assert MathUtils.isEqual(new Vector3(forwardVector).dot(upVector), 0f, 0.001f);
         return new TaskImpl().initialize(this, entity, parent);
     }

@@ -48,15 +48,62 @@ sequence2 =
             position: Position{x:-20.0, y:20.0, z:-150.0}}}
         );
 
+sequence3 = 
+        ( Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{0, 50, -400}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{-200, -50, 0}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{0, 50, 200}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{200, -50, 0}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, -1_000}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{20, -20, -800}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, -600}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{20, -20, -400}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, -200}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{20, -20, 0}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, 100}}}
+        );
+
+
 Cam {  
     uid:uid++,
     nearFrustum: 10.0,
     farFrustum: 1000.0,
     fieldOfView: 67.0,
-    //behavior: sequence
     /*
     behavior: Seek{
-        waypoint: Waypoint {
+        target: Waypoint {
             uid:uid++,
             position: Position{x:0.0, y:170.0, z:-100.0}
         }
@@ -85,6 +132,19 @@ Planet {
     behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
 };
 
+Planet {
+    uid:uid++,
+    radius: 50,
+    details: 4,
+    position: Position{x:0.0,y:170.0,z:150.0},
+    rotation: Rotation{axis:Vector{x:0.0,y:0.0,z:1.0}, angle: -40},
+    cubemap: "test",
+    heightFunction: 'ROCK1',
+    colorFunction: 'ROCK1',
+    behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
+};
+
+
 a = 100;
 
 b = 1 + a;
@@ -106,6 +166,14 @@ goto = MoveTo {
     target: target
 };
 
+ship5 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-90.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 0.5,
+    behavior: sequence3,  
+};
 
 Box {
     uid:uid++,
@@ -156,12 +224,10 @@ Box {
     texture: 'texture/ash_uvgrid01.png'
 };
 
-/*
 Smoke {
     uid:uid++,
-    position: Position{x:5.0,y:2.0,z:-15.0}
+    position: Position{x:50.0,y:20.0,z:-55.0}
 };
-*/
 
 Triangle {
     uid:uid++,

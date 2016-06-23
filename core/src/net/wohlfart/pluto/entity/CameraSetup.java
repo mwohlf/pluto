@@ -34,6 +34,10 @@ public class CameraSetup implements IEntityCommand {
     private final Vector3 forward = new Vector3(Vector3.Z).scl(-1);
     private final Vector3 up = new Vector3(Vector3.Y);
 
+    private float rotationSpeed = 1;
+
+    private float moveSpeed = 10;
+
     @Override
     public long getUid() {
         assert this.uid != HasUid.NULL_UID : "uid is invalid for CameraSetup";
@@ -59,7 +63,9 @@ public class CameraSetup implements IEntityCommand {
         entity.add(entityPool.createComponent(HasCamera.class).withCamera(setupCam()));
         entity.add(entityPool.createComponent(IsSteerable.class)
                 .withForward(forward)
-                .withUp(up));
+                .withUp(up)
+                .withRotationSpeed(rotationSpeed)
+                .withMoveSpeed(moveSpeed));
 
         if (behavior != null) {
             entity.add(entityPool.createComponent(HasBehavior.class)
@@ -105,6 +111,18 @@ public class CameraSetup implements IEntityCommand {
     @EntityProperty(name = "fieldOfView", type = "Float")
     public CameraSetup withFieldOfView(float fieldOfView) {
         this.fieldOfView = fieldOfView;
+        return this;
+    }
+
+    @EntityProperty(name = "fieldOfView", type = "Float")
+    public CameraSetup withRotationSpeed(float rotationSpeed) {
+        this.rotationSpeed = rotationSpeed;
+        return this;
+    }
+
+    @EntityProperty(name = "fieldOfView", type = "Float")
+    public CameraSetup withMoveSpeed(float moveSpeed) {
+        this.moveSpeed = moveSpeed;
         return this;
     }
 

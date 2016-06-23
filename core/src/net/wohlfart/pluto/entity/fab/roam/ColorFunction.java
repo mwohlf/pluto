@@ -30,10 +30,10 @@ public interface ColorFunction {
     }
 
     class GrayscaleHeight implements ColorFunction {
-        private final HeightFunction delegate;
+        private final IHeightFunction delegate;
         private final Color color = new Color();
 
-        public GrayscaleHeight(HeightFunction delegate) {
+        public GrayscaleHeight(IHeightFunction delegate) {
             this.delegate = delegate;
         }
 
@@ -46,14 +46,14 @@ public interface ColorFunction {
     }
 
     class GradientHeight implements ColorFunction {
-        private final HeightFunction delegate;
+        private final IHeightFunction delegate;
         private final ColorGradient gradient;
 
-        public GradientHeight(HeightFunction delegate) {
+        public GradientHeight(IHeightFunction delegate) {
             this(delegate, ColorGradient.HABITABLE_PLANET);
         }
 
-        public GradientHeight(HeightFunction delegate, ColorGradient gradient) {
+        public GradientHeight(IHeightFunction delegate, ColorGradient gradient) {
             this.gradient = gradient;
             this.delegate = delegate;
         }

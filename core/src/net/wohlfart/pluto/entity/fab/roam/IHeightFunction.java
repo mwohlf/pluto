@@ -4,17 +4,18 @@ import com.badlogic.gdx.math.MathUtils;
 import com.badlogic.gdx.math.Vector3;
 
 // returns value in [0...1]
-public interface HeightFunction {
+@FunctionalInterface
+public interface IHeightFunction {
 
     // returns [0...1]
     float calculate(Vector3 vect);
 
-    class Range implements HeightFunction {
-        private final HeightFunction delegate;
+    class Range implements IHeightFunction {
+        private final IHeightFunction delegate;
         private final float min;
         private final float delta;
 
-        public Range(float min, float max, HeightFunction delegate) {
+        public Range(float min, float max, IHeightFunction delegate) {
             assert (min <= max);
             this.min = min;
             this.delta = max - min;
@@ -28,7 +29,7 @@ public interface HeightFunction {
 
     }
 
-    class XAxis implements HeightFunction {
+    class XAxis implements IHeightFunction {
 
         @Override
         public float calculate(Vector3 vect) {
@@ -41,7 +42,7 @@ public interface HeightFunction {
 
     }
 
-    class Const implements HeightFunction {
+    class Const implements IHeightFunction {
 
         private final float scalar;
 
@@ -56,7 +57,7 @@ public interface HeightFunction {
 
     }
 
-    class Sinus implements HeightFunction {
+    class Sinus implements IHeightFunction {
 
         private final float wavelength;
         private final float height;
@@ -74,7 +75,7 @@ public interface HeightFunction {
 
     }
 
-    class Simplex implements HeightFunction {
+    class Simplex implements IHeightFunction {
 
         private final double w;
 

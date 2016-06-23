@@ -16,7 +16,7 @@ import com.badlogic.gdx.utils.JsonValue;
 
 import net.wohlfart.pluto.entity.fab.roam.ColorFunction;
 import net.wohlfart.pluto.entity.fab.roam.ColorFunction.GradientHeight;
-import net.wohlfart.pluto.entity.fab.roam.HeightFunction;
+import net.wohlfart.pluto.entity.fab.roam.IHeightFunction;
 import net.wohlfart.pluto.entity.fab.roam.SimplexIteration;
 import net.wohlfart.pluto.scene.Position;
 import net.wohlfart.pluto.util.Utils;
@@ -140,13 +140,13 @@ final class ConverterContainer {
 
     }
 
-    static class HeightFunctionConverter implements ParameterConverter<HeightFunction> {
+    static class HeightFunctionConverter implements ParameterConverter<IHeightFunction> {
 
-        public static final HeightFunction ROCK1_HEIGHT = new SimplexIteration(6, 1f, 0.007f);
-        public static final HeightFunction ROCK2_HEIGHT = new SimplexIteration(6, 0.7f, 100f);
+        public static final IHeightFunction ROCK1_HEIGHT = new SimplexIteration(6, 1f, 0.007f);
+        public static final IHeightFunction ROCK2_HEIGHT = new SimplexIteration(6, 0.7f, 100f);
 
         @Override // see: https://www.opengl.org/wiki/Primitive
-        public HeightFunction convert(JsonValue jsonValue) {
+        public IHeightFunction convert(JsonValue jsonValue) {
             switch (jsonValue.asString()) {
                 case "ROCK1":
                     return HeightFunctionConverter.ROCK1_HEIGHT;
