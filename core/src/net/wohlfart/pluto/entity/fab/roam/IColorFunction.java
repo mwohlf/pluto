@@ -3,11 +3,11 @@ package net.wohlfart.pluto.entity.fab.roam;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Vector3;
 
-public interface ColorFunction {
+public interface IColorFunction {
 
     Color calculate(Vector3 vector);
 
-    class Const implements ColorFunction {
+    class Const implements IColorFunction {
         private final Color color = new Color();
 
         public Const(Color color) {
@@ -20,7 +20,7 @@ public interface ColorFunction {
         }
     }
 
-    class VectorColor implements ColorFunction {
+    class VectorColor implements IColorFunction {
         private final Color color = new Color();
 
         @Override
@@ -29,7 +29,7 @@ public interface ColorFunction {
         }
     }
 
-    class GrayscaleHeight implements ColorFunction {
+    class GrayscaleHeight implements IColorFunction {
         private final IHeightFunction delegate;
         private final Color color = new Color();
 
@@ -45,7 +45,7 @@ public interface ColorFunction {
         }
     }
 
-    class GradientHeight implements ColorFunction {
+    class GradientHeight implements IColorFunction {
         private final IHeightFunction delegate;
         private final ColorGradient gradient;
 

@@ -14,10 +14,6 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.JsonValue;
 
-import net.wohlfart.pluto.entity.fab.roam.ColorFunction;
-import net.wohlfart.pluto.entity.fab.roam.ColorFunction.GradientHeight;
-import net.wohlfart.pluto.entity.fab.roam.IHeightFunction;
-import net.wohlfart.pluto.entity.fab.roam.SimplexIteration;
 import net.wohlfart.pluto.scene.Position;
 import net.wohlfart.pluto.util.Utils;
 
@@ -52,8 +48,8 @@ final class ConverterContainer {
 
         ConverterContainer.BY_NAME.put("primitive", new PrimitiveConverter());
         ConverterContainer.BY_NAME.put("attribute", new AttributeConverter());
-        ConverterContainer.BY_NAME.put("heightFunction", new HeightFunctionConverter());
-        ConverterContainer.BY_NAME.put("colorFunction", new ColorFunctionConverter());
+        //ConverterContainer.BY_NAME.put("heightFunction", new HeightFunctionConverter());
+        //ConverterContainer.BY_NAME.put("colorFunction", new ColorFunctionConverter());
     }
 
     static <C> boolean containsKey(Class<C> key) {
@@ -133,44 +129,6 @@ final class ConverterContainer {
             switch (jsonValue.asString()) {
                 case "Normal":
                     return new VertexAttribute(Usage.Normal, 3, ShaderProgram.NORMAL_ATTRIBUTE);
-                default:
-            }
-            throw new IllegalArgumentException("unknown value for '" + jsonValue.name + "' value was '" + jsonValue + "'");
-        }
-
-    }
-
-    static class HeightFunctionConverter implements ParameterConverter<IHeightFunction> {
-
-        public static final IHeightFunction ROCK1_HEIGHT = new SimplexIteration(6, 1f, 0.007f);
-        public static final IHeightFunction ROCK2_HEIGHT = new SimplexIteration(6, 0.7f, 100f);
-
-        @Override // see: https://www.opengl.org/wiki/Primitive
-        public IHeightFunction convert(JsonValue jsonValue) {
-            switch (jsonValue.asString()) {
-                case "ROCK1":
-                    return HeightFunctionConverter.ROCK1_HEIGHT;
-                case "ROCK2":
-                    return HeightFunctionConverter.ROCK2_HEIGHT;
-                default:
-            }
-            throw new IllegalArgumentException("unknown value for '" + jsonValue.name + "' value was '" + jsonValue + "'");
-        }
-
-    }
-
-    static class ColorFunctionConverter implements ParameterConverter<ColorFunction> {
-
-        public static final ColorFunction ROCK1_COLOR = new GradientHeight(new SimplexIteration(6, 1f, 0.007f));
-        public static final ColorFunction ROCK2_COLOR = new GradientHeight(new SimplexIteration(6, 0.7f, 100f));
-
-        @Override // see: https://www.opengl.org/wiki/Primitive
-        public ColorFunction convert(JsonValue jsonValue) {
-            switch (jsonValue.asString()) {
-                case "ROCK1":
-                    return ColorFunctionConverter.ROCK1_COLOR;
-                case "ROCK2":
-                    return ColorFunctionConverter.ROCK2_COLOR;
                 default:
             }
             throw new IllegalArgumentException("unknown value for '" + jsonValue.name + "' value was '" + jsonValue + "'");

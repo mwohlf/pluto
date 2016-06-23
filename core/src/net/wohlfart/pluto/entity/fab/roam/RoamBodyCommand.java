@@ -69,7 +69,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
     private Color color;
     private String textureFile;
     private String cubemapFile;
-    private ColorFunction colorFunction;
+    private IColorFunction colorFunction;
 
     private Pixmap[] pixmapData;
 
@@ -122,7 +122,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
     }
 
     @SuppressWarnings("MagicNumber")
-    private Pixmap[] loadPixmanpData(ColorFunction function) {
+    private Pixmap[] loadPixmanpData(IColorFunction function) {
         return new Pixmap[] {
                 // yaw: the rotation around the y axis in degrees
                 // pitch: the rotation around the x axis in degrees
@@ -139,7 +139,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
     public static class PixmapData extends Pixmap {
         private static final int SIZE = 512;
 
-        public PixmapData(Quaternion quat, ColorFunction colorFunction) {
+        public PixmapData(Quaternion quat, IColorFunction colorFunction) {
             super(PixmapData.SIZE, PixmapData.SIZE, Pixmap.Format.RGBA8888);
             final Vector3 vector = new Vector3();
             for (int y = 0; y < PixmapData.SIZE; y++) {
@@ -259,7 +259,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
     }
 
     @EntityProperty(name = "colorFunction", type = "ColorFunction")
-    public RoamBodyCommand withColorFunction(ColorFunction colorFunction) {
+    public RoamBodyCommand withColorFunction(IColorFunction colorFunction) {
         if (this.textureFile != null || this.cubemapFile != null || this.color != null) {
             throw new IllegalStateException("can't use color and texture/cubemap/color in the same entity");
         }

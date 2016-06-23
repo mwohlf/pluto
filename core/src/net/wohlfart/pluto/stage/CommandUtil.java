@@ -7,7 +7,7 @@ import com.badlogic.gdx.math.Vector3;
 import net.wohlfart.pluto.ai.SpinBehavior;
 import net.wohlfart.pluto.entity.effects.LightCommand;
 import net.wohlfart.pluto.entity.fab.CubeCommand;
-import net.wohlfart.pluto.entity.fab.roam.ColorFunction;
+import net.wohlfart.pluto.entity.fab.roam.IColorFunction;
 import net.wohlfart.pluto.entity.fab.roam.RoamBodyCommand;
 import net.wohlfart.pluto.entity.fab.roam.SimplexIteration;
 import net.wohlfart.pluto.scene.Position;
@@ -20,7 +20,7 @@ public class CommandUtil {
                 .withDetails(4)
                 .withRadius(6)
                 .withHeightFunction(surface)
-                .withColorFunction(new ColorFunction.GradientHeight(surface))
+                .withColorFunction(new IColorFunction.GradientHeight(surface))
                 .withBehavior(new SpinBehavior()
                         .withAxis(new Vector3(0, 0, 1))
                         .withAngle(10f))
