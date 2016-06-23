@@ -4,7 +4,6 @@ sourceSets.main.compileClasspath += files(project(':core').sourceSets.main.allJa
 
 webAppDirName = 'webapp'
 
-/*
 gwt {
     gwtVersion=project.gwtVersion // Should match the gwt version used for building the gwt backend
     maxHeapSize="1G" // Default 256m is not enough for gwt compiler. GWT is HUNGRY
@@ -20,7 +19,6 @@ gwt {
        //disableCastChecking = true;
     }
 }
-*/
 
 task compileGwt(dependsOn: test, type: JavaExec) {
     inputs.source sourceSets.main.java.srcDirs
@@ -53,10 +51,11 @@ task compileGwt(dependsOn: test, type: JavaExec) {
 
 
 // war.dependsOn compileGwt
-//war {
-//    from compileGwt.buildDir
-//}
+war {
+    from compileGwt.buildDir
+}
 
 eclipse.project {
     name = appName + "-gwt"
 }
+
