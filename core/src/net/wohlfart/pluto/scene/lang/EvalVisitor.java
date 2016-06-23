@@ -29,6 +29,7 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.AndExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.AssertFunctionCallContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.AttributeContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.BlockContext;
+import net.wohlfart.pluto.stage.SceneLanguageParser.ConstantExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.DivideExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ExpressionExpressionContext;
@@ -717,6 +718,11 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value<?>> {
                 LOGGER.error("<visitAttribute> unknown attribute: " + type);
                 return Value.NULL;
         }
+    }
+
+    @Override
+    public Value<?> visitConstantExpression(ConstantExpressionContext ctx) {
+        return Value.of(ctx.Constant().getText()); // constants are stored as strings
     }
 
     private Value<?> resolveVector(AttributeContext ctx) {

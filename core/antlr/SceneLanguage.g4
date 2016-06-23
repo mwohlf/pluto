@@ -110,6 +110,7 @@ expression
  | entity                                   #entityDefinition
  | behavior                                 #behaviorDefinition
  | attribute                                #attributeDefinition
+ | Constant                                 #constantExpression
  ;          
       
     
@@ -238,7 +239,7 @@ Identifier
  ;
 
 Constant
- : [A-Z] [a-zA-Z_0-9]*
+ : [A-Z] [A-Z_0-9]*
  ;
 
 String
