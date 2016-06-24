@@ -61,7 +61,7 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.WhileStatementContext;
 /**
  * core class for interpreting scene definition
  */
-public class EvalVisitor extends SceneLanguageBaseVisitor<Value<?>> {
+public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
 
     private static final Logger LOGGER = LoggerService.forClass(EvalVisitor.class);
 
