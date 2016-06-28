@@ -18,7 +18,7 @@ public class SequenceTreeExecutorTest {
     @Before
     public void before() {
         executor = new BehaviorExecutor();
-        Assert.assertTrue(executor.getLastState() == State.SUCCESS);
+        Assert.assertTrue("last state is: " + executor.getLastState(), executor.getLastState() == State.SUCCESS);
 
         stateHolder1 = new StateSensor();
         final TriggerBehavior trigger1 = new TriggerBehavior(stateHolder1);

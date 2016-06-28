@@ -14,11 +14,11 @@ import net.wohlfart.pluto.scene.SceneGraph;
  */
 public class BehaviorExecutor implements BehaviorTaskContext { // TODO: use the interface
 
+    public final NullTask NULL_TASK = new NullTask();
+
     private final List<ITask> runningTasks = new CopyOnWriteArrayList<>();
 
     private final Collection<Entity> entityBlacklist = new CopyOnWriteArrayList<>();
-
-    private final NullTask NULL_TASK = new NullTask();
 
     public BehaviorExecutor attachBehavior(Entity entity, IBehavior behavior) {
         return new BehaviorBuilder(behavior).build(entity);
@@ -112,11 +112,6 @@ public class BehaviorExecutor implements BehaviorTaskContext { // TODO: use the 
         @Override
         public ITask initialize(Entity entity, ITask parent) {
             throw new IllegalArgumentException("no parent allowed for executor task");
-        }
-
-        @Override
-        public void reset() {
-            throw new IllegalArgumentException("executor task should not be reset");
         }
 
         @Override

@@ -1,7 +1,6 @@
 package net.wohlfart.pluto.ai.btree;
 
 import com.badlogic.ashley.core.Entity;
-import com.badlogic.gdx.utils.Pool.Poolable;
 
 import net.wohlfart.pluto.ai.btree.IBehavior.State;
 import net.wohlfart.pluto.scene.SceneGraph;
@@ -9,7 +8,7 @@ import net.wohlfart.pluto.scene.SceneGraph;
 /**
  * runtime data for a behavior tree
  */
-public interface ITask extends Poolable {
+public interface ITask {
 
     Entity getEntity();
 
@@ -51,12 +50,6 @@ public interface ITask extends Poolable {
         }
 
         @Override
-        public void reset() {
-            this.entity = null;
-            this.parent = null;
-        }
-
-        @Override
         public abstract void reportState(State state);
 
         @Override
@@ -84,16 +77,9 @@ public interface ITask extends Poolable {
 
         @Override
         public ITask initialize(Entity entity, ITask parent) {
-            assert parent != null : "parent must not be null";
             this.entity = entity;
             this.parent = parent;
             return this;
-        }
-
-        @Override
-        public void reset() {
-            this.entity = null;
-            this.parent = null;
         }
 
         @Override
