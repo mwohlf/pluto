@@ -37,6 +37,8 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
     public SpinBehavior withRotation(Quaternion spinPerSec) {
         this.spinPerSec = spinPerSec;
         angle = this.spinPerSec.nor().getAxisAngle(axis = new Vector3());
+        int x = 0;
+        x += 1;
         return this;
     }
 

@@ -15,7 +15,7 @@ public class EvalException extends RuntimeException {
     }
 
     public EvalException(String msg, ParserRuleContext ctx) {
-        super(msg + " line:" + ctx.start.getLine());
+        super(msg + " at line:" + ctx.start.getLine());
     }
 
 }

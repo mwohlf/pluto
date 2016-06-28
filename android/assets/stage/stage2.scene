@@ -1,0 +1,336 @@
+
+
+uid = 1;
+
+sequence1 = 
+        (  Seek {
+          target: Waypoint {
+            uid:uid++,
+            position: Position{x:-20.0, y:20.0, z:-50.0}}}
+        &  Seek {
+          target: Waypoint {
+            uid:uid++,
+            position: Position{x:0.0, y:-20.0, z:-100.0}}}
+        &  Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{x:-10.0, y:20.0, z:-150.0}}}
+        &  Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{x:0.0, y:-20.0, z:-200.0}}}
+        &  Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{x:30.0, y:20.0, z:-250.0}}}
+        );
+
+sequence2 = 
+        (  Seek{
+        target: Waypoint {
+            uid:uid++,
+            position: Position{x:20.0, y:20.0, z:-50.0}}}
+        &  Seek{
+        target: Waypoint {
+            uid:uid++,
+            position: Position{x:20.0, y:-20.0, z:-50.0}}}
+        &  Seek{
+        target: Waypoint {
+            uid:uid++,
+            position: Position{x:-20.0, y:-20.0, z:-50.0}}}
+        &  Seek{
+        target: Waypoint {
+            uid:uid++,
+            position: Position{x:-20.0, y:20.0, z:-50.0}}}
+        &  Seek{
+        target: Waypoint {
+            uid:uid++,
+            position: Position{x:-20.0, y:20.0, z:-150.0}}}
+        );
+
+sequence3 = 
+        ( Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{0, 50, -400}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{-200, -50, 0}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{0, 50, 200}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{200, -50, 0}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, -1_000}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{20, -20, -800}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, -600}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{20, -20, -400}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, -200}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{20, -20, 0}}}
+        & Seek{
+          target: Waypoint {
+            uid:uid++,
+            position: Position{40, 30, 100}}}
+        );
+
+
+Cam {  
+    uid:uid++,
+    nearFrustum: 10.0,
+    farFrustum: 1000.0,
+    fieldOfView: 67.0,
+    /*
+    behavior: Seek{
+        target: Waypoint {
+            uid:uid++,
+            position: Position{x:0.0, y:170.0, z:-100.0}
+        }
+    }
+    */
+};
+
+Skybox {  
+    uid:uid++,
+    //  test, blue, sky, violent
+    style: 'sky' 
+};
+
+Light {  
+    uid:uid++,
+    color: Color{r:0.5,g:0.5,b:0.5,a:1.0}
+};
+
+Planet {
+    uid:uid++,
+    radius: 50,
+    details: 4,
+    position: Position{x:0.0,y:170.0,z:-150.0},
+    rotation: Rotation{axis:Vector{x:0.0,y:0.0,z:1.0}, angle: -40},
+    cubemap: "test",
+    behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
+};
+
+Planet {
+    uid:uid++,
+    radius: 50,
+    details: 4,
+    position: Position{x:0.0,y:170.0,z:150.0},
+    rotation: Rotation{axis:Vector{x:0.0,y:0.0,z:1.0}, angle: -40},
+    //cubemap: "test",
+    heightFunction: ROCK1,
+    colorFunction: 'ROCK1',
+    behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
+};
+
+
+a = 100;
+
+b = 1 + a;
+
+println(">>>>>" + b);
+
+target = Waypoint {
+   uid:uid++,
+   position: Position{x:a,y:b,z:-15.0}
+};
+
+
+target = Waypoint {
+    uid:uid++,
+    position: Position{x:0.0,y:10.0,z:-15.0}
+};
+
+goto = MoveTo {
+    target: target
+};
+
+ship5 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-90.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 0.5,
+    behavior: sequence3,  
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:0.0,y:0.0,z:-30.0},
+    texture: 'texture/ash_uvgrid01.png'
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:0.0,y:0.0,z:-20.0},
+    texture: 'texture/ash_uvgrid02.png'
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:0.0,y:0.0,z:-10.0},
+    texture: 'texture/ash_uvgrid03.png'
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:0.0,y:10.0,z:-30.0},
+    texture: 'texture/ash_uvgrid01.png'
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:0.0,y:20.0,z:-30.0},
+    texture: 'texture/ash_uvgrid01.png'
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:10.0,y:0.0,z:-30.0},
+    texture: 'texture/ash_uvgrid01.png'
+};
+
+Box {
+    uid:uid++,
+    length: 0.5,
+    position: Position{x:20.0,y:0.0,z:-30.0},
+    texture: 'texture/ash_uvgrid01.png'
+};
+
+Smoke {
+    uid:uid++,
+    position: Position{x:50.0,y:20.0,z:-55.0}
+};
+
+Triangle {
+    uid:uid++,
+    position: Position{x:10.0,y:2.0,z:-17.0},
+    length: 5.5
+};
+
+Quad {
+    uid:uid++,
+    position: Position{x:-10.0,y:2.0,z:-18.0},
+    length: 5.5,
+    texture: 'texture/badlogic.jpg'
+};
+
+Icosphere {
+    uid:uid++,
+    position: Position{x:-10.0,y:2.0,z:-70.0},
+    radius: 5,
+    primitive: 'GL_LINES',  // GL_TRIANGLES, GL_LINES
+    attribute: 'Normal',
+    color: Color{r:0.5,g:0.5,b:0.5,a:1.0}
+};
+
+ship1 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-90.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 1,
+    behavior: sequence2,  
+};
+
+ship2 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-70.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 9,
+    rotationSpeed: 1,
+    behavior: Seek{
+        target: ship1,
+    },
+};
+
+ship3 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-10.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 5,
+    rotationSpeed: 1,
+    behavior: Seek{
+        target: ship2,
+    },
+};
+
+
+ship4 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-190.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 1,
+    behavior: sequence1,  
+};
+
+behavior5 = 
+    ( FireLaser {
+        timeout: 1,
+        target: ship4}
+    & Delay {
+        timeout: 1}
+    );
+    
+behavior6 = ( behavior5 | Seek{ target: ship4 } );
+
+ship5 = Object {
+    uid:uid++,
+    position: Position{x:0.0,y:0.0,z:-90.0},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 0.5,
+    behavior: behavior6,  
+};
+
+c = 2;
+a = -52;
+while (c < 400) {
+  a = a + 20;
+  c = c + 20;
+  println(">>>>>" + c);
+  ship = Object {
+    uid:uid++,
+    position: Position{x:a,y:0.0,z:c},
+    file: "obj/manta1/manta1.obj",
+    moveSpeed: 10,
+    rotationSpeed: 0.5,
+    behavior: behavior6,  
+};
+};
+
+
+c= 30;
+
+
+
+
+

@@ -9,6 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Nonnull;
+
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -450,9 +452,13 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
 
     // Identifier indexes?                      #identifierExpression
     @Override
+    @Nonnull
     public Value<?> visitIdentifierExpression(SceneLanguageParser.IdentifierExpressionContext ctx) {
         final String id = ctx.Identifier().getText();
         Value<?> value = scope.resolve(id);
+        if (value == null) {
+            throw new EvalException("value for identifier '" + id + "' not found in current scope ", ctx);
+        }
 
         if (ctx.indexes() != null) {
             final List<ExpressionContext> expressions = ctx.indexes().expression();

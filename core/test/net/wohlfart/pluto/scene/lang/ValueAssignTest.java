@@ -1,12 +1,14 @@
 package net.wohlfart.pluto.scene.lang;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
-import net.wohlfart.pluto.scene.Position;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import net.wohlfart.pluto.scene.Position;
 
 public class ValueAssignTest {
 
@@ -99,17 +101,22 @@ public class ValueAssignTest {
     public void incDecTest() throws InterruptedException {
         final String script = ""
                 + "a = 1;"
-                + "a =+ 1;"
+                + "a += 1;"
                 + "b = 0.1;"
-                + "b =+ 0.1;"
+                + "b += 0.1;"
                 + "c = 2;"
-                + "c =- 1;"
+                + "c -= 1;"
                 + "d = 0.2;"
-                + "d =- 0.1;";
+                + "d -= 0.1;"
+                + "e = -0.1;"
+                + "f = e;"
+                + "f -= 0.2;";
         final Scope scope = new MockEvalScope().invoke(script);
         assertEquals(Long.valueOf(2), scope.resolve("a").asLong());
-        assertEquals(Double.valueOf(0.2), scope.resolve("b").asDouble());
+        assertEquals(Double.valueOf(0.2), scope.resolve("b").asDouble(), 0.0001);
         assertEquals(Long.valueOf(1), scope.resolve("c").asLong());
-        assertEquals(Double.valueOf(0.1), scope.resolve("d").asDouble());
+        assertEquals(Double.valueOf(0.1), scope.resolve("d").asDouble(), 0.0001);
+        assertEquals(Double.valueOf(-0.1), scope.resolve("e").asDouble(), 0.0001);
+        assertEquals(Double.valueOf(-0.3), scope.resolve("f").asDouble(), 0.0001);
     }
 }
