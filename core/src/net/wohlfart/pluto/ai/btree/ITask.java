@@ -84,6 +84,7 @@ public interface ITask extends Poolable {
 
         @Override
         public ITask initialize(Entity entity, ITask parent) {
+            assert parent != null : "parent must not be null";
             this.entity = entity;
             this.parent = parent;
             return this;

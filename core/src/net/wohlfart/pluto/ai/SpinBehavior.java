@@ -31,7 +31,7 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
     public ITask createTask(Entity entity, ITask parent) {
         assert !Float.isNaN(angle) : "angle is null";
         assert axis != null : "axis is null";
-        return new TaskImpl().initialize(this, entity, parent);
+        return new TaskImpl().initialize(entity, parent);
     }
 
     public SpinBehavior withRotation(Quaternion spinPerSec) {
@@ -60,9 +60,7 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
         }
     }
 
-    static class TaskImpl extends AbstractLeafTask {
-
-        private SpinBehavior behavior;
+    class TaskImpl extends AbstractLeafTask {
 
         @Override
         public void tick(float delta, SceneGraph graph) {
@@ -70,22 +68,17 @@ public class SpinBehavior extends AbstractBehaviorLeaf {
             getParent().reportState(State.RUNNING);
         }
 
-        public ITask initialize(SpinBehavior behavior, Entity entity, ITask parent) {
-            this.behavior = behavior;
-            return super.initialize(entity, parent);
-        }
-
         // calculate and apply the rotation in behavior.spinPerSec to the entity
         private void calculate(float deltaTime) {
-            assert behavior.spinPerSec != null : "behavior.spinPerSec must not be null";
+            assert spinPerSec != null : "behavior.spinPerSec must not be null";
 
             // scale the rotation to deltaTime into tmpQuaternion
-            Utils.scale(SpinBehavior.TMP_QUATERNION.set(behavior.spinPerSec), deltaTime);
-            behavior.angle = SpinBehavior.TMP_QUATERNION.getAxisAngle(behavior.axis);
+            Utils.scale(SpinBehavior.TMP_QUATERNION.set(spinPerSec), deltaTime);
+            angle = SpinBehavior.TMP_QUATERNION.getAxisAngle(axis);
 
             // transform the axis into object space
-            getEntity().getComponent(HasRotation.class).getRotation().transform(behavior.axis);
-            SpinBehavior.TMP_QUATERNION.set(behavior.axis, behavior.angle);
+            getEntity().getComponent(HasRotation.class).getRotation().transform(axis);
+            SpinBehavior.TMP_QUATERNION.set(axis, angle);
 
             // add to the current rotation of the object
             getEntity().getComponent(HasRotation.class).getRotation().mulLeft(SpinBehavior.TMP_QUATERNION);
