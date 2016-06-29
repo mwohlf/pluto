@@ -10,19 +10,30 @@ parse
  ;
 
 block
- : (statement SColon 
-     | functionDecl SColon)* 
-   (Return expression SColon)?
+ : (statement Semicolon)*
  ;
 
 statement
- : entity
+ : include
+ | entity
  | assignment
  | functionCall
+ | functionDeclaration
  | ifStatement
  | forStatement
  | whileStatement
  ;
+
+functionDeclaration
+ : Define Identifier OParen idList? CParen 
+     block 
+     (Return expression Semicolon)? 
+   End
+ ;
+ 
+include
+ : Include String
+ ; 
 
 assignment
  : Identifier indexes? Assign expression     #Assign
@@ -52,10 +63,6 @@ elseIfStat
 
 elseStat
  : Else Do block
- ;
-
-functionDecl
- : Def Identifier OParen idList? CParen block End
  ;
 
 forStatement
@@ -180,7 +187,7 @@ Print    : 'print';
 Input    : 'input';
 Assert   : 'assert';
 Size     : 'size';
-Def      : 'def';
+Define   : 'define';
 If       : 'if';
 Else     : 'else';
 Return   : 'return';
@@ -191,6 +198,7 @@ Do       : 'do';
 End      : 'end';
 In       : 'in';
 Null     : 'null';
+Include  : 'include';
 
 OrOr        : '||';
 AndAnd      : '&&';
@@ -214,7 +222,7 @@ OBracket    : '[';
 CBracket    : ']';
 OParen      : '(';
 CParen      : ')';
-SColon      : ';';
+Semicolon   : ';';
 Assign      : '=';
 AssignM     : '-=';
 AssignP     : '+=';

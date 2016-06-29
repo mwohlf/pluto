@@ -11,12 +11,18 @@ import java.util.Map;
 
 import javax.annotation.Nonnull;
 
+import org.antlr.v4.runtime.ANTLRInputStream;
+import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.github.czyzby.kiwi.log.Logger;
 import com.github.czyzby.kiwi.log.LoggerService;
 
@@ -25,6 +31,7 @@ import net.wohlfart.pluto.entity.IEntityCommand;
 import net.wohlfart.pluto.scene.ISceneGraph;
 import net.wohlfart.pluto.scene.Position;
 import net.wohlfart.pluto.stage.SceneLanguageBaseVisitor;
+import net.wohlfart.pluto.stage.SceneLanguageLexer;
 import net.wohlfart.pluto.stage.SceneLanguageParser;
 import net.wohlfart.pluto.stage.SceneLanguageParser.AndAndExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.AndExpressionContext;
@@ -37,11 +44,12 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.ExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ExpressionExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ForStatementContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.FunctionCallExpressionContext;
-import net.wohlfart.pluto.stage.SceneLanguageParser.FunctionDeclContext;
+import net.wohlfart.pluto.stage.SceneLanguageParser.FunctionDeclarationContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.GtEqExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.GtExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.IdentifierFunctionCallContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.InExpressionContext;
+import net.wohlfart.pluto.stage.SceneLanguageParser.IncludeContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.InputExpressionContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ListContext;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ListExpressionContext;
@@ -83,7 +91,8 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
 
     // functionDecl
     @Override
-    public Value<?> visitFunctionDecl(FunctionDeclContext ctx) {
+    public Value<?> visitFunctionDeclaration(FunctionDeclarationContext ctx) {
+        // todo
         return Value.NULL;
     }
 
@@ -471,7 +480,7 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
     @Override
     public Value<?> visitStringExpression(SceneLanguageParser.StringExpressionContext ctx) {
         String text = ctx.getText();
-        text = text.substring(1, text.length() - 1).replaceAll("\\\\(.)", "$1");
+        text = text.substring(1, text.length() - 1); //.replaceAll("\\\\(.)", "$1");
         Value<?> value = Value.of(text);
         if (ctx.indexes() != null) {
             final List<ExpressionContext> exexpressions = ctx.indexes().expression();
@@ -646,9 +655,7 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
         return Value.NULL;
     }
 
-    // block
-    // : (statement | functionDecl)* (Return expression)?
-    // ;
+    // execute a block of statements
     @Override
     public Value<?> visitBlock(BlockContext ctx) {
 
@@ -656,6 +663,7 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
         for (final StatementContext sx : ctx.statement()) {
             this.visit(sx);
         }
+        /*
         ExpressionContext ex;
         if ((ex = ctx.expression()) != null) {
             final Value<?> value = this.visit(ex);
@@ -663,6 +671,26 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
             return value;
         }
         //scope = scope.parent();
+         */
+        return Value.NULL;
+    }
+
+    @Override
+    public Value<?> visitInclude(IncludeContext ctx) {
+        final String quotedFilename = ctx.String().getSymbol().getText();
+        final String filename = quotedFilename.substring(1, quotedFilename.length() - 1);
+        final FileHandle handle = Gdx.files.internal(filename);
+        try (BufferedReader reader = new BufferedReader(handle.reader())) {
+            final SceneLanguageLexer lexer = new SceneLanguageLexer(new ANTLRInputStream(reader));
+            final SceneLanguageParser parser = new SceneLanguageParser(new CommonTokenStream(lexer));
+            parser.setBuildParseTree(true);
+            parser.removeErrorListeners();
+            parser.addErrorListener(new EvalErrorListener());
+            final ParseTree tree = parser.parse();
+            visit(tree);
+        } catch (final IOException ex) {
+            throw new GdxRuntimeException(ex);
+        }
         return Value.NULL;
     }
 
@@ -699,13 +727,13 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
 
     @Override
     public Value<?> visitEntity(SceneLanguageParser.EntityContext ctx) {
-        final IEntityCommand entity = new EntityVisitor(graph, this.scope, this.functions).visitEntity(ctx);
+        final IEntityCommand entity = new EntityVisitor(this).visitEntity(ctx);
         return Value.of(graph.create(entity));
     }
 
     @Override
     public Value<?> visitBehavior(SceneLanguageParser.BehaviorContext ctx) {
-        return Value.of(new BehaviorVisitor(graph, this.scope, this.functions).visitBehavior(ctx));
+        return Value.of(new BehaviorVisitor(this).visitBehavior(ctx));
     }
 
     @Override

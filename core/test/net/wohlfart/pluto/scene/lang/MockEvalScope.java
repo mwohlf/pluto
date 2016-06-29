@@ -31,13 +31,16 @@ public class MockEvalScope {
             // pass the tokens to the parser
             final SceneLanguageParser parser = new SceneLanguageParser(new CommonTokenStream(lexer));
             parser.setBuildParseTree(true);
+            parser.removeErrorListeners();
+            parser.addErrorListener(new EvalErrorListener());
             //parser.setErrorHandler(new BailErrorStrategy());
             final ParseTree tree = parser.parse();
 
             final Map<String, Function> functions = new HashMap<>();
 
             // TODO: do we need the return value from the visit call?
-            new EvalVisitor(new MockSceneGraph(), scope, functions).visit(tree);
+            final EvalVisitor evalVisitor = new EvalVisitor(new MockSceneGraph(), scope, functions);
+            evalVisitor.visit(tree);
 
         } catch (final IOException ex) {
             throw new GdxRuntimeException(ex);

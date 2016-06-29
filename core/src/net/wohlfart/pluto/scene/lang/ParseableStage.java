@@ -50,21 +50,15 @@ public class ParseableStage extends AbstractGraphStage {
         final FileHandle handle = Gdx.files.internal(filename);
         try (BufferedReader reader = new BufferedReader(handle.reader())) {
             final SceneLanguageLexer lexer = new SceneLanguageLexer(new ANTLRInputStream(reader));
-
-            // pass the tokens to the parser
             final SceneLanguageParser parser = new SceneLanguageParser(new CommonTokenStream(lexer));
             parser.setBuildParseTree(true);
-            //parser.setErrorHandler(new BailErrorStrategy());
+            parser.removeErrorListeners();
+            parser.addErrorListener(new EvalErrorListener());
             final ParseTree tree = parser.parse();
 
             final Scope scope = new Scope();
             final Map<String, Function> functions = new HashMap<>();
-
-            // TODO: do we need the return value from the visit call?
             new EvalVisitor(graph, scope, functions).visit(tree);
-
-            LOGGER.info("<setupGraph> scope: " + scope);
-            LOGGER.info("<setupGraph> functions: " + functions);
 
         } catch (final IOException ex) {
             throw new GdxRuntimeException(ex);

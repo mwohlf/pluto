@@ -1,0 +1,18 @@
+
+Cam {  
+    uid:uid++,
+    nearFrustum: 10.0,
+    farFrustum: 1000.0,
+    fieldOfView: 67.0,
+};
+
+Light {  
+    uid:uid++,
+    color: Color{r:0.5,g:0.5,b:0.5,a:1.0},
+    direction: Vector{1,1,0},
+};
+
+Light {  
+    uid:uid++,
+    color: Color{r:0.5,g:0.5,b:0.5,a:1.0},
+};
