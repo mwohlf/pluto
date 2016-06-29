@@ -2,7 +2,9 @@
 
 uid = 1;
 
-include "stage/basic.scene";
+include "stage/includes/basic.scene";
+
+include "stage/includes/astroids.scene";
 
 
 x=-100;

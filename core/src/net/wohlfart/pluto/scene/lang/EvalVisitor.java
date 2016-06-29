@@ -375,6 +375,9 @@ public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
     public Value<?> visitPostIncrement(SceneLanguageParser.PostIncrementContext ctx) {
         final String identifier = ctx.Identifier().getText();
         final Value<?> value = scope.resolve(identifier);
+        if (value == null) {
+            throw new EvalException("identifier not found in context", ctx);
+        }
         scope.assignExisting(identifier, Value.of(value.asLong() + 1));
         return value;
     }

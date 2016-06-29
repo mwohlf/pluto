@@ -48,7 +48,7 @@ import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
 
 @SuppressFBWarnings(value = "UPM_UNCALLED_PRIVATE_METHOD", justification = "TODO: work in progress")
-@EntityElement(type = "Planet")
+@EntityElement(type = "RoamBody")
 public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
 
     public static final String CUBEMAP_PATH = "texture/cubemap/";

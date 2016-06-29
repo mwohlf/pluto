@@ -1,0 +1,14 @@
+
+
+RoamBody {
+    uid:uid++,
+    radius: 5,
+    details: 2,
+    position: Position{x:0.0,y:0.0,z:-150.0},
+    rotation: Rotation{axis:Vector{x:0.0,y:0.0,z:1.0}, angle: -40},
+    //cubemap: "test",
+    heightFunction: ASTROID1,
+    colorFunction: ASTROID1,
+    behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -2}
+};
+

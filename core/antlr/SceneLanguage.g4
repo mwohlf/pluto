@@ -152,7 +152,8 @@ behaviorType
       | 'Delay'  
       | 'Align'     
       ;  
-        
+   
+// must match the definition in the command annotations        
 entityType
       : 'Cam'
       | 'Skybox'
@@ -163,7 +164,7 @@ entityType
       | 'Waypoint'
       | 'Triangle'
       | 'Quad'
-      | 'Planet'
+      | 'RoamBody'
       | 'Smoke'
       ;
       
