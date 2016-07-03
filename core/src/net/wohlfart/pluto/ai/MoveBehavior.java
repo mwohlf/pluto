@@ -8,10 +8,10 @@ import net.wohlfart.pluto.ai.btree.IBehavior;
 import net.wohlfart.pluto.ai.btree.ITask;
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.scene.SceneGraph;
+import net.wohlfart.pluto.scene.lang.EntityElement;
+import net.wohlfart.pluto.scene.lang.EntityProperty;
 import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.scene.properties.HasRotation;
-import net.wohlfart.pluto.stage.loader.EntityElement;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
 
 /**
  * move an entity for a fixed distance

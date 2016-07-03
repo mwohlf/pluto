@@ -148,6 +148,7 @@ public class ValueConverters {
         CONVERTERS.put("HeightFunction", new ISetterDecorator() {
             @Override
             public void setValue(Object entity, Method method, Value<?> value) {
+                // TODO: we need more than enums here
                 final String enumName = value.asString();
                 try {
                     method.invoke(entity, HeightFunctionEnum.valueOf(enumName).get());
@@ -159,6 +160,7 @@ public class ValueConverters {
         CONVERTERS.put("ColorFunction", new ISetterDecorator() {
             @Override
             public void setValue(Object entity, Method method, Value<?> value) {
+                // TODO: we need more than enums here
                 final String enumName = value.asString();
                 try {
                     method.invoke(entity, ColorFunctionEnum.valueOf(enumName).get());

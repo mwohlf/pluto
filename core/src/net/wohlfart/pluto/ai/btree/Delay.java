@@ -4,8 +4,8 @@ import com.badlogic.ashley.core.Entity;
 
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.scene.SceneGraph;
-import net.wohlfart.pluto.stage.loader.EntityElement;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
+import net.wohlfart.pluto.scene.lang.EntityElement;
+import net.wohlfart.pluto.scene.lang.EntityProperty;
 
 @EntityElement(type = "Delay")
 public class Delay extends AbstractBehaviorLeaf {

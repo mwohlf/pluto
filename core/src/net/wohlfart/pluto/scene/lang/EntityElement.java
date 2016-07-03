@@ -1,4 +1,4 @@
-package net.wohlfart.pluto.stage.loader;
+package net.wohlfart.pluto.scene.lang;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

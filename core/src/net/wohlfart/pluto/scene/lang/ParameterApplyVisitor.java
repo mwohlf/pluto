@@ -10,11 +10,11 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.ParameterContext;
 
 public class ParameterApplyVisitor<T> extends SceneLanguageBaseVisitor<T> {
 
-    private static final Logger LOGGER = LoggerService.forClass(BehaviorVisitor.class);
+    private static final Logger LOGGER = LoggerService.forClass(ParameterApplyVisitor.class);
 
-    protected IFactoryDecorator<T> factory;
+    private IFactoryDecorator<T> factory;
 
-    protected T entity;
+    private T entity;
 
     private final EvalVisitor visitor;
 
@@ -36,6 +36,16 @@ public class ParameterApplyVisitor<T> extends SceneLanguageBaseVisitor<T> {
         }
 
         return entity; // not used
+    }
+
+    public ParameterApplyVisitor<T> withFactory(IFactoryDecorator<T> factory) {
+        this.factory = factory;
+        return this;
+    }
+
+    public ParameterApplyVisitor<T> withEntity(T entity) {
+        this.entity = entity;
+        return this;
     }
 
 }

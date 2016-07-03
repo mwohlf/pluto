@@ -31,7 +31,6 @@ import com.badlogic.gdx.graphics.g3d.loader.ObjLoader;
 import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.badlogic.gdx.utils.JsonValue;
 import com.badlogic.gdx.utils.ObjectMap;
 import com.github.czyzby.kiwi.log.Logger;
 import com.github.czyzby.kiwi.log.LoggerService;
@@ -43,7 +42,6 @@ import net.wohlfart.pluto.controller.Command;
 import net.wohlfart.pluto.resource.Executor.BackgroundWorker;
 import net.wohlfart.pluto.resource.FontManager.FontKey;
 import net.wohlfart.pluto.shader.CubeTexturesLoader;
-import net.wohlfart.pluto.stage.loader.JsonDocumentLoader;
 import net.wohlfart.pluto.transition.Fade;
 import net.wohlfart.pluto.util.Utils;
 
@@ -161,7 +159,7 @@ public class ResourceManager extends AssetManager {
 
         // custom loaders
         setLoader(TextureData[].class, new CubeTexturesLoader(resolver));
-        setLoader(JsonValue.class, new JsonDocumentLoader(resolver));
+        //setLoader(JsonValue.class, new JsonDocumentLoader(resolver));
     }
 
     @SuppressWarnings({ "rawtypes", "unchecked" })

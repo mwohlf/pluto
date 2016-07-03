@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 
 import net.wohlfart.pluto.ai.btree.ITask.AbstractNodeTask;
 import net.wohlfart.pluto.scene.SceneGraph;
-import net.wohlfart.pluto.stage.loader.EntityElement;
+import net.wohlfart.pluto.scene.lang.EntityElement;
 
 @EntityElement(type = "Parallel")
 public class Parallel extends AbstractBehaviorNode {

@@ -18,9 +18,9 @@ import net.wohlfart.pluto.entity.AbstractEntityCommand;
 import net.wohlfart.pluto.entity.EntityPool;
 import net.wohlfart.pluto.resource.ResourceManager;
 import net.wohlfart.pluto.scene.FutureEntity;
+import net.wohlfart.pluto.scene.lang.EntityElement;
 import net.wohlfart.pluto.scene.properties.HasRenderables;
 import net.wohlfart.pluto.scene.properties.HasTransformMethod;
-import net.wohlfart.pluto.stage.loader.EntityElement;
 
 @EntityElement(type = "Waypoint")
 public class WaypointCommand extends AbstractEntityCommand<WaypointCommand> {

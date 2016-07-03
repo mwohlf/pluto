@@ -10,11 +10,11 @@ import net.wohlfart.pluto.ai.btree.ITask;
 import net.wohlfart.pluto.ai.btree.ITask.AbstractLeafTask;
 import net.wohlfart.pluto.scene.Position;
 import net.wohlfart.pluto.scene.SceneGraph;
+import net.wohlfart.pluto.scene.lang.EntityElement;
+import net.wohlfart.pluto.scene.lang.EntityProperty;
 import net.wohlfart.pluto.scene.properties.HasPosition;
 import net.wohlfart.pluto.scene.properties.HasRotation;
 import net.wohlfart.pluto.scene.properties.IsSteerable;
-import net.wohlfart.pluto.stage.loader.EntityElement;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
 
 @EntityElement(type = "Align")

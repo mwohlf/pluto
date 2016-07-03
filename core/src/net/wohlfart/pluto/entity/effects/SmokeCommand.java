@@ -29,10 +29,10 @@ import net.wohlfart.pluto.entity.EntityPool;
 import net.wohlfart.pluto.resource.ResourceManager;
 import net.wohlfart.pluto.scene.FutureEntity;
 import net.wohlfart.pluto.scene.UpdateMethod;
+import net.wohlfart.pluto.scene.lang.EntityElement;
 import net.wohlfart.pluto.scene.properties.HasRenderables;
 import net.wohlfart.pluto.scene.properties.HasTransformMethod;
 import net.wohlfart.pluto.scene.properties.HasUpdateMethod;
-import net.wohlfart.pluto.stage.loader.EntityElement;
 
 @EntityElement(type = "Smoke")
 public class SmokeCommand extends AbstractEntityCommand<SmokeCommand> {

@@ -18,8 +18,6 @@ import net.wohlfart.pluto.ai.btree.Delay;
 import net.wohlfart.pluto.ai.btree.IBehavior;
 import net.wohlfart.pluto.ai.btree.Parallel;
 import net.wohlfart.pluto.ai.btree.Sequential;
-import net.wohlfart.pluto.stage.loader.EntityElement;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.ISupplier;
 
 // see: http://jakubdziworski.github.io/java/2016/04/01/antlr_visitor_vs_listener.html

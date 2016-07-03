@@ -68,7 +68,7 @@ sequence3 =
         & Seek{
           target: Waypoint {
             uid:uid++,
-            position: Position{40, 30, -1_000}}}
+            position: Position{40, 30, -1000}}}
         & Seek{
           target: Waypoint {
             uid:uid++,

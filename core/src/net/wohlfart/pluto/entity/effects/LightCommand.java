@@ -20,6 +20,8 @@ import net.wohlfart.pluto.entity.IEntityCommand;
 import net.wohlfart.pluto.resource.ResourceManager;
 import net.wohlfart.pluto.scene.FutureEntity;
 import net.wohlfart.pluto.scene.Position;
+import net.wohlfart.pluto.scene.lang.EntityElement;
+import net.wohlfart.pluto.scene.lang.EntityProperty;
 import net.wohlfart.pluto.scene.properties.HasBehavior;
 import net.wohlfart.pluto.scene.properties.HasLightMethod;
 import net.wohlfart.pluto.scene.properties.HasPosition;
@@ -27,8 +29,6 @@ import net.wohlfart.pluto.scene.properties.HasRenderables;
 import net.wohlfart.pluto.scene.properties.HasRotation;
 import net.wohlfart.pluto.scene.properties.HasTransformMethod;
 import net.wohlfart.pluto.scene.properties.HasUid;
-import net.wohlfart.pluto.stage.loader.EntityElement;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
 import net.wohlfart.pluto.util.Utils;
 
 /*

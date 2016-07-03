@@ -23,10 +23,10 @@ public class EntityVisitor extends ParameterApplyVisitor<IEntityCommand> {
     public IEntityCommand visitEntity(SceneLanguageParser.EntityContext ctx) {
         final String type = ctx.entityType().getText();
         LOGGER.info("<visitEntity> type: " + type);
-        this.factory = DECORATORS.get(type);
-        this.entity = factory.create();
+        final IFactoryDecorator<IEntityCommand> factory = DECORATORS.get(type);
+        final IEntityCommand entity = factory.create();
         for (final ParameterContext propertyContext : ctx.parameter()) {
-            visitParameter(propertyContext);
+            withFactory(factory).withEntity(entity).visitParameter(propertyContext);
         }
         return entity;
     }

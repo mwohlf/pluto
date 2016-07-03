@@ -9,12 +9,12 @@ import net.wohlfart.pluto.ai.btree.IBehavior;
 import net.wohlfart.pluto.controller.CamRobotInput;
 import net.wohlfart.pluto.resource.ResourceManager;
 import net.wohlfart.pluto.scene.FutureEntity;
+import net.wohlfart.pluto.scene.lang.EntityElement;
+import net.wohlfart.pluto.scene.lang.EntityProperty;
 import net.wohlfart.pluto.scene.properties.HasBehavior;
 import net.wohlfart.pluto.scene.properties.HasCamera;
 import net.wohlfart.pluto.scene.properties.HasUid;
 import net.wohlfart.pluto.scene.properties.IsSteerable;
-import net.wohlfart.pluto.stage.loader.EntityElement;
-import net.wohlfart.pluto.stage.loader.EntityProperty;
 
 @EntityElement(type = "Cam")
 public class CameraSetup implements IEntityCommand {

@@ -21,11 +21,11 @@ public class BehaviorVisitor extends ParameterApplyVisitor<IBehavior> {
     public IBehavior visitBehavior(SceneLanguageParser.BehaviorContext ctx) {
         final String type = ctx.behaviorType().getText();
         LOGGER.info("<visitBehavior> type: " + type);
-        this.factory = DECORATORS.get(type);
-        this.entity = factory.create();
+        final IFactoryDecorator<IBehavior> factory = DECORATORS.get(type);
+        final IBehavior entity = factory.create();
         // test fail if we use lambda here
         for (final ParameterContext propertyContext : ctx.parameter()) {
-            visitParameter(propertyContext);
+            withFactory(factory).withEntity(entity).visitParameter(propertyContext);
         }
         return entity;
     }
