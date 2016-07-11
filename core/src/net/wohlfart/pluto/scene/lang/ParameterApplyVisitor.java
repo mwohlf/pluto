@@ -22,22 +22,6 @@ public class ParameterApplyVisitor<T> extends SceneLanguageBaseVisitor<T> {
         this.visitor = visitor;
     }
 
-    @Override
-    public T visitParameter(ParameterContext ctx) {
-        // calculate the parameter value by reusing the eval visitor
-        final Value<?> value = visitor.visit(ctx.expression());
-        // assign by identifier if possible
-        final TerminalNode identifier = ctx.Identifier();
-        if (identifier != null) {
-            final String type = identifier.getText();
-            LOGGER.info("<visitProperty> call by type: " + type + " to " + value);
-            factory.setTypedValue(entity, type, value);
-            return entity;
-        }
-
-        return entity; // not used
-    }
-
     public ParameterApplyVisitor<T> withFactory(IFactoryDecorator<T> factory) {
         this.factory = factory;
         return this;
@@ -46,6 +30,32 @@ public class ParameterApplyVisitor<T> extends SceneLanguageBaseVisitor<T> {
     public ParameterApplyVisitor<T> withEntity(T entity) {
         this.entity = entity;
         return this;
+    }
+
+    @Override
+    public T visitParameter(ParameterContext ctx) {
+        try {
+            return doVisitParameter(factory, entity, ctx);
+        } catch (final Exception ex) {
+            throw new EvalException(ex, ctx);
+        }
+    }
+
+    T doVisitParameter(IFactoryDecorator<T> factory, T entity, ParameterContext ctx) throws Exception {
+        // calculate the parameter value by reusing the eval visitor
+        final Value<?> value = visitor.visit(ctx.expression());
+        // assign by identifier if possible
+        final TerminalNode identifier = ctx.Identifier();
+        if (identifier == null) {
+            throw new IllegalArgumentException("unknown identifier " + identifier);
+        }
+        final String type = identifier.getText();
+        if (type == null) {
+            throw new IllegalArgumentException("unknown type " + type);
+        }
+
+        factory.setTypedValue(entity, type, value);
+        return entity;
     }
 
 }

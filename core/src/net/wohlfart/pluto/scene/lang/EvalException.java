@@ -10,8 +10,16 @@ public class EvalException extends RuntimeException {
         super("eval error: " + cause);
     }
 
+    public EvalException(Exception cause) {
+        super(cause);
+    }
+
     public EvalException(ParserRuleContext ctx) {
         this("illegal expression: " + ctx.getText(), ctx);
+    }
+
+    public EvalException(Exception cause, ParserRuleContext ctx) {
+        this(cause.getMessage(), ctx);
     }
 
     public EvalException(String msg, ParserRuleContext ctx) {

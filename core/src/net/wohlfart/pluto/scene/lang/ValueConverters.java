@@ -21,117 +21,73 @@ public class ValueConverters {
     static {
         CONVERTERS.put("String", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asString());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asString());
             }
         });
         CONVERTERS.put("Long", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asLong());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asLong());
             }
         });
         CONVERTERS.put("Integer", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asLong().intValue());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asLong().intValue());
             }
         });
         CONVERTERS.put("Float", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asDouble().floatValue());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asDouble().floatValue());
             }
         });
         CONVERTERS.put("Color", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asColor());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asColor());
             }
         });
         CONVERTERS.put("Position", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asPosition());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asPosition());
             }
         });
         CONVERTERS.put("Vector3", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asVector());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asVector());
             }
         });
         CONVERTERS.put("Quaternion", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asQuaternion());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asQuaternion());
             }
         });
         CONVERTERS.put("Behavior", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asBehavior());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asBehavior());
             }
         });
         CONVERTERS.put("Primitive", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asPrimitive());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asPrimitive());
             }
         });
         CONVERTERS.put("VertexAttribute", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
-                try {
-                    method.invoke(entity, value.asVertexAttribute());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
+                method.invoke(entity, value.asVertexAttribute());
             }
         });
         CONVERTERS.put("Entity", new ISetterDecorator() {
             @Override
-            public void setValue(final Object targetEntity, Method method, Value<?> value) {
+            public void setValue(final Object targetEntity, Method method, Value<?> value) throws Exception {
                 value.asEntity().then(new IConsumer<Entity>() {
                     @Override
                     public void apply(Entity valueEntity) {
@@ -147,26 +103,18 @@ public class ValueConverters {
 
         CONVERTERS.put("HeightFunction", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
                 // TODO: we need more than enums here
                 final String enumName = value.asString();
-                try {
-                    method.invoke(entity, HeightFunctionEnum.valueOf(enumName).get());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+                method.invoke(entity, HeightFunctionEnum.valueOf(enumName).get());
             }
         });
         CONVERTERS.put("ColorFunction", new ISetterDecorator() {
             @Override
-            public void setValue(Object entity, Method method, Value<?> value) {
+            public void setValue(Object entity, Method method, Value<?> value) throws Exception {
                 // TODO: we need more than enums here
                 final String enumName = value.asString();
-                try {
-                    method.invoke(entity, ColorFunctionEnum.valueOf(enumName).get());
-                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                    ex.printStackTrace();
-                }
+                method.invoke(entity, ColorFunctionEnum.valueOf(enumName).get());
             }
         });
 

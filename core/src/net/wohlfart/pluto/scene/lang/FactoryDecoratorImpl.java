@@ -39,22 +39,15 @@ public class FactoryDecoratorImpl<D> implements IFactoryDecorator<D> {
         return supplier.get();
     }
 
-    @Override // TODO: make private after json removal
-    public ISetterDecorator getSetterFor(String key) {
-        return setters.get(key);
-    }
-
-    @Override // TODO: make private after json removal
-    public Method getMethodFor(String key) {
-        return methods.get(key);
-    }
-
     @Override
-    public D setTypedValue(D entity, String key, Value<?> value) {
-        final ISetterDecorator setter = getSetterFor(key);
-        final Method method = getMethodFor(key);
+    public D setTypedValue(D entity, String key, Value<?> value) throws Exception {
+        final ISetterDecorator setter = setters.get(key);
         if (setter == null) {
             throw new EvalException("no setter for " + key);
+        }
+        final Method method = methods.get(key);
+        if (method == null) {
+            throw new EvalException("no method for " + key);
         }
         setter.setValue(entity, method, value);
         return entity;

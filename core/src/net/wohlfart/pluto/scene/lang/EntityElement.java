@@ -7,7 +7,6 @@ import java.lang.annotation.Target;
 
 /**
  * annotation for setting properties for creating entities
- * TODO: move to lang after json removal
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
