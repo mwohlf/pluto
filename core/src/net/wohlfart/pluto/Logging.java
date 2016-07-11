@@ -8,10 +8,9 @@ public final class Logging {
     static {
         LoggerService.logTime(true);
         LoggerService.simpleClassNames(true);
-        ROOT = LoggerService.forClass(Pluto.class);
     }
 
-    public static Logger ROOT = LoggerService.forClass(Pluto.class);
+    public static final Logger ROOT = LoggerService.forClass(Pluto.class);
 
     private Logging() {
         // no instances

@@ -5,7 +5,7 @@ import com.badlogic.gdx.utils.Pool.Poolable;
 
 public class HasUid implements Component, Poolable {
 
-    public static long NULL_UID = 0;
+    public static final long NULL_UID = 0;
 
     public static long INITIAL_BEHAVIOR_UID = 1_000_000;
 

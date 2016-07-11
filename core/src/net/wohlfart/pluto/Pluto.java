@@ -59,7 +59,7 @@ public class Pluto implements ApplicationListener, IStageManager {
 
         tweenManager = resourceManager.getTweenManager();
 
-        scheduleTransitionToStage(null, new IntroStage(this));
+        scheduleTransitionToStage(new IStageTransition.SwitchTransition(), new IntroStage(this));
         final IStage initialStage = resourceManager.getStageRepository().createInstance(Pluto.this, StageRepository.INITIAL_STAGE_KEY);
         scheduleTransitionToStage(new FadeOverTransition(this), initialStage);
     }
@@ -124,11 +124,7 @@ public class Pluto implements ApplicationListener, IStageManager {
         newStage.create(); // this should return early and be called only once
         nextStage = newStage;
         // transition for disposing, init with the current and the new stage
-        if (newTransition == null) {
-            transition = new IStageTransition.SwitchTransition();
-        } else {
-            transition = newTransition;
-        }
+        transition = newTransition;
         transition.initTransition(renderTarget, newStage);
         // the new render target is the transition
         renderTarget = transition;

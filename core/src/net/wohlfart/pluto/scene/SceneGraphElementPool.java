@@ -70,7 +70,8 @@ public class SceneGraphElementPool extends EntityPool {
             public void entityAdded(Entity entity) {
                 assert Utils.isRenderThread();
                 final long uid = entity.getComponent(HasUid.class).getUid();
-                uids.get(uid).set(entity);
+                final boolean success = uids.get(uid).set(entity);
+                assert success;
             }
 
             @Override
