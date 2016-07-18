@@ -1,0 +1,12 @@
+
+
+
+Box {
+    uid:uid++,
+    length: 2,
+    position: Position{x:-10.0,y:0.0,z:-50.0},
+    rotation: Rotation{axis:Vector{x:0.0,y:0.0,z:1.0}, angle: -40},
+    texture: 'texture/ash_uvgrid03.png',
+    behavior: Spin{axis:Vector{x:0.0,y:1.0,z:0.0}, angle: -10},
+};
+

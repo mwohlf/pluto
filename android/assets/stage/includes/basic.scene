@@ -15,12 +15,12 @@ Cam {
 Light {  
     uid:uid++,
     color: Color{r:0.5,g:0.5,b:0.5,a:1.0},
-    direction: Vector{1,1,0},
+    direction: Vector{1,-1,0},
 };
 
 Light {  
     uid:uid++,
-    color: Color{r:0.5,g:0.5,b:0.5,a:1.0},
+    color: Color{r:0.2,g:0.2,b:0.2,a:1.0},
 };
 
 Skybox {  

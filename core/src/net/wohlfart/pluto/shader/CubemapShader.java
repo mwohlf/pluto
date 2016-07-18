@@ -22,7 +22,7 @@ public class CubemapShader extends DefaultShader {
         if (!program.isCompiled()) {
             Logging.ROOT.error("<init> shader failed to compile", new IllegalArgumentException(program.getLog()));
         } else {
-            Logging.ROOT.info("<init> shader compiled" + program.getLog());
+            Logging.ROOT.info("<init> shader compiled path: '" + PATH + "'");
         }
     }
 

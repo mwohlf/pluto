@@ -41,13 +41,13 @@ public class SkyboxShader extends BaseShader {
         register(Inputs.projTrans, Setters.projTrans);
         register(Inputs.viewTrans, Setters.viewTrans);
         register(Inputs.projViewTrans, Setters.projViewTrans);
-        ShaderProgram shaderProgram = new ShaderProgram(
+        final ShaderProgram shaderProgram = new ShaderProgram(
                 Gdx.files.internal(SkyboxShader.PATH + ".vertex.glsl").readString(),
                 Gdx.files.internal(SkyboxShader.PATH + ".fragment.glsl").readString());
         if (!shaderProgram.isCompiled()) {
             Logging.ROOT.error("<init> shader failed to compile", new IllegalArgumentException(shaderProgram.getLog()));
         } else {
-            Logging.ROOT.info("<init> shader compiled" + shaderProgram.getLog());
+            Logging.ROOT.info("<init> shader compiled path: '" + PATH + "'");
         }
         init(shaderProgram, firstRenderable);
     }

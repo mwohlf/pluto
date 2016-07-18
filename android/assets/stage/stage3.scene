@@ -1,0 +1,14 @@
+
+
+uid = 1;
+
+include "stage/includes/basic.scene";
+
+include "stage/includes/astroids.scene";
+
+include "stage/includes/box.scene";
+
+
+
+//include "stage/includes/icospheres.scene";
+

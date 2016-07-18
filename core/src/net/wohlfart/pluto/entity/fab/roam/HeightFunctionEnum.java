@@ -20,7 +20,7 @@ public enum HeightFunctionEnum implements ISupplier<IHeightFunction> {
     ASTROID1() {
         @Override
         public IHeightFunction get() {
-            return new Range(1, 5, new SimplexIteration(4, 0.7f, 0.05f));
+            return new Range(1, 10, new SimplexIteration(2, 0.7f, 0.5f));
         }
     };
 

@@ -73,8 +73,11 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
 
     private Pixmap[] pixmapData;
 
-    private final Array<VertexAttribute> attributes = new Array<>(new VertexAttribute[] {
-            new VertexAttribute(Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE) });
+    private final Array<VertexAttribute> attributes = new Array<>(
+            new VertexAttribute[] {
+                    new VertexAttribute(Usage.Position, 3, ShaderProgram.POSITION_ATTRIBUTE),
+            //    new VertexAttribute(Usage.Normal, 3, ShaderProgram.NORMAL_ATTRIBUTE), //"a_normal"
+            });
 
     private static class RoamTrianglePool extends Pool<RoamTriangle> {
         @Override
@@ -293,6 +296,7 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
         }
         this.withNormalAttribute();
         this.cubemapFile = cubemapFile;
+        System.err.println("cubemapFile: " + cubemapFile);
         return this;
     }
 
