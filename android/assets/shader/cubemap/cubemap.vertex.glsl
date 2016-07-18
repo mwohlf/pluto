@@ -246,7 +246,7 @@ void main() {
 	#ifdef environmentCubemapFlag
 	   //v_position = normalize(u_normalMatrix * a_normal); // no rotation whatsoever
 	   //v_position = transpose(inverse(u_projViewTrans)) * vec4(a_normal, 1); // disturbed but rotating
-	   // v_position = transpose(u_normalMatrix) * a_normal;  // user rotation is off
+	   //v_position = transpose(u_normalMatrix) * a_normal;  // user rotation is off
 	   v_position = a_normal;  // picup on the cubemap
     #endif
 	

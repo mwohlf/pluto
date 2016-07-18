@@ -296,7 +296,6 @@ public class RoamBodyCommand extends AbstractEntityCommand<RoamBodyCommand> {
         }
         this.withNormalAttribute();
         this.cubemapFile = cubemapFile;
-        System.err.println("cubemapFile: " + cubemapFile);
         return this;
     }
 

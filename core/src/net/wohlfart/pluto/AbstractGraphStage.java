@@ -130,7 +130,7 @@ public abstract class AbstractGraphStage extends ApplicationAdapter implements I
     }
 
     private void clean() {
-        Gdx.graphics.getGL20().glClearColor(0.3f, 0.3f, 0.3f, 0);
+        Gdx.graphics.getGL20().glClearColor(Utils.CLEAR_COLOR.r, Utils.CLEAR_COLOR.g, Utils.CLEAR_COLOR.b, Utils.CLEAR_COLOR.a);
         Gdx.gl20.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | GL20.GL_STENCIL_BUFFER_BIT);
         Gdx.gl20.glBlendFunc(GL20.GL_ONE, GL20.GL_ZERO); // reset blend function
         Gdx.gl20.glDisable(GL20.GL_CULL_FACE);

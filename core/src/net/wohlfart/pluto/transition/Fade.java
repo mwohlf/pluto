@@ -17,7 +17,7 @@ public class Fade {
 
     private final FrameBuffer stageFBO;
 
-    private final Color color = new Color().set(Color.CLEAR);
+    private final Color color = new Color(Color.WHITE);
 
     private float opacity = 1;
 
@@ -34,7 +34,8 @@ public class Fade {
         this.opacity = opacity;
     }
 
-    public void render() {
+    // render to FBO
+    public void prepareRender() {
         assert Utils.isRenderThread();
         if (stage.getTasksLeft() <= 0) {
             stageFBO.begin();
@@ -52,10 +53,12 @@ public class Fade {
         final float width = texture.getWidth();
         final float height = texture.getHeight();
 
-        color.set(Color.WHITE);
         color.a = opacity;
         batch.setColor(color);
-        batch.draw(texture, 0, 0, width / 2, height / 2, width, height, 1, 1, 0, 0, 0,
+        batch.draw(texture,
+                0, 0, width / 2, height / 2, width, height, // dimensions
+                1, 1,
+                0, 0, 0,
                 Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), false, true);
 
     }

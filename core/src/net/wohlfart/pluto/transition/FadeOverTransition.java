@@ -89,10 +89,10 @@ public class FadeOverTransition implements IStageTransition {
     public void render() {
         assert Utils.isRenderThread();
 
-        fadeOld.render();
-        fadeNew.render();
+        fadeOld.prepareRender();
+        fadeNew.prepareRender();
 
-        Gdx.gl.glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+        Gdx.gl.glClearColor(Utils.CLEAR_COLOR.r, Utils.CLEAR_COLOR.g, Utils.CLEAR_COLOR.b, Utils.CLEAR_COLOR.a);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT | GL20.GL_STENCIL_BUFFER_BIT);
         batch.begin();
         fadeOld.render(batch);

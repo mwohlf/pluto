@@ -8,6 +8,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.g3d.Attribute;
@@ -40,6 +41,8 @@ public final class Utils {
             "/bottom.png",
             "/front.png",
             "/back.png"));
+
+    public static final Color CLEAR_COLOR = new Color(0, 0, 0, 1);
 
     private Utils() {
     }
