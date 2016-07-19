@@ -23,9 +23,8 @@ public class SceneShaderProvider extends DefaultShaderProvider {
             return new SkyboxShader(renderable);
         } else if (renderable.material.has(CubemapAttribute.EnvironmentMap)) {
             return new CubemapShader(renderable);
-            //return super.createShader(renderable);
         } else {
-            return super.createShader(renderable);
+            return new MainShader(renderable);
         }
     }
 
