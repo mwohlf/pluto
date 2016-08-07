@@ -32,6 +32,7 @@ public class Snapshots {
     private final Pluto pluto = new Pluto();
 
     @Test
+    //@Ignore
     public void smokeTest() throws InterruptedException {
         // desktop startup
         final Lwjgl3ApplicationConfiguration config = new Lwjgl3ApplicationConfiguration();

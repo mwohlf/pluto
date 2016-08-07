@@ -45,4 +45,10 @@ public class MainShader extends DefaultShader {
         return super.canRender(renderable);
     }
 
+    @Override
+    public boolean equals(Object that) {
+        Logging.ROOT.info("<equals> " + this + ":" + that);
+        return this == that;
+    }
+
 }

@@ -58,12 +58,12 @@ public abstract class AbstractGraphStage extends ApplicationAdapter implements I
 
     @Override
     public void create() {
-        AbstractGraphStage.LOGGER.debug("<create> start for '" + this.getClass().getSimpleName() + "'");
+        LOGGER.debug("<create> start for '" + this.getClass().getSimpleName() + "'");
         logManagedCachesStatus();
         final long start = Utils.currentTickCount();
         setupGraph(graph).whenReady(this::sceneCreated); // cam is not available before the call to this method
         final long end = Utils.currentTickCount();
-        AbstractGraphStage.LOGGER.debug("<create> at " + end + " ticks in setupScene: " + (end - start));
+        LOGGER.debug("<create> at " + end + " ticks in setupScene: " + (end - start));
     }
 
     /**
@@ -91,17 +91,17 @@ public abstract class AbstractGraphStage extends ApplicationAdapter implements I
         Gdx.input.setInputProcessor(controller);
 
         setupCommands();
-        AbstractGraphStage.LOGGER.debug("<create> finished for '" + this.getClass().getSimpleName() + "'");
+        LOGGER.debug("<create> finished for '" + this.getClass().getSimpleName() + "'");
     }
 
     private void setupCommands() {
-        AbstractGraphStage.LOGGER.debug("<setupCommands> in AbstractGraphStage");
+        LOGGER.debug("<setupCommands> in AbstractGraphStage");
 
         final CommandInput commandInput = controller.getCommandInput();
         commandInput.putKeyAction(Keys.ESCAPE, EXIT_COMMAND.getKey());
         commandInput.putKeyAction(Keys.BACK, EXIT_COMMAND.getKey());
         commandInput.putKeyAction(Keys.I, TextLayer.INFO_ACTION);
-        commandInput.putKeyAction(Keys.C, AbstractGraphStage.CONTINUOUS_RENDERING_COMMAND.getKey());
+        commandInput.putKeyAction(Keys.C, CONTINUOUS_RENDERING_COMMAND.getKey());
 
         resourceManager.getCommandMap().put(EXIT_COMMAND.getKey(), EXIT_COMMAND);
         resourceManager.getCommandMap().put(CONTINUOUS_RENDERING_COMMAND.getKey(), CONTINUOUS_RENDERING_COMMAND);
@@ -109,7 +109,7 @@ public abstract class AbstractGraphStage extends ApplicationAdapter implements I
 
     @Override
     public void resize(int width, int height) {
-        AbstractGraphStage.LOGGER.debug("<resize> in " + this.getClass().getSimpleName());
+        LOGGER.debug("<resize> in " + this.getClass().getSimpleName());
         logManagedCachesStatus();
         Gdx.gl.glViewport(0, 0, Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
         graph.resize(width, height);
@@ -138,39 +138,37 @@ public abstract class AbstractGraphStage extends ApplicationAdapter implements I
 
     @Override
     public void pause() {
-        AbstractGraphStage.LOGGER.debug("<pause>");
-        AbstractGraphStage.LOGGER.debug("<pause> resources: " + resourceManager.getDiagnostics());
+        LOGGER.debug("<pause> --- resources --- \n" + resourceManager.getDiagnostics());
         logManagedCachesStatus();
     }
 
     @Override
     public void resume() {
-        AbstractGraphStage.LOGGER.debug("<resume>");
-        AbstractGraphStage.LOGGER.debug("<resume> resources: " + resourceManager.getDiagnostics());
+        LOGGER.debug("<resume> --- resources --- \n" + resourceManager.getDiagnostics());
         resourceManager.finishLoading();
         logManagedCachesStatus();
     }
 
     @Override
     public void dispose() {
-        AbstractGraphStage.LOGGER.debug("<dispose> call for '" + this.getClass().getSimpleName() + "'");
+        LOGGER.debug("<dispose> call for '" + this.getClass().getSimpleName() + "'");
         final CommandInput commandInput = controller.getCommandInput();
         commandInput.removeKeyAction(Keys.ESCAPE, EXIT_COMMAND.getKey());
         commandInput.removeKeyAction(Keys.BACK, EXIT_COMMAND.getKey());
-        commandInput.removeKeyAction(Keys.C, AbstractGraphStage.CONTINUOUS_RENDERING_COMMAND.getKey());
+        commandInput.removeKeyAction(Keys.C, CONTINUOUS_RENDERING_COMMAND.getKey());
         commandInput.removeKeyAction(Keys.I, TextLayer.INFO_ACTION);
         graph.dispose();
         hud.dispose();
         resourceManager.getCommandMap().remove(EXIT_COMMAND.getKey());
-        resourceManager.getCommandMap().remove(AbstractGraphStage.CONTINUOUS_RENDERING_COMMAND.getKey());
+        resourceManager.getCommandMap().remove(CONTINUOUS_RENDERING_COMMAND.getKey());
     }
 
     protected void logManagedCachesStatus() {
-        AbstractGraphStage.LOGGER.debug("<logManagedCachesStatus> " + Mesh.getManagedStatus());
-        AbstractGraphStage.LOGGER.debug("<logManagedCachesStatus> " + Texture.getManagedStatus());
-        AbstractGraphStage.LOGGER.debug("<logManagedCachesStatus> " + Cubemap.getManagedStatus());
-        AbstractGraphStage.LOGGER.debug("<logManagedCachesStatus> " + ShaderProgram.getManagedStatus());
-        AbstractGraphStage.LOGGER.debug("<logManagedCachesStatus> " + GLFrameBuffer.getManagedStatus());
+        LOGGER.debug("<logManagedCachesStatus> " + Mesh.getManagedStatus());
+        LOGGER.debug("<logManagedCachesStatus> " + Texture.getManagedStatus());
+        LOGGER.debug("<logManagedCachesStatus> " + Cubemap.getManagedStatus());
+        LOGGER.debug("<logManagedCachesStatus> " + ShaderProgram.getManagedStatus());
+        LOGGER.debug("<logManagedCachesStatus> " + GLFrameBuffer.getManagedStatus());
     }
 
     @Override
