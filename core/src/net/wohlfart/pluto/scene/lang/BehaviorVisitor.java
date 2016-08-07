@@ -20,7 +20,7 @@ public class BehaviorVisitor extends ParameterApplyVisitor<IBehavior> {
     @Override
     public IBehavior visitBehavior(SceneLanguageParser.BehaviorContext ctx) {
         final String type = ctx.behaviorType().getText();
-        LOGGER.info("<visitBehavior> type: " + type);
+        LOGGER.info("<visitBehavior> type: {0}", type);
         final IFactoryDecorator<IBehavior> factory = DECORATORS.get(type);
         final IBehavior entity = factory.create();
         // test fail if we use lambda here

@@ -2,13 +2,14 @@ package net.wohlfart.pluto;
 
 import javax.annotation.Nonnull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.ApplicationListener;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.profiling.GLProfiler;
 import com.badlogic.gdx.utils.I18NBundle;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import aurelienribon.tweenengine.TweenManager;
 import net.wohlfart.pluto.resource.ResourceManager;
@@ -26,7 +27,7 @@ import net.wohlfart.pluto.util.Utils;
  */
 public class Pluto implements ApplicationListener, IStageManager {
 
-    protected Logger logger;
+    private static final Logger LOGGER = LoggerFactory.getLogger(Pluto.class.getSimpleName());
 
     // the stage or the transition that is currently being rendered
     @Nonnull
@@ -45,12 +46,11 @@ public class Pluto implements ApplicationListener, IStageManager {
 
     @Override
     public void create() {
-        logger = LoggerService.forClass(Pluto.class);
         Utils.initRenderThreadName(Thread.currentThread().getName());
         Utils.initTickCount();
         I18NBundle.setExceptionOnMissingKey(true);
         Gdx.app.setLogLevel(Application.LOG_DEBUG);
-        logger.debug("<create> in Pluto setting up StageManagement");
+        LOGGER.debug("<create> in Pluto setting up StageManagement");
 
         resourceManager = new ResourceManager();
         if (resourceManager.getInfoEnabled()) {
@@ -73,7 +73,7 @@ public class Pluto implements ApplicationListener, IStageManager {
      */
     @Override
     public void resize(int width, int height) {
-        logger.debug("<resize> in " + this.getClass().getSimpleName());
+        LOGGER.debug("<resize> in " + this.getClass().getSimpleName());
         renderTarget.resize(width, height);
     }
 
@@ -95,7 +95,7 @@ public class Pluto implements ApplicationListener, IStageManager {
     }
 
     private void switchState() {
-        logger.debug("<switchState> current stage is '" + renderTarget + "' nextStage is '" + nextStage + "'");
+        LOGGER.debug("<switchState> current stage is '" + renderTarget + "' nextStage is '" + nextStage + "'");
         // remember to dispose
         final IStageTransition oldTransition = transition;
         transition = IStageTransition.NULL_TRANSITION;
@@ -113,10 +113,10 @@ public class Pluto implements ApplicationListener, IStageManager {
     @Override
     public void scheduleTransitionToStage(@Nonnull IStageTransition newTransition, @Nonnull IStage newStage) {
         assert newStage != null : "new Stage is null";
-        logger.debug("<scheduleTransitionToStage> is: " + newStage.getClass().getSimpleName());
+        LOGGER.debug("<scheduleTransitionToStage> is: " + newStage.getClass().getSimpleName());
         // is there another stage waiting?
         if (nextStage != IStage.NULL_STAGE) {
-            logger.error("<scheduleTransitionToStage>"
+            LOGGER.error("<scheduleTransitionToStage>"
                     + " can't switch state, current next state not yet ready, still preparing '" + nextStage + "'"
                     + " ignoring, not switching to '" + newStage + "'");
             return;
@@ -140,7 +140,7 @@ public class Pluto implements ApplicationListener, IStageManager {
      */
     @Override
     public void pause() {
-        logger.debug("<pause>");
+        LOGGER.debug("<pause>");
         renderTarget.pause();
     }
 
@@ -152,13 +152,13 @@ public class Pluto implements ApplicationListener, IStageManager {
      */
     @Override
     public void resume() {
-        logger.debug("<resume>");
+        LOGGER.debug("<resume>");
         renderTarget.resume();
     }
 
     @Override
     public void dispose() {
-        logger.debug("<dispose> call for '" + this.getClass().getSimpleName() + "'");
+        LOGGER.debug("<dispose> call for '" + this.getClass().getSimpleName() + "'");
         renderTarget.dispose();
         resourceManager.dispose();
     }
