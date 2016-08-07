@@ -80,7 +80,7 @@ deploy:
   file:
   - desktop/build/libs/desktop-0.1.jar
   - android/build/outputs/apk/android-release-unsigned.apk
-  - /tmp/output1.png
+#  - /tmp/output1.png
   skip_cleanup: true
   on:
     tags: false
