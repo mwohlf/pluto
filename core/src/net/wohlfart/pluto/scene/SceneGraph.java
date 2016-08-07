@@ -39,7 +39,7 @@ public class SceneGraph implements ISceneGraph {
     @Nonnull
     protected final BehaviorExecutor behaviorExecutor;
 
-    private final IPickFacade pickFacade;
+    private final IPickSystem pickFacade;
 
     // lights, attributes
     protected final Environment environment;
@@ -146,7 +146,7 @@ public class SceneGraph implements ISceneGraph {
     }
 
     @Override
-    public IPickFacade getPickFacade() {
+    public IPickSystem getPickFacade() {
         return pickFacade;
     }
 
@@ -156,8 +156,8 @@ public class SceneGraph implements ISceneGraph {
     }
 
     // TODO: refactor, this is ugly
-    private IPickFacade createPickFacade() {
-        return new IPickFacade() {
+    private IPickSystem createPickFacade() {
+        return new IPickSystem() {
 
             @Override
             public Ray getPickRay(float screenX, float screenY) {

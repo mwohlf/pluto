@@ -36,6 +36,6 @@ public interface ISceneGraph extends Disposable, Executor {
 
     PickSystem getPickSystem();
 
-    IPickFacade getPickFacade();
+    IPickSystem getPickFacade();
 
 }

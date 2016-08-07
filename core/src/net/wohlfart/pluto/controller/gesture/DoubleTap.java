@@ -2,6 +2,7 @@ package net.wohlfart.pluto.controller.gesture;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Matrix4;
+
 import net.wohlfart.pluto.Camera;
 import net.wohlfart.pluto.controller.IGesture;
 import net.wohlfart.pluto.controller.ITransformCalculator;

@@ -12,6 +12,7 @@ public class Hud {
     private final Collection<HudLayer> layers = new ArrayList<>();
 
     public Hud(ISceneGraph graph, EventBus eventBus, ResourceManager resourceManager) {
+        layers.add(new SvgLayer());
         layers.add(new TextLayer(graph, resourceManager));
         layers.add(new SceneLayer(graph));
     }

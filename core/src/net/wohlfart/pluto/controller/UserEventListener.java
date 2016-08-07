@@ -4,7 +4,7 @@ import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.collision.Ray;
 
 import net.wohlfart.pluto.entity.EntityPool;
-import net.wohlfart.pluto.scene.IPickFacade;
+import net.wohlfart.pluto.scene.IPickSystem;
 
 public interface UserEventListener {
 
@@ -27,9 +27,9 @@ public interface UserEventListener {
     };
 
     class PickRayListener implements UserEventListener {
-        final IPickFacade facade;
+        final IPickSystem facade;
 
-        public PickRayListener(IPickFacade facade) {
+        public PickRayListener(IPickSystem facade) {
             this.facade = facade;
         }
 

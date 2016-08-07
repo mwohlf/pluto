@@ -7,7 +7,7 @@ import net.wohlfart.pluto.Camera;
 import net.wohlfart.pluto.entity.IEntityCommand;
 import net.wohlfart.pluto.entity.PickSystem;
 import net.wohlfart.pluto.scene.FutureEntity;
-import net.wohlfart.pluto.scene.IPickFacade;
+import net.wohlfart.pluto.scene.IPickSystem;
 import net.wohlfart.pluto.scene.ISceneGraph;
 
 public class MockSceneGraph implements ISceneGraph {
@@ -65,7 +65,7 @@ public class MockSceneGraph implements ISceneGraph {
     }
 
     @Override
-    public IPickFacade getPickFacade() {
+    public IPickSystem getPickFacade() {
         return null;
     }
 

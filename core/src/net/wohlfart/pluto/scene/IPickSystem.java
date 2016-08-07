@@ -5,11 +5,11 @@ import net.wohlfart.pluto.entity.EntityPool;
 import com.badlogic.ashley.core.Entity;
 import com.badlogic.gdx.math.collision.Ray;
 
-public interface IPickFacade {
+public interface IPickSystem {
 
     Ray NULL_RAY = new Ray();
 
-    IPickFacade NULL = new IPickFacade() {
+    IPickSystem NULL = new IPickSystem() {
 
         @Override
         public Ray getPickRay(float x, float y) {
