@@ -47,11 +47,11 @@ public class ParameterApplyVisitor<T> extends SceneLanguageBaseVisitor<T> {
         // assign by identifier if possible
         final TerminalNode identifier = ctx.Identifier();
         if (identifier == null) {
-            throw new IllegalArgumentException("unknown identifier " + identifier);
+            throw new IllegalArgumentException("null identifier");
         }
         final String type = identifier.getText();
         if (type == null) {
-            throw new IllegalArgumentException("unknown type " + type);
+            throw new IllegalArgumentException("null type for identifier: " + identifier);
         }
 
         factory.setTypedValue(entity, type, value);

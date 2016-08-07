@@ -4,7 +4,6 @@ import java.nio.ByteBuffer;
 import java.util.concurrent.CountDownLatch;
 
 import org.junit.Assert;
-import org.junit.Test;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.backends.lwjgl3.Lwjgl3Application;
@@ -31,7 +30,7 @@ public class Snapshots {
 
     private final Pluto pluto = new Pluto();
 
-    @Test
+    //@Test
     //@Ignore
     public void smokeTest() throws InterruptedException {
         // desktop startup
