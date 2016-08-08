@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Locale;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.assets.AssetDescriptor;
@@ -32,8 +35,6 @@ import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.utils.I18NBundle;
 import com.badlogic.gdx.utils.ObjectMap;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import aurelienribon.tweenengine.Tween;
 import aurelienribon.tweenengine.TweenManager;
@@ -48,7 +49,7 @@ import net.wohlfart.pluto.util.Utils;
 // TODO: we need async loading for all resources
 public class ResourceManager extends AssetManager {
 
-    protected static final Logger LOGGER = LoggerService.forClass(ResourceManager.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ResourceManager.class);
 
     private static final String CONFIG_FILE = "config.json";
 

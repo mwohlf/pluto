@@ -1,7 +1,7 @@
 package net.wohlfart.pluto.scene.lang;
 
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.wohlfart.pluto.ai.btree.IBehavior;
 import net.wohlfart.pluto.stage.SceneLanguageParser;
@@ -9,7 +9,7 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.ParameterContext;
 
 public class BehaviorVisitor extends ParameterApplyVisitor<IBehavior> {
 
-    private static final Logger LOGGER = LoggerService.forClass(BehaviorVisitor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BehaviorVisitor.class);
 
     private static final BehaviorFactoryDecorators DECORATORS = new BehaviorFactoryDecorators();
 

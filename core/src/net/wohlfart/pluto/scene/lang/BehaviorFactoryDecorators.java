@@ -4,8 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.wohlfart.pluto.ai.AlignBehavior;
 import net.wohlfart.pluto.ai.FireLaser;
@@ -22,7 +22,7 @@ import net.wohlfart.pluto.util.ISupplier;
 
 // see: http://jakubdziworski.github.io/java/2016/04/01/antlr_visitor_vs_listener.html
 public class BehaviorFactoryDecorators {
-    private static final Logger LOGGER = LoggerService.forClass(BehaviorFactoryDecorators.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(BehaviorFactoryDecorators.class);
 
     private final Map<String, IFactoryDecorator<IBehavior>> FACTORY_DECORATORS = new HashMap<>();
 

@@ -4,13 +4,13 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.wohlfart.pluto.util.ISupplier;
 
 public class FactoryDecoratorImpl<D> implements IFactoryDecorator<D> {
-    private static final Logger LOGGER = LoggerService.forClass(FactoryDecoratorImpl.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(FactoryDecoratorImpl.class);
 
     // the entity being wrapped
     private final ISupplier<D> supplier;

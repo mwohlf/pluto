@@ -1,16 +1,16 @@
 package net.wohlfart.pluto;
 
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public final class Logging {
 
     static {
-        LoggerService.logTime(true);
-        LoggerService.simpleClassNames(true);
+        //LoggerService.logTime(true);
+        //LoggerService.simpleClassNames(true);
     }
 
-    public static final Logger ROOT = LoggerService.forClass(Pluto.class);
+    public static final Logger ROOT = LoggerFactory.getLogger(Pluto.class);
 
     private Logging() {
         // no instances

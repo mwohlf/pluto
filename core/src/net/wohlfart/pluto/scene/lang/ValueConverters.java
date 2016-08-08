@@ -5,16 +5,17 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.ashley.core.Entity;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import net.wohlfart.pluto.entity.fab.roam.ColorFunctionEnum;
 import net.wohlfart.pluto.entity.fab.roam.HeightFunctionEnum;
 import net.wohlfart.pluto.util.IConsumer;
 
 public class ValueConverters {
-    private static final Logger LOGGER = LoggerService.forClass(ValueConverters.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ValueConverters.class);
 
     private static final Map<String, ISetterDecorator> CONVERTERS = new HashMap<>();
 

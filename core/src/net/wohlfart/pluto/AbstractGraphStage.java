@@ -2,6 +2,9 @@ package net.wohlfart.pluto;
 
 import javax.annotation.Nonnull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input.Keys;
@@ -12,8 +15,6 @@ import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.glutils.GLFrameBuffer;
 import com.badlogic.gdx.graphics.glutils.ShaderProgram;
 import com.badlogic.gdx.utils.TimeUtils;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import net.wohlfart.pluto.controller.Command;
 import net.wohlfart.pluto.controller.CommandInput;
@@ -36,7 +37,7 @@ import net.wohlfart.pluto.util.Utils;
  */
 public abstract class AbstractGraphStage extends ApplicationAdapter implements IStage {
 
-    protected static final Logger LOGGER = LoggerService.forClass(AbstractGraphStage.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(AbstractGraphStage.class);
 
     protected final EventBus eventBus = new EventBus();
 

@@ -16,6 +16,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
@@ -23,8 +25,6 @@ import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import net.wohlfart.pluto.ai.btree.Looping;
 import net.wohlfart.pluto.entity.IEntityCommand;
@@ -73,7 +73,7 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.WhileStatementContext;
  */
 public class EvalVisitor extends SceneLanguageBaseVisitor<Value> {
 
-    private static final Logger LOGGER = LoggerService.forClass(EvalVisitor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EvalVisitor.class);
 
     private static final CharSequence COMMA = ".";
 

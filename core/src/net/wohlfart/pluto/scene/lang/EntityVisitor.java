@@ -1,7 +1,7 @@
 package net.wohlfart.pluto.scene.lang;
 
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.wohlfart.pluto.entity.IEntityCommand;
 import net.wohlfart.pluto.stage.SceneLanguageParser;
@@ -11,7 +11,7 @@ import net.wohlfart.pluto.stage.SceneLanguageParser.ParameterContext;
 // a new visitor for each entity
 public class EntityVisitor extends ParameterApplyVisitor<IEntityCommand> {
 
-    private static final Logger LOGGER = LoggerService.forClass(EntityVisitor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EntityVisitor.class);
 
     private static final EntityFactoryDecorators DECORATORS = new EntityFactoryDecorators();
 

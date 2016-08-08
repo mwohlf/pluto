@@ -6,15 +6,16 @@ import java.util.Iterator;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.gdx.utils.GdxRuntimeException;
 import com.badlogic.gdx.utils.Pool.Poolable;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 // TODO: do some optimization and combine multiple event on the same object (e.g. two moves can be combined into one...)
 public class EventBus implements IEventBus<Poolable> {
 
-    protected static final Logger LOGGER = LoggerService.forClass(EventBus.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(EventBus.class);
 
     private final ConcurrentLinkedQueue<Poolable> queue = new ConcurrentLinkedQueue<>();
 

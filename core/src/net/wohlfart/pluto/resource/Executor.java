@@ -8,18 +8,19 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import javax.annotation.Nonnull;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.utils.Disposable;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import net.wohlfart.pluto.scene.FutureEntity;
 
 public class Executor implements Disposable {
 
-    protected static final Logger LOGGER = LoggerService.forClass(Executor.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(Executor.class);
 
     private static final int MAX_TIMEOUT = 5; // [s]
 

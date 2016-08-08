@@ -209,7 +209,7 @@ public class SceneGraph implements ISceneGraph {
         public void onFailure(Throwable ex) {
             assert Utils.isRenderThread() : "<onFailure> running on wrong thread";
             futureEntity.setException(ex);
-            Logging.ROOT.error(ex, "failure executing BackgroundWorker");
+            Logging.ROOT.error("failure executing BackgroundWorker", ex);
         }
     }
 }

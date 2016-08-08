@@ -1,16 +1,15 @@
 package net.wohlfart.pluto.scene.lang;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
-
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.wohlfart.pluto.stage.SceneLanguageBaseVisitor;
 import net.wohlfart.pluto.stage.SceneLanguageParser.ParameterContext;
 
 public class ParameterApplyVisitor<T> extends SceneLanguageBaseVisitor<T> {
 
-    private static final Logger LOGGER = LoggerService.forClass(ParameterApplyVisitor.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ParameterApplyVisitor.class);
 
     private IFactoryDecorator<T> factory;
 

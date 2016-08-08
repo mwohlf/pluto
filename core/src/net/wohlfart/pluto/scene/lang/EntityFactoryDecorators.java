@@ -4,8 +4,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import net.wohlfart.pluto.entity.CameraSetup;
 import net.wohlfart.pluto.entity.IEntityCommand;
@@ -23,7 +23,7 @@ import net.wohlfart.pluto.util.ISupplier;
 
 // see: http://jakubdziworski.github.io/java/2016/04/01/antlr_visitor_vs_listener.html
 public class EntityFactoryDecorators {
-    private static final Logger LOGGER = LoggerService.forClass(EntityFactoryDecorators.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(EntityFactoryDecorators.class);
 
     private final Map<String, IFactoryDecorator<IEntityCommand>> FACTORY_DECORATORS = new HashMap<>();
 

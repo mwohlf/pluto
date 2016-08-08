@@ -8,12 +8,12 @@ import java.util.Map;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.files.FileHandle;
 import com.badlogic.gdx.utils.GdxRuntimeException;
-import com.github.czyzby.kiwi.log.Logger;
-import com.github.czyzby.kiwi.log.LoggerService;
 
 import net.wohlfart.pluto.AbstractGraphStage;
 import net.wohlfart.pluto.IStageManager;
@@ -24,7 +24,7 @@ import net.wohlfart.pluto.stage.SceneLanguageParser;
 
 public class ParseableStage extends AbstractGraphStage {
 
-    protected static final Logger LOGGER = LoggerService.forClass(ParseableStage.class);
+    protected static final Logger LOGGER = LoggerFactory.getLogger(ParseableStage.class);
 
     private final String filename;
 
