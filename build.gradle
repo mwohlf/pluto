@@ -63,7 +63,9 @@ project(":core") {
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         // compile "com.github.czyzby:gdx-kiwi:$kiwiVersion.$gdxVersion"
-        compile "com.github.czyzby:gdx-kiwi:$kiwiVersion.1.9.3"
+        compile ("com.github.czyzby:gdx-kiwi:$kiwiVersion.1.9.3")  {
+            transitive = false
+        }
         compile 'org.slf4j:slf4j-api:1.7.21'
         compile 'com.google.android:support-v4:r7'
         compile "com.google.guava:guava:$guavaVersion"
