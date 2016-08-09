@@ -36,6 +36,7 @@ allprojects {
     ext {
         appName = 'pluto'
         gdxVersion = '1.9.4-SNAPSHOT'
+        lwjglVersion = '3.0.0' // used in gdxVersion
         gwtVersion = '2.8.0-beta1'
         roboVMVersion = '1.9'
         box2DLightsVersion = '1.3'
@@ -60,6 +61,7 @@ project(":core") {
 
     dependencies {
         compile "com.badlogicgames.gdx:gdx:$gdxVersion"
+        compile "org.lwjgl:lwjgl:$lwjglVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         // compile "com.github.czyzby:gdx-kiwi:$kiwiVersion.$gdxVersion"
