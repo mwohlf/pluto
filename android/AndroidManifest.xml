@@ -7,8 +7,8 @@
     android:versionName="1.0" 
     tools:ignore="OldTargetApi">
 
-    <uses-sdk android:minSdkVersion="20" 
-              android:targetSdkVersion="20" 
+    <uses-sdk android:minSdkVersion="24" 
+              android:targetSdkVersion="24" 
               android:maxSdkVersion="24" />
 
     <application

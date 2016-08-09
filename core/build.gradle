@@ -3,7 +3,7 @@
 
 sourceSets.main.java.srcDirs = ["src/", "build/antlr-src/"]
 sourceSets.test.java.srcDirs = ["test/"]
-
+/*
 def localProperties = project.file("../local.properties")
 if (localProperties.exists()) {
   Properties properties = new Properties()
@@ -14,7 +14,7 @@ if (localProperties.exists()) {
   retrolambda.jdk = "$System.env.JAVA_HOME"
   retrolambda.oldJdk = "$System.env.JAVA7_HOME"
 }
-
+*/
 eclipse.project {
     name = appName + "-core"
 }

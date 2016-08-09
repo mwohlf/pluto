@@ -13,7 +13,6 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:2.1.2'
         classpath 'com.google.appengine:gradle-appengine-plugin:1.9.30' 
-        classpath 'me.tatarka:gradle-retrolambda:3.2.5'
         classpath 'me.champeau.gradle:antlr4-gradle-plugin:0.1'
     }
 }
@@ -21,7 +20,6 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"    
-    apply plugin: "me.tatarka.retrolambda"
    
     repositories {
         mavenLocal() // needed for the tween engine in local
@@ -45,7 +43,6 @@ allprojects {
         appengineVersion = '1.9.42'
         nettyVersion = '4.1.4.Final'
         guavaVersion = '19.0'
-        //kiwiVersion = '1.6'   // --> 1.6.1.9.3
         // wget https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/java-universal-tween-engine/tween-engine-api-6.3.3.zip
         // mvn install:install-file -Dfile=tween-engine-api.jar -DgroupId=aurelienribon -DartifactId=tweenengine -Dversion=6.3.3 -Dpackaging=jar
         tweenEngineVersion = '6.3.3'
@@ -64,10 +61,6 @@ project(":core") {
         compile "org.lwjgl:lwjgl:$lwjglVersion"
         compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
-        // compile "com.github.czyzby:gdx-kiwi:$kiwiVersion.$gdxVersion"
-        //compile ("com.github.czyzby:gdx-kiwi:$kiwiVersion.1.9.3") {
-        //    transitive = false
-        //}
         compile 'org.slf4j:slf4j-api:1.7.21'
         compile 'com.google.android:support-v4:r7'
         compile "com.google.guava:guava:$guavaVersion"
@@ -86,9 +79,6 @@ project(":core") {
 
     }
 
-    // see: https://github.com/melix/antlr4-gradle-plugin
-    //antlr4.source = new File("core/antlr")
-    //antlr4.output = new File("build")
     antlr4 {
         source = file('antlr')
         output = file('build/antlr-src/net/wohlfart/pluto/stage')
@@ -100,7 +90,6 @@ project(":core") {
 
     compileJava.dependsOn antlr4
     
-    //sourceSets.test.java.srcDirs += file('build/antlr-src/')
     sourceSets.test.java.srcDir "build/antlr-src/"
     sourceSets.main.java.srcDirs += antlr4.output
     sourceSets.test.resources.srcDirs += "../android/assets/"
@@ -129,17 +118,12 @@ project(":android") {
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         compile ("com.github.bright:slf4android:$slf4androidVersion@aar") {
-            transitive = false
+            transitive = true
         }
-        //compile ("com.github.bright:slf4android:$slf4androidVersion@aar"){
-        //   transitive = true
-        //}
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"  
-        
-        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"
-        
+        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"        
+        compile "com.badlogicgames.ashley:ashley:$ashleyVersion"       
         compile "com.badlogicgames.gdx:gdx-freetype:$gdxVersion"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-x86"
         natives "com.badlogicgames.gdx:gdx-freetype-platform:$gdxVersion:natives-armeabi"
@@ -155,7 +139,6 @@ project(":html") {
     dependencies {
         providedCompile "com.google.gwt:gwt-user:$gwtVersion"
         providedCompile "com.google.gwt:gwt-dev:$gwtVersion"
-    
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-gwt:$gdxVersion"
         compile "com.badlogicgames.gdx:gdx:$gdxVersion:sources"
