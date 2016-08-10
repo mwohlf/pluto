@@ -19,6 +19,7 @@ before_install:
 - chmod +x gradlew
 - export DISPLAY=:99
 - export LIBGL_ALWAYS_SOFTWARE=1
+- export ANDROID_JACK_EXTRA_ARGS="--verbose debug --sanity-checks on -D sched.runner=single-threaded"
 # cloud-init breaks updates sometimes and we don't need it anyways
 - sudo apt-get remove cloud-init -qq --force-yes
 - sudo apt-get update -qq --force-yes
