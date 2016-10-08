@@ -114,7 +114,7 @@ Cam {
 Skybox {  
     uid:uid++,
     //  test, blue, sky, violent
-    style: 'sky' 
+    style: 'violent' 
 };
 
 Light {  

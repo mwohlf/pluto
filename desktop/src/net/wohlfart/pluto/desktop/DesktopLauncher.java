@@ -18,7 +18,7 @@ public class DesktopLauncher {
         config.setResizable(true);
         config.setWindowedMode(1024, 600);
         //config.enableGLDebugOutput(true, System.out);
-        config.useVsync(false);
+        //config.useVsync(false);
         // this starts the loop
         new Lwjgl3Application(new Pluto(), config);
 
