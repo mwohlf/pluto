@@ -3,7 +3,7 @@ import com.android.build.gradle.tasks.PackageApplication
 
 android {
     compileSdkVersion 24
-    buildToolsVersion '24'
+    buildToolsVersion '25'
         
     defaultConfig {
       // Enable the experimental Jack build tools.
