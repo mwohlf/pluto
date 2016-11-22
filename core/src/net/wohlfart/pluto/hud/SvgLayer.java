@@ -1,21 +1,10 @@
 package net.wohlfart.pluto.hud;
 
-import static org.lwjgl.nanovg.NanoVG.nvgBeginFrame;
-import static org.lwjgl.nanovg.NanoVG.nvgBeginPath;
-import static org.lwjgl.nanovg.NanoVG.nvgEndFrame;
-import static org.lwjgl.nanovg.NanoVG.nvgFill;
-import static org.lwjgl.nanovg.NanoVG.nvgFillColor;
-import static org.lwjgl.nanovg.NanoVG.nvgRestore;
-import static org.lwjgl.nanovg.NanoVG.nvgRoundedRect;
-import static org.lwjgl.nanovg.NanoVG.nvgSave;
-import static org.lwjgl.nanovg.NanoVGGL2.NVG_ANTIALIAS;
-import static org.lwjgl.nanovg.NanoVGGL2.NVG_DEBUG;
-import static org.lwjgl.nanovg.NanoVGGL2.NVG_STENCIL_STROKES;
-import static org.lwjgl.nanovg.NanoVGGL2.nvgCreateGL2;
-
+import com.badlogic.gdx.Gdx;
 import org.lwjgl.nanovg.NVGColor;
 
-import com.badlogic.gdx.Gdx;
+import static org.lwjgl.nanovg.NanoVG.*;
+import static org.lwjgl.nanovg.NanoVGGL2.*;
 
 public class SvgLayer implements HudLayer {
 
@@ -23,7 +12,7 @@ public class SvgLayer implements HudLayer {
     private final NVGColor colorA = NVGColor.create().r(1).g(0).b(0).a(0.6f);
 
     public SvgLayer() {
-        ctx = nvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
+        ctx = nnvgCreateGL2(NVG_ANTIALIAS | NVG_STENCIL_STROKES | NVG_DEBUG);
     }
 
     @Override

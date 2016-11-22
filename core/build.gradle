@@ -1,6 +1,4 @@
-
 [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
-
 sourceSets.main.java.srcDirs = ["src/", "build/antlr-src/"]
 sourceSets.test.java.srcDirs = ["test/"]
 /*
@@ -16,5 +14,7 @@ if (localProperties.exists()) {
 }
 */
 eclipse.project {
-    name = appName + "-core"
+  name = appName + "-core"
+}
+dependencies {
 }
