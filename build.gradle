@@ -13,7 +13,8 @@ buildscript {
     dependencies {
         // classpath 'com.android.tools.build:gradle:2.1.2'
         classpath 'com.android.tools.build:gradle:2.2.0'
-        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.30' 
+        classpath 'com.google.appengine:gradle-appengine-plugin:1.9.30'
+        classpath 'me.tatarka:gradle-retrolambda:+'      
         classpath 'me.champeau.gradle:antlr4-gradle-plugin:0.1'
         classpath 'org.akhikhl.gretty:gretty:+'
     }
@@ -22,6 +23,7 @@ buildscript {
 allprojects {
     apply plugin: "eclipse"
     apply plugin: "idea"    
+    apply plugin: "me.tatarka.retrolambda"
    
     repositories {
         mavenLocal() // needed for the tween engine in local
@@ -124,6 +126,8 @@ project(":android") {
     configurations { natives }
  
     dependencies {
+            retrolambdaConfig 'net.orfjackal.retrolambda:retrolambda:+'
+    
         compile project(":core")
         compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
         compile ("com.github.bright:slf4android:$slf4androidVersion@aar") {
