@@ -52,7 +52,7 @@ before_install:
 
 script:
 - gradle clean
-- gradle build
+- gradle desktop:build
 - gradle dist
 #- echo no | android create avd -n emu -t android-18 --force
 #- emulator -avd emu -gpu on &

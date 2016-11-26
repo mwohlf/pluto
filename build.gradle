@@ -15,6 +15,7 @@ buildscript {
         classpath 'com.android.tools.build:gradle:2.2.0'
         classpath 'com.google.appengine:gradle-appengine-plugin:1.9.30' 
         classpath 'me.champeau.gradle:antlr4-gradle-plugin:0.1'
+        classpath 'org.akhikhl.gretty:gretty:+'
     }
 }
 
@@ -84,6 +85,7 @@ project(":core") {
 
         antlr4 "org.antlr:antlr4:$antlrVersion"
 
+        runtime "org.lwjgl:lwjgl-nanovg:$lwjglVersion:natives-linux"
     }
 
     antlr4 {
@@ -141,7 +143,7 @@ project(":android") {
 project(":html") {
     apply plugin: "java"
     apply plugin: "war"
-    apply plugin: "jetty"
+    apply plugin: "org.akhikhl.gretty"
     
     dependencies {
         providedCompile "com.google.gwt:gwt-user:$gwtVersion"

@@ -4,6 +4,8 @@ android {
   buildToolsVersion '25'
 
   defaultConfig {
+    minSdkVersion 24
+    targetSdkVersion 24
     // Enable the experimental Jack build tools.
     jackOptions {
       enabled true
@@ -90,7 +92,7 @@ eclipse {
   }
 
   jdt {
-    sourceCompatibility = 1.8
+    sourceCompatibility = 1.7
     targetCompatibility = 1.8
   }
 
