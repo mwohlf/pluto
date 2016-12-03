@@ -6,9 +6,6 @@ in order to build you have to set up
 sdk.dir and retrolambda.jdk, retrolambda.oldJdk in local.properties
 
 
-travis-ci: [![Build Status](https://travis-ci.org/mwohlf/pluto.svg?branch=master)](https://travis-ci.org/mwohlf/pluto)
-
-
 ## Links and Resources
 
 ### libgdx
