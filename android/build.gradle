@@ -9,16 +9,20 @@ android {
     versionCode 1
     versionName "1.0"
     // Enable the experimental Jack build tools.
+    /*
     jackOptions {
-      enabled true  /// fixme
+      enabled false  /// fixme
     }
+    */
     multiDexEnabled true
   }
 
+/*
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
   }
+  */
   sourceSets {
     main {
       manifest.srcFile 'AndroidManifest.xml'
@@ -94,7 +98,7 @@ eclipse {
   }
 
   jdt {
-    sourceCompatibility = 1.7
+    sourceCompatibility = 1.8
     targetCompatibility = 1.8
   }
 
